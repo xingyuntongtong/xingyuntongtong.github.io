@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Hexo搭建静态博客" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-npm" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/21/Hexo搭建静态博客/" class="article-date">
-  <time datetime="2016-08-21T02:05:25.000Z" itemprop="datePublished">2016-08-21</time>
+    <a href="/2016/08/22/npm/" class="article-date">
+  <time datetime="2016-08-22T02:07:25.000Z" itemprop="datePublished">2016-08-22</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/21/Hexo搭建静态博客/">Hexo搭建静态博客</a>
+      <a class="article-title" href="/2016/08/22/npm/">npm</a>
     </h1>
   
 
@@ -83,69 +83,68 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Hexo 是一款基于 Node.js 的快速的、简单的博客框架，能够创建一个项目进行编辑后生成一套静态网页，比较适合个人博客搭建。因为 Hexo 生成的网页不依赖数据库和任何 Web 工具，所以可以把它放在 Github上，然后配置好域名以后进行访问。</p>
-<h2 id="1-安装前置条件"><a href="#1-安装前置条件" class="headerlink" title="1.安装前置条件"></a>1.安装前置条件</h2><p>安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：</p>
-<ul>
-<li>Node.js</li>
-<li>Git</li>
-</ul>
-<h2 id="2-安装hexo"><a href="#2-安装hexo" class="headerlink" title="2.安装hexo"></a>2.安装hexo</h2><ul>
-<li><p>windows系统安装,所有带-g的都表示全局安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure>
-</li>
-<li><p>mac安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install hexo-cli -g</div></pre></td></tr></table></figure>
+        <h2 id="1-包和npm"><a href="#1-包和npm" class="headerlink" title="1.包和npm"></a>1.包和npm</h2><ul>
+<li>多个模块可以封装成一个包</li>
+<li>放置多个模块的文件夹称为包,可以通过包来对一组具有相互依赖的有关系模块进行管理。</li>
+<li>npm是node.js默认的模块管理器,用来安装和管理node模块 网址为 <a href="http://npmjs.org" target="_blank" rel="external">http://npmjs.org</a></li>
+<li>可以用包的方式通过npm安装、卸载、发布包<h2 id="2-npm-node-package-manager"><a href="#2-npm-node-package-manager" class="headerlink" title="2.npm: node package manager"></a>2.npm: node package manager</h2></li>
+<li>我们想把所有依赖都用一个文件来描述出来,初始化一个描述文件,是一个json格式的</li>
+<li>创建package.json,在一个文件夹里初始化一个项目<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ npm init -y</div><div class="line">&#123;</div><div class="line">&quot;name&quot;:&quot;包的名称&quot;,</div><div class="line">&quot;description&quot;：&quot;包的简要说明。&quot;,</div><div class="line">&quot;version&quot;:&quot;版本号&quot;,</div><div class="line">&quot;keywords&quot;：&quot;关键字&quot;,</div><div class="line">&quot;licenses&quot;:&quot;许可证&quot;,</div><div class="line">&quot;repositories&quot;：&quot;仓库地址 &quot;,</div><div class="line">&quot;dependencies&quot;:&quot;包的依赖，一个关联数组，由包名称和版本组成。&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="3-初始化博客"><a href="#3-初始化博客" class="headerlink" title="3.初始化博客"></a>3.初始化博客</h2><ul>
-<li><p>初始博客文件夹，就是在本地创建一个文件夹叫blog</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init blog</div></pre></td></tr></table></figure>
+<h2 id="依赖列表-依赖的好处可以详细描述你的项目"><a href="#依赖列表-依赖的好处可以详细描述你的项目" class="headerlink" title="依赖列表,依赖的好处可以详细描述你的项目"></a>依赖列表,依赖的好处可以详细描述你的项目</h2><ul>
+<li><p>所有的依赖要放入到依赖列表中安装时加入到列表里<br>hexo init blog 初始化的项目是没有node_modules<br>cd blog&amp;&amp;npm install 是安装所需要的依赖</p>
 </li>
-<li><p>安装所需模块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> blog &amp;&amp; npm install</div></pre></td></tr></table></figure>
+<li><p>一个叫开发依赖 例如 webpack  –save-dev 只是在写代码时用</p>
 </li>
-<li><p>启动服务查看基本结构,这样可以看到博客的基本样式,localhost:4000/</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<li>一个叫依赖 例如 jquery –save 写代码和上线都要用<h2 id="3-安装第三方包"><a href="#3-安装第三方包" class="headerlink" title="3.安装第三方包"></a>3.安装第三方包</h2></li>
+<li>在任何地方安装都可以，因为安装到全局下</li>
+<li><p>全局安装,所有带-g(-global)的都表示全局安装,直接下载到Node的安装目录中，各个项目都可以调用,适合工具模块,可以在<code>命令行</code>下直接使用,比如 hexo deploy </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install 包的名字 -g</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<h2 id="4-新建文章"><a href="#4-新建文章" class="headerlink" title="4.新建文章"></a>4.新建文章</h2><ul>
-<li><p>添加文章为md格式来进行编写</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new 文章名</div></pre></td></tr></table></figure>
+<li><p>本地安装 将一个模块下载到当前目录的node_modules子目录，然后只有在当前目录和它的子目录之中，才能调用这个模块,本地安装就是项目中要真正使用的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install 包的名字 --save-dev/--save</div></pre></td></tr></table></figure>
 </li>
-<li><p>也可以在WebStorm里创建文件,在source文件夹的_posts下,但是必须加上头信息</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ---</div><div class="line">  title: text</div><div class="line">  date: 2016-08-21 10:06:25</div><div class="line">  tags:</div><div class="line">$ ---</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加完文章在启动服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<li><p>查看全局路径,目录安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm root -g</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="5-发布到git上"><a href="#5-发布到git上" class="headerlink" title="5.发布到git上"></a>5.发布到git上</h2><ul>
-<li><p>下载hexo-deployer-git插件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<h2 id="4-卸载第三方包-怎么安装的就怎么卸载"><a href="#4-卸载第三方包-怎么安装的就怎么卸载" class="headerlink" title="4.卸载第三方包,怎么安装的就怎么卸载"></a>4.卸载第三方包,怎么安装的就怎么卸载</h2><ul>
+<li><p>全局卸载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm uninstall 包的名字 -g</div></pre></td></tr></table></figure>
 </li>
-<li><p>在git上创建自己的仓库,仓库名的格式如下:不然找不到 以后访问的时候也访问这个</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ 自己的github用户名.github.io</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改_config.yml,根目录下的,直接复制即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ deploy:</div><div class="line">    <span class="built_in">type</span>: git</div><div class="line">    repo: &lt;repository url&gt;</div><div class="line">    branch: master</div><div class="line">    message: push</div></pre></td></tr></table></figure>
-</li>
-<li><p>如果出现用户名不能访问的问题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ repo: http://用户名:密码@github.com/github用户名/github用户名.github.io.git</div></pre></td></tr></table></figure>
-</li>
-<li><p>部署,发布</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-</li>
-<li><p>以后有文章更新,可按以下步骤来进行。</p>
-<pre><code>hexo generate 可以简写 hexo g
-hexo deploy
-</code></pre><p>参考:<a href="https://hexo.io/" target="_blank" rel="external">https://hexo.io/</a></p>
+<li><p>本地卸载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm uninstall 包的名字 --save</div><div class="line">npm uninstall 包的名字 --save-dev</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h2 id="5-发布包-发布全局项目"><a href="#5-发布包-发布全局项目" class="headerlink" title="5.发布包,发布全局项目"></a>5.发布包,发布全局项目</h2><ul>
+<li><p>创建用户,在npm官网注册用户 <a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm adduser</div></pre></td></tr></table></figure>
+</li>
+<li><p>发布项目,我们想发布我们包 和 jquery一样，让别人使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm publish</div></pre></td></tr></table></figure>
+</li>
+<li><p>可以让别人进行下载,当做第三方包</p>
+</li>
+</ul>
+<p>注意项目的名称不能是别人已经注册的名称,尽量用自己的名字做前缀 如果注册失败的话可能是因为改了镜像地址了，需要改回来 npm config set registry “<a href="http://registry.npmjs.org/“" target="_blank" rel="external">http://registry.npmjs.org/“</a> 查看所有的配置项 npm config ls</p>
+<h2 id="6-切换源"><a href="#6-切换源" class="headerlink" title="6.切换源"></a>6.切换源</h2><ul>
+<li><p>安装此工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install nrm -g</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看所有源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nrm ls</div></pre></td></tr></table></figure>
+</li>
+<li><p>切换到中国源,使用源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nrm use cnpm</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>node npm 都可以在命令行下使用,我把它配置到path中了<br>hexo是否在path中？<br>C:\Users\10354_000\AppData\Roaming\npm 这里是npm的安装路径我们说npm可以进行全局访问，在npm中创建了很多连接，做了个快捷方式<br>C:\Users\10354_000\AppData\Roaming\npm\gulp -&gt; C:\Users\10354_000\AppData\Roaming\npm\node_modules\gulp\bin\gulp.js</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/21/Hexo搭建静态博客/" data-id="cisqxp08b0000rouaj5eorj1e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/22/npm/" data-id="cisr6sjun0001zouav78k33z9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,7 +157,7 @@ hexo deploy
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -189,6 +188,10 @@ hexo deploy
       <ul>
         
           <li>
+            <a href="/2016/08/25/路由-route/">angular中的路由</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/24/自定义服务/">自定义服务</a>
           </li>
         
@@ -202,10 +205,6 @@ hexo deploy
         
           <li>
             <a href="/2016/08/22/npm/">npm</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/21/Hexo搭建静态博客/">Hexo搭建静态博客</a>
           </li>
         
       </ul>
