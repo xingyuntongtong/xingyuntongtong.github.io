@@ -19,7 +19,7 @@ NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该�
 它是一个缓冲区Buffer是暂时存放输入输出数据的一段内存。
 JS语言没有二进制数据类型，而在处理TCP和文件流的时候，必须要处理二进制数据。
 NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该类用来创">
-<meta property="og:updated_time" content="2016-09-06T03:42:37.295Z">
+<meta property="og:updated_time" content="2016-09-06T03:46:06.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="node中的buffer">
 <meta name="twitter:description" content="JS语言自身只有字符串数据类型，没有二进制数据类型，因此NodeJS提供了一个与String对等的全局构造函数Buffer来提供对二进制数据的操作。
@@ -135,13 +135,17 @@ NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该�
 </ul>
 <p>string 要写入的字符串，一个汉字3个字节<br>offset 写入的偏移量 就是从哪个字节开始写入 默认为 0<br>length 写入的长度 字节的长度<br>encoding 写入内容的编码格式 默认为 ‘utf8’<br>后两个参数可以不写write方法会默认把内容从头写到尾</p>
 <ul>
-<li>返回值：返回实际写入的大小。如果 buffer 空间不足， 则只会写入部分字符串。、<h3 id="4-3-toString方法"><a href="#4-3-toString方法" class="headerlink" title="4.3 toString方法"></a>4.3 toString方法</h3></li>
+<li>返回值：返回实际写入的大小。如果 buffer 空间不足， 则只会写入部分字符串。</li>
+</ul>
+<h3 id="4-3-toString方法"><a href="#4-3-toString方法" class="headerlink" title="4.3 toString方法"></a>4.3 toString方法</h3><ul>
 <li>将buffer转换成字符串类型 转化时可以根据截取的位置进行输出<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(buffer.toString(&apos;utf8&apos;,3,6));</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>第一天参数可以是utf8也可以是base64;后两个参数是截取的buffer的长度</p>
 <ul>
-<li>返回值：解码缓冲区数据并使用指定的编码返回字符串。<h3 id="4-4-slice方法"><a href="#4-4-slice方法" class="headerlink" title="4.4 slice方法"></a>4.4 slice方法</h3></li>
+<li>返回值：解码缓冲区数据并使用指定的编码返回字符串。</li>
+</ul>
+<h3 id="4-4-slice方法"><a href="#4-4-slice方法" class="headerlink" title="4.4 slice方法"></a>4.4 slice方法</h3><ul>
 <li>截取buffer<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer([1,2,3]);</div><div class="line">var newBuffer = buffer.slice(2); //从索引2开始</div><div class="line">newBuffer[0] = 100;</div><div class="line">console.log(newBuffer); //64</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -160,7 +164,9 @@ NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该�
 </ul>
 <p>targetBuffer 目标buffer 要拷贝的 Buffer 对象<br>targetStart 目标的开始 数字, 可选, 默认: 0<br>sourceStart 拷贝内容的开始 数字, 可选, 默认: 0<br>sourceEnd 拷贝内容的结束 数字, 可选, 默认: buffer.length</p>
 <ul>
-<li>返回值：没有返回值<h3 id="4-6-concat方法"><a href="#4-6-concat方法" class="headerlink" title="4.6 concat方法"></a>4.6 concat方法</h3></li>
+<li>返回值：没有返回值</li>
+</ul>
+<h3 id="4-6-concat方法"><a href="#4-6-concat方法" class="headerlink" title="4.6 concat方法"></a>4.6 concat方法</h3><ul>
 <li><p>拼接buffer 将两个buffer拼接成1个buffer 也叫缓冲区合并</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var buffer1 = new Buffer(&apos;中&apos;);</div><div class="line">var buffer2 = new Buffer(&apos;文&apos;);</div><div class="line">var newBuffer = Buffer.concat([buffer1,buffer2],3);</div><div class="line">console.log(newBuffer.toString()); //只会显示中因为长度是3</div></pre></td></tr></table></figure>
 </li>
@@ -170,7 +176,9 @@ NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该�
 </ul>
 <p>list(参数1) - 用于合并的 Buffer 对象数组列表。<br>totalLength(参数2) - 指定合并后Buffer对象的总长度。</p>
 <ul>
-<li>返回值：返回一个多个成员合并的新 Buffer 对象。<h3 id="4-7-isBuffer"><a href="#4-7-isBuffer" class="headerlink" title="4.7 isBuffer"></a>4.7 isBuffer</h3></li>
+<li>返回值：返回一个多个成员合并的新 Buffer 对象。</li>
+</ul>
+<h3 id="4-7-isBuffer"><a href="#4-7-isBuffer" class="headerlink" title="4.7 isBuffer"></a>4.7 isBuffer</h3><ul>
 <li>判断是否是buffer<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(Buffer.isBuffer(new Buffer(3)));</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -179,7 +187,9 @@ NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该�
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var buffer = Buffer.byteLength(&quot;中文&quot;);</div><div class="line">buffer.length;</div></pre></td></tr></table></figure>
 </li>
 <li><p>返回值: 返回 Buffer 对象所占据的内存长度。</p>
-<h2 id="5-进制转换"><a href="#5-进制转换" class="headerlink" title="5.进制转换"></a>5.进制转换</h2></li>
+</li>
+</ul>
+<h2 id="5-进制转换"><a href="#5-进制转换" class="headerlink" title="5.进制转换"></a>5.进制转换</h2><ul>
 <li>将任意进制字符串转换为十进制<br>parseInt(“11”, 2); // 3 2进制转10进制<br>parseInt(“77”, 8); // 63 8进制转10进制<br>parseInt(“e7”, 16); //175 16进制转10进制</li>
 <li>将10进制转换为其它进制字符串<br>(3).toString(2)) // “11” 十进制转2进制<br>(17).toString(16) // “11” 十进制转16进制<br>(33).toString(32) // “11” 十提制转32进制</li>
 <li>2进制是缝二进一，8进制以此类推。。。</li>
@@ -190,8 +200,10 @@ NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该�
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log((0xff).toString(2));</div></pre></td></tr></table></figure>
 </li>
 <li><p>一个字节由8个位组成，每个位不是0 就是1  最高位 1^2^7 2进制</p>
-<h2 id="6-base64-转换成可见编码-base64实现原理"><a href="#6-base64-转换成可见编码-base64实现原理" class="headerlink" title="6.base64 转换成可见编码(base64实现原理)"></a>6.base64 转换成可见编码(base64实现原理)</h2><p>Base64是一种用64个字符来表示任意二进制数据的方法。 用记事本打开exe、jpg、pdf这些文件时，我们都会看到一大堆乱码，因为二进制文件包含很多无法显示和打印的字符，所以，如果要让记事本这样的文本处理软件能处理二进制数据，就需要一个二进制到字符串的转换方法。Base64是一种最常见的二进制编码方法。</p>
 </li>
+</ul>
+<h2 id="6-base64-转换成可见编码-base64实现原理"><a href="#6-base64-转换成可见编码-base64实现原理" class="headerlink" title="6.base64 转换成可见编码(base64实现原理)"></a>6.base64 转换成可见编码(base64实现原理)</h2><p>Base64是一种用64个字符来表示任意二进制数据的方法。 用记事本打开exe、jpg、pdf这些文件时，我们都会看到一大堆乱码，因为二进制文件包含很多无法显示和打印的字符，所以，如果要让记事本这样的文本处理软件能处理二进制数据，就需要一个二进制到字符串的转换方法。Base64是一种最常见的二进制编码方法。</p>
+<ul>
 <li>相当于2进制最大为6个1 前面两位为0转换成10进制后为最大63 0-63，这个10进制的值就代表数组的索引</li>
 <li>base64,在0-63之间随机取可见编码</li>
 <li>ABCDEFGHIJKLMNOPQRSTUVWXYZ</li>
@@ -217,7 +229,7 @@ NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/22/node里的buffer/" data-id="cis91fa640000xouadan3i3zv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/22/node里的buffer/" data-id="cisqxp08l0001rouaajejkrnf" class="article-share-link">Share</a>
       
       
     </footer>
