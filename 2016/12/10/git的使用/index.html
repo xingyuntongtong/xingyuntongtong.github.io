@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git | Tongtong blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版本控制备份文件
+类似于网盘备份
+我们的代码也需要备份。修改完了以后提交给版本库进行保管，哪一天代码没了也可以找回来。记录历史
+比如我们打游戏就要存档，万一挂了还可以从上个存档的地方重玩。
+和网盘不同，网盘保留的是最新的状态，历史的记录都没有了，修改的记录也都找不回来了
+网盘无法知道文件里的某行代码是何人在哪个时间添加进去的回到过去
+如果我有一天不小心删除了某个文件，我们可以通过历史备份找回来多端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git">
+<meta property="og:url" content="http://yoursite.com/2016/12/10/git的使用/index.html">
+<meta property="og:site_name" content="Tongtong blog">
+<meta property="og:description" content="版本控制备份文件
+类似于网盘备份
+我们的代码也需要备份。修改完了以后提交给版本库进行保管，哪一天代码没了也可以找回来。记录历史
+比如我们打游戏就要存档，万一挂了还可以从上个存档的地方重玩。
+和网盘不同，网盘保留的是最新的状态，历史的记录都没有了，修改的记录也都找不回来了
+网盘无法知道文件里的某行代码是何人在哪个时间添加进去的回到过去
+如果我有一天不小心删除了某个文件，我们可以通过历史备份找回来多端">
+<meta property="og:updated_time" content="2016-12-11T06:03:44.021Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git">
+<meta name="twitter:description" content="版本控制备份文件
+类似于网盘备份
+我们的代码也需要备份。修改完了以后提交给版本库进行保管，哪一天代码没了也可以找回来。记录历史
+比如我们打游戏就要存档，万一挂了还可以从上个存档的地方重玩。
+和网盘不同，网盘保留的是最新的状态，历史的记录都没有了，修改的记录也都找不回来了
+网盘无法知道文件里的某行代码是何人在哪个时间添加进去的回到过去
+如果我有一天不小心删除了某个文件，我们可以通过历史备份找回来多端">
+  
+    <link rel="alternate" href="/atom.xml" title="Tongtong blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Tongtong blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章收藏</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-git的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/10/git的使用/" class="article-date">
+  <time datetime="2016-12-10T02:00:00.000Z" itemprop="datePublished">2016-12-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Node-JS/">Node JS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><h3 id="备份文件"><a href="#备份文件" class="headerlink" title="备份文件"></a>备份文件</h3><ul>
+<li>类似于网盘备份</li>
+<li>我们的代码也需要备份。修改完了以后提交给版本库进行保管，哪一天代码没了也可以找回来。<h3 id="记录历史"><a href="#记录历史" class="headerlink" title="记录历史"></a>记录历史</h3></li>
+<li>比如我们打游戏就要存档，万一挂了还可以从上个存档的地方重玩。</li>
+<li>和网盘不同，网盘保留的是最新的状态，历史的记录都没有了，修改的记录也都找不回来了</li>
+<li>网盘无法知道文件里的某行代码是何人在哪个时间添加进去的<h3 id="回到过去"><a href="#回到过去" class="headerlink" title="回到过去"></a>回到过去</h3></li>
+<li>如果我有一天不小心删除了某个文件，我们可以通过历史备份找回来<h3 id="多端共享"><a href="#多端共享" class="headerlink" title="多端共享"></a>多端共享</h3></li>
+<li>Git仓库可以通过PC端、Android、IOS移动端等各个终端访问</li>
+<li>可以随时随地修改代码,公司没干完的工作回家接着干，可以在家提交，但是svn不可以<h3 id="团队协作"><a href="#团队协作" class="headerlink" title="团队协作"></a>团队协作</h3></li>
+<li>多个人或团队合作编写一个项目</li>
+<li>合并代码处理冲突</li>
+</ul>
+<h2 id="git-和-svn-的区别，下面说的主要是git的优势"><a href="#git-和-svn-的区别，下面说的主要是git的优势" class="headerlink" title="git 和 svn 的区别，下面说的主要是git的优势"></a>git 和 svn 的区别，下面说的主要是git的优势</h2><ul>
+<li>速度快</li>
+<li>git是分布式的</li>
+<li>无需联网</li>
+<li>git把内容按元数据方式存储</li>
+<li>强大的分支管<h2 id="markdown的配置"><a href="#markdown的配置" class="headerlink" title="markdown的配置"></a>markdown的配置</h2>file - settings - plugin - browser - 搜索markdown<h2 id="git的安装"><a href="#git的安装" class="headerlink" title="git的安装"></a>git的安装</h2><h3 id="windows下安装"><a href="#windows下安装" class="headerlink" title="windows下安装"></a>windows下安装</h3></li>
+<li>下载地址 <a href="http://git-scm.com" target="_blank" rel="external">http://git-scm.com</a><h3 id="mac的安装"><a href="#mac的安装" class="headerlink" title="mac的安装"></a>mac的安装</h3></li>
+<li>先安装homebrew 下载Homebrew <a href="http://brew.sh" target="_blank" rel="external">http://brew.sh</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install git</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>安装xcode,会默认下载git</p>
+</blockquote>
+<h2 id="配置git邮箱和密码"><a href="#配置git邮箱和密码" class="headerlink" title="配置git邮箱和密码"></a>配置git邮箱和密码</h2><h3 id="先查看配置，如果查看没有配置进行配置"><a href="#先查看配置，如果查看没有配置进行配置" class="headerlink" title="先查看配置，如果查看没有配置进行配置"></a>先查看配置，如果查看没有配置进行配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name</div><div class="line">git config --list  //查看所有配置</div></pre></td></tr></table></figure>
+<h3 id="进行配置，如果不配置不能提交代码-只需要配置一次"><a href="#进行配置，如果不配置不能提交代码-只需要配置一次" class="headerlink" title="进行配置，如果不配置不能提交代码,只需要配置一次"></a>进行配置，如果不配置不能提交代码,只需要配置一次</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;用户名&quot; //最好使用github的用户名</div><div class="line">git config --global user.email &quot;自己的邮箱&quot;</div></pre></td></tr></table></figure>
+<h2 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h2><ul>
+<li>自定义快捷键 file–&gt;settings–&gt;搜索living template  把不想写的设置成快捷键<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir test //创建文件夹</div><div class="line">cd test  //进入文件夹，改变目录</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="初始化git仓库"><a href="#初始化git仓库" class="headerlink" title="初始化git仓库"></a>初始化git仓库</h2><ul>
+<li>先创建一个空目录 ，然后进入此目录</li>
+<li>点击右键选择Git-Bash打开命令行</li>
+<li>输入git init命令把这个目录变成Git可以管理的仓库<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>ls -al显示全部文件 会产生一个.git的隐藏文件，用来管理我们的文件<br>.git文件存储着所有的内容(提交，版本库，标签)，初始化后会给一个分支默认叫master</p>
+</blockquote>
+<h2 id="对文件夹里面文件的操作"><a href="#对文件夹里面文件的操作" class="headerlink" title="对文件夹里面文件的操作"></a>对文件夹里面文件的操作</h2><h3 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch index.txt</div></pre></td></tr></table></figure>
+<h3 id="像文件内写入内容"><a href="#像文件内写入内容" class="headerlink" title="像文件内写入内容"></a>像文件内写入内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo hello &gt; index.txt //如果文件不存在则会创建文件</div><div class="line">echo word &gt;&gt; index.txt //向文件中追加内容</div></pre></td></tr></table></figure>
+<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat index.txt</div></pre></td></tr></table></figure>
+<blockquote>
+<p>红色表示未加入暂存区内,就是没有增加之前的</p>
+</blockquote>
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm index.txt</div></pre></td></tr></table></figure>
+<blockquote>
+<p>ls 查看文件；clear 是清屏</p>
+</blockquote>
+<h3 id="编辑文件，可以往里面写入内容"><a href="#编辑文件，可以往里面写入内容" class="headerlink" title="编辑文件，可以往里面写入内容"></a>编辑文件，可以往里面写入内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi index.txt</div></pre></td></tr></table></figure>
+<blockquote>
+<p>进入插入模式进行编辑 i，esc退出编辑，：wq 保存并退出</p>
+</blockquote>
+<h3 id="打印之前的命令行中输入的命令"><a href="#打印之前的命令行中输入的命令" class="headerlink" title="打印之前的命令行中输入的命令"></a>打印之前的命令行中输入的命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">history &gt; index.txt</div></pre></td></tr></table></figure>
+<h2 id="git中的三个区"><a href="#git中的三个区" class="headerlink" title="git中的三个区"></a>git中的三个区</h2><ul>
+<li>工作流程<br><a href="http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html" target="_blank" rel="external">http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html</a><h3 id="工作区"><a href="#工作区" class="headerlink" title="工作区"></a>工作区</h3></li>
+<li>添加文件到暂存区中<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add file</div><div class="line">git add . / -A</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="暂存区-缓存区"><a href="#暂存区-缓存区" class="headerlink" title="暂存区/缓存区"></a>暂存区/缓存区</h3><ul>
+<li>提交到版本库/历史区<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m&quot;此次提交的注释内容&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>暂存区特点：过渡的作用，避免误操作，保护工作区和历史区，分支处理;<br>-m ：message就是消息的意思；svn里面没有暂存区</p>
+</blockquote>
+<h3 id="版本库-历史区"><a href="#版本库-历史区" class="headerlink" title="版本库/历史区"></a>版本库/历史区</h3><ul>
+<li>提交到版本库中通过git log 进行查看日志，里面的内容是注释的内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log --oneline  //查看一行</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="修改时查看git当前状态"><a href="#修改时查看git当前状态" class="headerlink" title="修改时查看git当前状态"></a>修改时查看git当前状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure>
+<h3 id="搜索日志-版本里面的"><a href="#搜索日志-版本里面的" class="headerlink" title="搜索日志(版本里面的)"></a>搜索日志(版本里面的)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log --author/--grep=co //grep搜索的意思</div></pre></td></tr></table></figure>
+<blockquote>
+<p>co 是搜索注释的内容 是git commit -m”注释内容”里面的注释内容</p>
+</blockquote>
+<h2 id="代码的比较，看代码的不同"><a href="#代码的比较，看代码的不同" class="headerlink" title="代码的比较，看代码的不同"></a>代码的比较，看代码的不同</h2><ul>
+<li><p>比较工作区和缓存区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff //默认是工作区和缓存区进行比较</div></pre></td></tr></table></figure>
+</li>
+<li><p>比较缓存区和历史区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git dif --cached //cached：缓存的意思</div></pre></td></tr></table></figure>
+</li>
+<li><p>比较工作区和历史区，一般很少比较</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff master //master 分支是什么名字这里就写什么名字</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h2><p>从缓存区中撤销add内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset HEAD index.txt</div></pre></td></tr></table></figure></p>
+<h2 id="撤回文件里的内容，就是工作区的内容有更改完了又不想改了"><a href="#撤回文件里的内容，就是工作区的内容有更改完了又不想改了" class="headerlink" title="撤回文件里的内容，就是工作区的内容有更改完了又不想改了"></a>撤回文件里的内容，就是工作区的内容有更改完了又不想改了</h2><p>如果工作区有更改 ，我想用暂存区域或者历史区的内容去覆盖掉我们的工作区域<br>先查找暂存区 ，查找不到 查找历史区<br>用暂存区替换掉工作区里的内容，就是从暂存区回到工作区<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout index.txt</div></pre></td></tr></table></figure></p>
+<h2 id="合并提交"><a href="#合并提交" class="headerlink" title="合并提交"></a>合并提交</h2><p>如果我们使用git commit 会产生一个新的版本，但是我们此次的提交，还想算作上次的提交<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit --amend //可以选择是否用以前的提交注释</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果进入编辑模式按esc键 输入:wq</p>
+</blockquote>
+<h2 id="从版本库-历史区-拉回代码-回滚-回到过去，就是从历史区回到工作区"><a href="#从版本库-历史区-拉回代码-回滚-回到过去，就是从历史区回到工作区" class="headerlink" title="从版本库(历史区)拉回代码 回滚 回到过去，就是从历史区回到工作区"></a>从版本库(历史区)拉回代码 回滚 回到过去，就是从历史区回到工作区</h2><ul>
+<li>git log 查看版本号（7位以上）如果太长了不想看，按q退出<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard 版本号</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="在回到未来-就是在回到历史区"><a href="#在回到未来-就是在回到历史区" class="headerlink" title="在回到未来 就是在回到历史区"></a>在回到未来 就是在回到历史区</h2><ul>
+<li>通过git reflog 查看未来的版本，使用reset回到未来<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reflog //获取所有操作的版本号</div><div class="line">git reset --hard 版本号</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="删除缓存区，但是要保证工作区里内容必须不存在"><a href="#删除缓存区，但是要保证工作区里内容必须不存在" class="headerlink" title="删除缓存区，但是要保证工作区里内容必须不存在"></a>删除缓存区，但是要保证工作区里内容必须不存在</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm</div></pre></td></tr></table></figure>
+<h2 id="只删除缓存区"><a href="#只删除缓存区" class="headerlink" title="只删除缓存区"></a>只删除缓存区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm --cached filename</div></pre></td></tr></table></figure>
+<h2 id="同时删除暂存区和工作区"><a href="#同时删除暂存区和工作区" class="headerlink" title="同时删除暂存区和工作区"></a>同时删除暂存区和工作区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm -force 文件的名字</div></pre></td></tr></table></figure>
+<blockquote>
+<p>rm -rf .git 递归删除，删除了就在也找不回来了</p>
+</blockquote>
+<h2 id="要把写好的文件推送到远程仓库（github仓库）上"><a href="#要把写好的文件推送到远程仓库（github仓库）上" class="headerlink" title="要把写好的文件推送到远程仓库（github仓库）上"></a>要把写好的文件推送到远程仓库（github仓库）上</h2><ul>
+<li>创建新仓库（空的里面什么文件都不能有）</li>
+<li>推送的时候空的文件夹是不会被提交的</li>
+<li>在提交之前想要忽略掉一些文件(.gitignore)</li>
+<li>添加到历史区中 git commit -m”haha”</li>
+<li>添加远程仓库地址<h3 id="创建新仓库后需要关联远程仓库"><a href="#创建新仓库后需要关联远程仓库" class="headerlink" title="创建新仓库后需要关联远程仓库"></a>创建新仓库后需要关联远程仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin &apos;仓库的地址&apos;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="推送到远程仓库，就是把写好的文件推上去gitHub"><a href="#推送到远程仓库，就是把写好的文件推上去gitHub" class="headerlink" title="推送到远程仓库，就是把写好的文件推上去gitHub"></a>推送到远程仓库，就是把写好的文件推上去gitHub</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
+<blockquote>
+<p>-u的意思是upstream 如果下次再提交可以直接使用git push</p>
+</blockquote>
+<h2 id="从工作区-直接提交到历史区（必须走一下过渡区）"><a href="#从工作区-直接提交到历史区（必须走一下过渡区）" class="headerlink" title="从工作区 直接提交到历史区（必须走一下过渡区）"></a>从工作区 直接提交到历史区（必须走一下过渡区）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -a -m&quot;add&quot;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>不支持首次提交，如果文件没有加到过缓存区中是不能使用这种方式的</p>
+</blockquote>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
+<li><p>查看所有分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch 分支名</div></pre></td></tr></table></figure>
+</li>
+<li><p>切换分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout 分支名(dev)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>相当于把master复制了一份到dev里，如果在dev分支里创建文件在master里也可以看到，如果在dev里提交master上才看不到dev上的内容，就是在哪里提交就是哪里的，在另一个里面就看不到了</p>
+</blockquote>
+<ul>
+<li>删除分支<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -D dev</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>得先把分支切换到master，不能自己删除自己</p>
+</blockquote>
+<h2 id="创建分支并且切换分支"><a href="#创建分支并且切换分支" class="headerlink" title="创建分支并且切换分支"></a>创建分支并且切换分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git branch dev</div><div class="line">git checkout dev</div><div class="line">git checkout -b dev  //这是把上面2条合并成1条简写的</div></pre></td></tr></table></figure>
+<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><ul>
+<li>要切换到master身上来合并dev，就是合并两个人的代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git merge dev</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="在合并分支时有冲突我们需要先把最新的拉下来"><a href="#在合并分支时有冲突我们需要先把最新的拉下来" class="headerlink" title="在合并分支时有冲突我们需要先把最新的拉下来"></a>在合并分支时有冲突我们需要先把最新的拉下来</h2><ul>
+<li>先使用git fetch拉下来 我们可以先比较一下不同在合并<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git fetch</div><div class="line">git merge</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>git pull  = get fetch + git merge</p>
+<ul>
+<li>产生冲突(就是两个人同时改了一个文件)比如：<br>1.在dev分支中改变hello.js文件，把里面的内容改成了helloword，进行提交<br>2.在master分支中改变hello.js文件，把里面的内容改成了helloword123，进行提交<br>3.合并时会产生冲突，解决冲突 删除&gt;&gt;&gt;&gt;  ==== &lt;&lt;&lt;&lt; 保存剩余的再次提交即可</li>
+</ul>
+<h2 id="发布静态页面"><a href="#发布静态页面" class="headerlink" title="发布静态页面"></a>发布静态页面</h2><ul>
+<li>发布页面要求分支的名字必须叫做gh-pages(并且把内容推送到这个分支上)</li>
+<li>1.创建页面(html)，写上内容</li>
+<li>2.切换到gh-pages分支上</li>
+<li>3.提交到分支上</li>
+<li>4.推到远程仓库</li>
+</ul>
+<h2 id="每天完成的代码-提交流程"><a href="#每天完成的代码-提交流程" class="headerlink" title="每天完成的代码 提交流程"></a>每天完成的代码 提交流程</h2><ul>
+<li>领导建立一个仓库</li>
+<li>所有的’组长’都需要fork领导的仓库(只能fork一次)<blockquote>
+<p>fork：将现在你看好的仓库代码复制一份，放到自己的仓库下(领导的代码发生变化不会影响自己的)</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="组长提交作业"><a href="#组长提交作业" class="headerlink" title="组长提交作业"></a>组长提交作业</h2><ul>
+<li><p>将fork领导的仓库下载下来,将自己的作业丢进去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone 自己的仓库地址 别名(可有可无，就是改变文件夹的名字)</div></pre></td></tr></table></figure>
+</li>
+<li><p>当我们建立好一个仓库后不是所有文件都要提交的，要忽略掉一些文件</p>
+<ul>
+<li>在文件根目录下创建一个.gitignore文件去忽略掉不想要的<br>.idea<br>node_modules<br>.DS_Store<br>bower_component</li>
+</ul>
+</li>
+<li>提交到自己的仓库下<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m &apos;&apos;</div><div class="line">git push origin master</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>克隆后会默认提供origin地址</p>
+</blockquote>
+<h2 id="发送合并请求"><a href="#发送合并请求" class="headerlink" title="发送合并请求"></a>发送合并请求</h2><ul>
+<li>你的项目是从领导这克隆下来的，可以直接发送请求</li>
+<li>new pull request<h2 id="组长需要给组员发配权限"><a href="#组长需要给组员发配权限" class="headerlink" title="组长需要给组员发配权限"></a>组长需要给组员发配权限</h2></li>
+<li>让组员操作自己的仓库 自己项目下-&gt; settings -&gt; collabrators -&gt; 添加 -&gt; 给组员发送邀请函 -&gt;组员同意即可 （组员拥有组长所有权限）</li>
+<li><p>组员需要将组长的仓库拉到本地</p>
+<blockquote>
+<p>git clone 组长的地址</p>
+</blockquote>
+</li>
+<li><p>在提交到组长仓库之前要拉取组长的最新代码</p>
+<blockquote>
+<p>防止你写代码时 别人有提交的代码，你需要先拉取别人，更新成最新代码提交到仓库上<br>将自己的作业提交到组长的仓库上，在根目录下提交，相当于作业提交给了组长</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="组长将作业提交给老师"><a href="#组长将作业提交给老师" class="headerlink" title="组长将作业提交给老师"></a>组长将作业提交给老师</h2><ul>
+<li>先拉取自己仓库最新代码</li>
+<li>拉取领导的最新代码<br>git remote add teacher 领导的仓库地址</li>
+<li>提交到自己的仓库下，在发送pull request请求</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/12/10/git的使用/" data-id="ciwoc2ksp0000u0uahwu09g6j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/11/node基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          node基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/08/angular中的指令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">angular中的指令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-JS/">Node JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/11/node基础/">node基础</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/10/git的使用/">git</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/08/angular中的指令/">angular中的指令</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/25/路由-route/">angular中的路由</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/自定义服务/">自定义服务</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Tong chao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章收藏</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>angular中的指令 | Tongtong blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是指令：AngularJS 指令是扩展的 HTML 属性 就是操作DOM元素的什么是自定义指令：就是封装一些方法，供外面使用指令 directive
+组件式指令：有模板的 &amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;，restrict一般采用E
+装饰型指令：一般增加属性的 &amp;lt;div red-color&amp;gt;&amp;lt;/div&amp;gt;，restric">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular中的指令">
+<meta property="og:url" content="http://yoursite.com/2016/12/08/angular中的指令/index.html">
+<meta property="og:site_name" content="Tongtong blog">
+<meta property="og:description" content="什么是指令：AngularJS 指令是扩展的 HTML 属性 就是操作DOM元素的什么是自定义指令：就是封装一些方法，供外面使用指令 directive
+组件式指令：有模板的 &amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;，restrict一般采用E
+装饰型指令：一般增加属性的 &amp;lt;div red-color&amp;gt;&amp;lt;/div&amp;gt;，restric">
+<meta property="og:updated_time" content="2016-12-08T09:03:27.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular中的指令">
+<meta name="twitter:description" content="什么是指令：AngularJS 指令是扩展的 HTML 属性 就是操作DOM元素的什么是自定义指令：就是封装一些方法，供外面使用指令 directive
+组件式指令：有模板的 &amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;，restrict一般采用E
+装饰型指令：一般增加属性的 &amp;lt;div red-color&amp;gt;&amp;lt;/div&amp;gt;，restric">
+  
+    <link rel="alternate" href="/atom.xml" title="Tongtong blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Tongtong blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章收藏</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-angular中的指令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/08/angular中的指令/" class="article-date">
+  <time datetime="2016-12-08T04:00:25.000Z" itemprop="datePublished">2016-12-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      angular中的指令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是指令：AngularJS-指令是扩展的-HTML-属性-就是操作DOM元素的"><a href="#什么是指令：AngularJS-指令是扩展的-HTML-属性-就是操作DOM元素的" class="headerlink" title="什么是指令：AngularJS 指令是扩展的 HTML 属性 就是操作DOM元素的"></a>什么是指令：AngularJS 指令是扩展的 HTML 属性 就是操作DOM元素的</h2><h2 id="什么是自定义指令：就是封装一些方法，供外面使用"><a href="#什么是自定义指令：就是封装一些方法，供外面使用" class="headerlink" title="什么是自定义指令：就是封装一些方法，供外面使用"></a>什么是自定义指令：就是封装一些方法，供外面使用</h2><h2 id="指令-directive"><a href="#指令-directive" class="headerlink" title="指令 directive"></a>指令 directive</h2><ul>
+<li>组件式指令：有模板的 <code>&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;</code>，restrict一般采用E</li>
+<li>装饰型指令：一般增加属性的 <code>&lt;div red-color&gt;&lt;/div&gt;</code>，restrict一般采用A<blockquote>
+<p>指令默认是不依赖控制器的；一般我们用指令封装功能而不是封装方法的</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="定义一个指令"><a href="#定义一个指令" class="headerlink" title="定义一个指令"></a>定义一个指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;div my-dire&gt;wold&lt;/div&gt;</div><div class="line">var myMod=angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.directive(&apos;myDire&apos;,function()&#123;</div><div class="line">//myDire需要转成驼峰命名法,声明指令后默认返回一个对象</div><div class="line">    return&#123;返回值: 是一个对象</div><div class="line">    //定义一个模板 它指的是html结构 把它嵌套到html里面 &lt;div my-dire&gt;&lt;div&gt;hello&lt;/div&gt;&lt;/div&gt;</div><div class="line">        //template:&apos;&lt;div&gt;hello&lt;/div&gt;&apos;, 会把原有的标签里的内容也替换掉</div><div class="line">        templateUrl:&apos;url.html&apos;,//引入外界的模板只能是模板片段 上面的就不用了，它是ajax将文件读取过来插入到模板中</div><div class="line">        replace:true,  //替换原有的标签 就是把上面的div替换掉 只剩下这一个div</div><div class="line">        restrict:&apos;ECMA&apos;, //定义指令可以使用的位置 用它的时候必须得有 replace:true</div><div class="line">        transclude:true, //保存原有标签里的内容 和ng-transclude(会形成自己的作用域)结合使用，想把内容放在哪个标签上就在哪个标签上加ng-transclude 标签和外面的一样</div><div class="line">        scope:true, //指令所有的元素 会形成自己的作用域,它也可以是个对象,&#123;&#125;和true是有区别的，指定它以后就不会出现</div><div class="line">        controller:function($scope,$element,$attrs)&#123;//可被外界定义指令调用的公用部分</div><div class="line">        &#125;//在最前面</div><div class="line">        compile:function(tElement,tAttrs)&#123;//编译阶段 写在link前面</div><div class="line">        &#125;,</div><div class="line">        link:function(scope,element,attrs)&#123; //链接阶段,是装饰指令</div><div class="line">        &#125;,</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="restrict"><a href="#restrict" class="headerlink" title="restrict"></a>restrict</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">restrict:&apos;ECMA&apos;; 不写默认值是 EA 可以不写 可以单个写 restrict:&apos;E&apos;;</div><div class="line">    &lt;my-dire&gt;&lt;/my-dire&gt;&lt;!--用于标签--&gt; E: element 用于标签</div><div class="line">    &lt;div class=&quot;my-dire&quot;&gt;&lt;/div&gt;&lt;!--用于样式类名--&gt; C: class 用于样式类名</div><div class="line">    &lt;!-- directive:my-dire --&gt; 里面内容前后各一个空格  &lt;!--用于注释--&gt; M: comment 用于注释</div><div class="line">    &lt;div my-dire&gt;&lt;/div&gt;&lt;!--用于属性名--&gt; A: attribute 用于属性名</div></pre></td></tr></table></figure>
+<h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><p>link: 它是个函数可以实现 作用域(scope)和DOM元素 的链接 在它上面写的都是私有的 链接阶段<br>   link:function(scope,element,attrs){<br>       scope: 指是当前模板的作用域，如果当前模板没有形成作用域，会直接找父级，和控制器里的$scope是一样的，它里面的属性也是定义在scope上的<br>       element: 自定义指令所在的DOM元素，是一个jQuery对象，可以调用jQuery里的方法 内置的有轻量级的jQuery也就是 jqLite 是简化板的，不是所有的方法都有<br>  把jQuery 变成原生的 element[0]; 在变回jQuery的  angular.element(element[0])<br>       attrs: 自定义指令所在的DOM元素上的属性存储在attrs对象里标签里的属性可以通过它得到;也就是当前指令的所有属性变成一个对象格式<br>   }</p>
+<ul>
+<li>在angularJS只有link可以操作DOM元素 在控制器里用的都是$scope<h2 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h2></li>
+<li>可以为当前指令设置独立作用域，也可以起到赋值的作用<br>return {<br>  scope:true,<br>}</li>
+<li><p>“@”引用字符串 指令和作用域间的交互  会形成自己的作用域<br>想用自定义指令拿到控制器里的属性; 在页面上把自定义指令放入到控制器里面，做它的子级<br><code>&lt;div ng-controller=&quot;myCtrl&quot;&gt;</code></p>
+<pre><code>`&lt;input type=&quot;text&quot; ng-model=&quot;nameCtrl&quot;/&gt;`
+`&lt;my-dire name=&quot;{{nameCtrl}}&quot;&gt;&lt;/my-dire&gt;`
+</code></pre><p>//<code>&lt;my-dire name=&quot;nameCtrl&quot; greet=&quot;greetCtrl(d)&quot;&gt;&lt;/my-dire&gt;</code> 供 = 来使用<br><code>&lt;/div&gt;</code><br>var myMod=angular.module(‘myMod’,[]);<br>myMod.controller(‘myCtrl’,[‘$scope’,function($scope){</p>
+<pre><code>$scope.nameCtrl=&apos;tongtong&apos;;
+$scope.greetCtrl=function(a){//这里面的a就是上面函数里传的 d
+    alert(a);
+}
+</code></pre><p>}]);<br>myMod.directive(‘myDire’,function(){</p>
+<pre><code>return{
+    template:&apos;`&lt;input type=&quot;text&quot; ng-model=&quot;nameDir&quot;/&gt;`
+              `&lt;button ng-click=&quot;greetDir({d:nameDir})&quot;&gt;打招呼&lt;/button&gt;&apos;`,
+    scope:{
+        nameDir:&apos;@name&apos;,
+        //name:&apos;@&apos;, 名字相同时直接用@就可以了 name:&apos;@name&apos;
+        nameDir:&apos;=name&apos;,
+        //name:&apos;=&apos;, 名字相同时直接用=就可以了 name:&apos;=name&apos;
+        greetDir:&apos;&amp;greet&apos;
+    }
+}
+</code></pre><p>});<br>@name中的name是自定义指令中的name属性，获取的是name=”“里面的字面量的值 那么nameDir在当前指令所在的作用域可随处调用nameDir存储的的字面量的值,但是子级改变不了父级的，实现不了双向绑定 会形成自己的作用域</p>
+</li>
+<li><p>‘=’ 它实现了子级和父级的双向绑定 就是和控制器的双向数据绑定 是变量的传递<br>‘=name’ 获取的是name=’nameCtrl’ 中 ‘nameCtrl’ 存储的变量，在当前指令所在的作用域<br>修改nameDir也可以同时修改myCtrl中的nameCtrl的值 上面得属性名(变量)不能用字量形式</p>
+</li>
+<li>&amp; 用来取控制器中的方法的  方法的传递<br>greetDir({d:nameDir})中{d:nameDir}是一个对象nameDir是要传的参数</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/12/08/angular中的指令/" data-id="ciwoc1j3f000094uaivk62c0f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/10/git的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/25/路由-route/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">angular中的路由</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-JS/">Node JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/11/node基础/">node基础</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/10/git的使用/">git</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/08/angular中的指令/">angular中的指令</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/25/路由-route/">angular中的路由</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/自定义服务/">自定义服务</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Tong chao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章收藏</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

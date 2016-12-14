@@ -25,7 +25,7 @@ Git
 
 2.安装hexo
 w">
-<meta property="og:updated_time" content="2016-09-06T09:51:55.969Z">
+<meta property="og:updated_time" content="2016-12-14T02:40:22.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo搭建静态博客">
 <meta name="twitter:description" content="Hexo 是一款基于 Node.js 的快速的、简单的博客框架，能够创建一个项目进行编辑后生成一套静态网页，比较适合个人博客搭建。因为 Hexo 生成的网页不依赖数据库和任何 Web 工具，所以可以把它放在 Github上，然后配置好域名以后进行访问。
@@ -132,7 +132,7 @@ w">
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> blog &amp;&amp; npm install</div></pre></td></tr></table></figure>
 </li>
 <li><p>启动服务查看基本结构,这样可以看到博客的基本样式,localhost:4000/</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo serve</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="4-新建文章"><a href="#4-新建文章" class="headerlink" title="4.新建文章"></a>4.新建文章</h2><ul>
@@ -140,7 +140,7 @@ w">
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new 文章名</div></pre></td></tr></table></figure>
 </li>
 <li><p>也可以在WebStorm里创建文件,在source文件夹的_posts下,但是必须加上头信息</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ---</div><div class="line">  title: text</div><div class="line">  date: 2016-08-21 10:06:25</div><div class="line">  tags:</div><div class="line">$ ---</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ---</div><div class="line"> title: text</div><div class="line"> date: 2016-08-21 10:06:25</div><div class="line"> tags:</div><div class="line">$ ---</div></pre></td></tr></table></figure>
 </li>
 <li><p>添加完文章在启动服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
@@ -154,7 +154,7 @@ w">
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ 自己的github用户名.github.io</div></pre></td></tr></table></figure>
 </li>
 <li><p>修改_config.yml,根目录下的,直接复制即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ deploy:</div><div class="line">    <span class="built_in">type</span>: git</div><div class="line">    repo: &lt;repository url&gt;</div><div class="line">    branch: master</div><div class="line">    message: push</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ deploy:</div><div class="line"> <span class="built_in">type</span>: git</div><div class="line"> repo: &lt;repository url&gt;</div><div class="line"> branch: master</div><div class="line"> message: push</div></pre></td></tr></table></figure>
 </li>
 <li><p>如果出现用户名不能访问的问题</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ repo: http://用户名:密码@github.com/github用户名/github用户名.github.io.git</div></pre></td></tr></table></figure>
@@ -163,16 +163,15 @@ w">
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
 </li>
 <li><p>以后有文章更新,可按以下步骤来进行。</p>
-<pre><code>hexo generate 可以简写 hexo g
-hexo deploy
-</code></pre><p>参考:<a href="https://hexo.io/" target="_blank" rel="external">https://hexo.io/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo generate 可以简写 hexo g</div><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+<p>参考:<a href="https://hexo.io/" target="_blank" rel="external">https://hexo.io/</a></p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/21/Hexo搭建静态博客/" data-id="cisrarhlw00009suadds7yri7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/21/Hexo搭建静态博客/" data-id="ciwoc35gp0000dguagjbpuhz3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -219,7 +218,7 @@ hexo deploy
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
     </div>
   </div>
 
@@ -232,23 +231,23 @@ hexo deploy
       <ul>
         
           <li>
+            <a href="/2016/12/11/node基础/">node基础</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/10/git的使用/">git</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/08/angular中的指令/">angular中的指令</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/25/路由-route/">angular中的路由</a>
           </li>
         
           <li>
             <a href="/2016/08/24/自定义服务/">自定义服务</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/22/node里的buffer/">node中的buffer</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/22/node里的模块/">node中的模块</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/22/npm/">npm</a>
           </li>
         
       </ul>

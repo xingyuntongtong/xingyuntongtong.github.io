@@ -61,14 +61,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-node里的模块" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-路由-route" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/22/node里的模块/" class="article-date">
-  <time datetime="2016-08-22T02:30:25.000Z" itemprop="datePublished">2016-08-22</time>
+    <a href="/2016/08/25/路由-route/" class="article-date">
+  <time datetime="2016-08-25T02:05:25.000Z" itemprop="datePublished">2016-08-25</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Node-JS/">Node JS</a>
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
   </div>
 
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/22/node里的模块/">node中的模块</a>
+      <a class="article-title" href="/2016/08/25/路由-route/">angular中的路由</a>
     </h1>
   
 
@@ -87,85 +87,54 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>javaScript 从一个仅仅在浏览器上面的一个玩具语言，一转眼演变成无所不能神一般的存在。但是，由于天生存在着一点戏剧性，模块系统作为一门语言最基本的属性却是javaScript所缺的。</p>
-<h2 id="Node-js里的模块和包的概念"><a href="#Node-js里的模块和包的概念" class="headerlink" title="Node.js里的模块和包的概念"></a>Node.js里的模块和包的概念</h2><ul>
-<li>在前端的编程里，我们经常把单独功能的一些JS脚本写一个文件里，用这个文件的时候就用script标签的src属性来引用。在node.js里，同样也是把单独功能的脚本写一个单独的文件里，不过引入的方式变了，是用require来引用。这个单独的JS文件，在node.js里叫模块</li>
-<li>什么是模块呢？我们可以简单的把它看成一个实现单独功能的文件。比如在前端JS中的jQuery.js，在node.js里，我们把它就看成一个模块的概念就行。 在前端的JS在使用它之前，是用 先要引入此文件。在node.js里，则需要require来引入.</li>
-<li>包的概念：包含一个或多模块的(也就是JS文件的)文件夹（我们先简单的理为包就是一个实现完整功能的目录，其实它的意义远不止这些，先这样上手）</li>
-<li>包是模块化JS必须的。<br>我们可以在node.js项目中直使用别人写好的功能，就是使用别人写的包。也可以自己写一个包，发布到互联网上供大家使用。 </li>
-<li>为了让Node.js的文件可以相互调用，Node.js提供了一个简单的模块系统。<br>模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个 Node.js 文件就是一个模块，这个文件可能是JavaScript 代码、JSON 或者编译过的C/C++ 扩展。<h2 id="1-JS的不足"><a href="#1-JS的不足" class="headerlink" title="1.JS的不足"></a>1.JS的不足</h2>js没有模块系统，不支持封闭作用域或依赖管理<br>没有标准库，没有文件系统API<br>没有包管理系统，不能自动加载和安装依赖<h2 id="2-什么是CommonJS"><a href="#2-什么是CommonJS" class="headerlink" title="2.什么是CommonJS?"></a>2.什么是CommonJS?</h2></li>
-<li>CommonJS 是javascript模块化编程的一种规范，主要是在服务器端模块化的规范，一个单独的文件就是一个模块。每一个模块都是一个单独的作用域，也就是说，在该模块内部定义的变量，无法被其他模块读取，除非定义为global对象的属性。</li>
-<li>commonjs规范<br>一个 node.js由大量模块组成，每个JS文件都是一个模块<br>实现了require方法，npm基于commonjs实现了自动加载和安装依赖<h2 id="3-模块化优点"><a href="#3-模块化优点" class="headerlink" title="3.模块化优点"></a>3.模块化优点</h2></li>
-<li>增加内聚性，有助分工协作</li>
-<li>方便重构</li>
-<li>提高代码质量<h2 id="4-模块使用"><a href="#4-模块使用" class="headerlink" title="4.模块使用"></a>4.模块使用</h2></li>
-<li>定义模块 我们创建一个文件就表示声明了一个模块</li>
-<li>导出模块 module.exports和exports 模块的接口</li>
-<li>使用模块 require(‘./filename’);</li>
-<li>实现原理 文件外面默认被套了一个闭包函数,所以可以模块化,我们是看不到的,是文件形参传入进来的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(function(exports,require,module,__filename,__dirname)&#123;</div><div class="line">    exports  = module.exports = &#123;&#125;;</div><div class="line">    return module.exports;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+        <h2 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由?"></a>什么是路由?</h2><ul>
+<li>AngularJS 路由允许我们通过不同的 URL 访问不同的内容。</li>
+<li>通过 AngularJS 可以实现多视图的单页Web应用（single page web application，SPA）。</li>
+<li>通常我们的URL形式为 <a href="http://runoob.com/first/page" target="_blank" rel="external">http://runoob.com/first/page</a> 但在单页Web应用中 AngularJS 通过 # + 标记 实现，例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http://runoob.com/#/first</div><div class="line">http://runoob.com/#/second</div><div class="line">http://runoob.com/#/third</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>module.exports和exports的区别</p>
-<ul>
-<li>导出模块导出的不是exports对象  exports默认是一个空对象</li>
-<li>真正require进来的是module.exports对象,向外暴露一个接口</li>
-<li>一个global全局上的变量 一个是形参,它的实现原理就是这样<h2 id="5-require的应用"><a href="#5-require的应用" class="headerlink" title="5.require的应用"></a>5.require的应用</h2></li>
-<li>需要一个模块就要把这个模块require进来，通过相对路径引用模块</li>
-<li>require()是同步的：有返回值的是同步方法 如果带有回调函数的是异步</li>
-<li><p>多次导入一个模块会对模块进行缓存,多次加载后得到同一对象,防止浪费性能 所以只会出现一次</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;./test.js&apos;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>查看模块缓存: require.cache 根据模块的绝对路径进行缓存,{‘一个绝对路径’:’模块’}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(require.cache);</div></pre></td></tr></table></figure>
-</li>
-<li><p>查询(解析)模块绝对路径: 要让模块多次加载，可以加载后删除掉缓存的模块，得解析出一个绝对路径<br>例如解析一个绝对路径  C:\Users\10354_000\Desktop\node8\3.module\test.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require.resolve(&apos;./test.js&apos;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>查看单个的模块缓存</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require.cache[require.resolve(&apos;./test.js&apos;)]</div></pre></td></tr></table></figure>
-</li>
-<li><p>删除模块缓存,这样多次加载就可以输出多次</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">delete require.cache[require.resolve(&apos;./test.js&apos;)];</div></pre></td></tr></table></figure>
+<p>当我们点击以上的任意一个链接时，向服务端请的地址都是一样的 (<a href="http://runoob.com/" target="_blank" rel="external">http://runoob.com/</a>) 因为 # 号之后的内容在向服务端请求时会被浏览器忽略掉。 所以我们就需要在客户端实现 # 号后面内容的功能实现。 AngularJS 路由 就通过 #, + 标记 帮助我们区分不同的逻辑页面并将不同的页面绑定到对应的控制器上。</p>
+<h2 id="1-ng-route路由-属性单页面应用-angular-route它是angular自带的路由模块"><a href="#1-ng-route路由-属性单页面应用-angular-route它是angular自带的路由模块" class="headerlink" title="1.ng-route路由 属性单页面应用 angular-route它是angular自带的路由模块"></a>1.ng-route路由 属性单页面应用 angular-route它是angular自带的路由模块</h2><h3 id="1-1-安装路由"><a href="#1-1-安装路由" class="headerlink" title="1.1 安装路由"></a>1.1 安装路由</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install angular-route</div></pre></td></tr></table></figure>
+<h3 id="1-2-依赖模块"><a href="#1-2-依赖模块" class="headerlink" title="1.2 依赖模块"></a>1.2 依赖模块</h3><ul>
+<li>让当前模块依赖于ngRoute<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var myMod = angular.module(&apos;myMod&apos;,[&apos;ngRoute&apos;]);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="6-模块分类"><a href="#6-模块分类" class="headerlink" title="6.模块分类"></a>6.模块分类</h2><ul>
-<li><p>1.内置模块(核心模块)http url fs util  是node中自带的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">require(&apos;util&apos;);</div><div class="line">util.inherits继承 原理就是Object.create方法</div><div class="line">inspect解析属性</div><div class="line">isArray isRegExp isDate isError判断数据类型</div></pre></td></tr></table></figure>
-</li>
-<li><p>inherits 默认为原型链继承(不继承私有属性)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ctor.prototype.__proto__ = superCtor.prototype;</div><div class="line">ctor.prototype = Object.create(superCtor.prototype);</div></pre></td></tr></table></figure>
-</li>
-<li><p>inspect 解析对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var obj  = &#123;name:&apos;zfpx&apos;,age:7&#125;;</div><div class="line">util.inspect(obj,&#123;showHidden:true,depth:1,colors:true&#125;);</div><div class="line">showHidden 显示隐藏属性</div><div class="line">depth 解析的深度</div><div class="line">colors 输出的时候带颜色</div></pre></td></tr></table></figure>
-</li>
-<li><p>给对象增加属性,这里拿util举例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Object.defineProperty(obj,&apos;age&apos;,&#123;</div><div class="line">    value:&apos;8&apos;, //当前定义属性的值</div><div class="line">    enumerable:false,//是否可枚举</div><div class="line">    writable:true,//是否可写</div><div class="line">    configurable:false,//是否可配置</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>判断类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">console.log(util.isArray([]));</div><div class="line">console.log(util.isError(new RegExp()));</div><div class="line">console.log(util.isRegExp(new Error()));</div></pre></td></tr></table></figure>
-</li>
-<li><p>2.文件模块(自定义模块) 以./方式引入的都是文件模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;./person&apos;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.第三方模块,是需要安装的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;mime&apos;);//会自动搜索package.json里的main属性 mime.js</div></pre></td></tr></table></figure>
+<h3 id="1-3-使用-ngView-指令"><a href="#1-3-使用-ngView-指令" class="headerlink" title="1.3 使用 ngView 指令"></a>1.3 使用 ngView 指令</h3><ul>
+<li>ng-view必须有，所有的页面都是渲染到该标签中的,只有它里面的内容是变化的</li>
+<li>该 div 内的 HTML 内容会根据路由的变化而变化。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div ng-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>我们引入第三模块是不要路径的./,直接引用模块的名字<br>自己写的模块 要注意:当我们安装一个模块会就近安装 找最近目录一直往上找，直到找到node_modules文件夹，如果找不到在自己的目录下创建</p>
-<h2 id="7-模块查找规则"><a href="#7-模块查找规则" class="headerlink" title="7.模块查找规则"></a>7.模块查找规则</h2><p>当没有以’/‘或者’./‘来指向一个文件时，这个模块要么是核心模块,要么就是从node_modules文件夹加载的<br>第三方模块</p>
-<ul>
-<li>从module.paths(模块的查找路径)取出第一个目录开始。</li>
-<li>直接从目录中查找，存在结束，不存在下一条。先查找模块的名字,找不到往上找，找到跟目录</li>
-<li>查找index.js index.json如果没有index 会找package.json里的main字段</li>
-<li>我们的文件模块不用指定后缀名默认会自动添加.js后缀，如果找不到在添加.json后缀</li>
-<li>尝试将require的参数作为一个包来查找，读取package.json，取得main配置项指定的文件查找，不存在进行3</li>
-<li>继续失败查看下一个目录</li>
+<h3 id="1-4-配置路由"><a href="#1-4-配置路由" class="headerlink" title="1.4 配置路由"></a>1.4 配置路由</h3><ul>
+<li>when: 就是当配置路由的路径是哪个的时候要做的事情；参数1：path 配置路由的路径 参数2：是一个对象；它可以实现链式操作,可以链接多个when</li>
+<li>AngularJS 模块的 config 函数用于配置路由规则。通过使用 configAPI，我们请求把$routeProvider注入到我们的配置函数并且使用$routeProvider.whenAPI来定义我们的路由规则。</li>
+<li>$routeProvider 为我们提供了 when(path,object) 和 otherwise(object) 函数按顺序定义所有路由<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">myMod.config(function($routeProvider)&#123;</div><div class="line">        $routeProvider.when(&apos;/&apos;,&#123;</div><div class="line">            template:&apos;&lt;h1&gt;index&lt;/h1&gt;&apos;,//定义需要的模板</div><div class="line">        &#125;).when(&apos;/users&apos;,&#123;</div><div class="line">            templateUrl:&apos;usesr.html&apos;,</div><div class="line">            controller:[&apos;$scope&apos;,&apos;add&apos;,function($scope,add)&#123;</div><div class="line">                //控制器:它控制的是同一个路由下的模板，这里有控制器了在模板里就不用写了</div><div class="line">                //$scope.users=[&apos;tongtong&apos;,&apos;haha&apos;,&apos;hehe&apos;];</div><div class="line">                //这里可以是一个字符串也可以是一个对象</div><div class="line">                $scope.users=[&#123;id:1,name:&apos;tongtong&apos;&#125;,&#123;id:2,name:&apos;haha&apos;&#125;,&#123;id:3,name:&apos;hehe&apos;&#125;];</div><div class="line">                $scope.result=add(1,2);</div><div class="line">            &#125;],</div><div class="line">            resolve:&#123;//它是一个对象 相当于factory 可以定义服务,这里面的add就相当于一个服务</div><div class="line">                add:function()&#123;//指定当前controller所依赖的其他模块。</div><div class="line">                    return function(a,b)&#123;</div><div class="line">                        return a+b;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;).when(&apos;/user/:id&apos;,&#123;</div><div class="line">              // /user/1   /user/2    /user/3</div><div class="line">              template:&apos;我的ID号是&#123;&#123;id&#125;&#125;&apos;,</div><div class="line">              controller: function ($scope, $routeParams) &#123;</div><div class="line">            //$routeParams 路由参数（是一个对象） 能够获取到冒号后面的值</div><div class="line">                  $scope.id = $routeParams.id</div><div class="line">              &#125;</div><div class="line">          &#125;).otherwise(&#123;</div><div class="line">              redirectTo:&apos;/&apos;;//意思是重新定义路径，当输入错误时直接回到 / 它的页面上 两种写法</div><div class="line">          &#125;)</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-5-创建路由链接"><a href="#1-5-创建路由链接" class="headerlink" title="1.5 创建路由链接"></a>1.5 创建路由链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;#/home&quot;&gt;首页&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#/user/&#123;&#123;user.id&#125;&#125;&quot;&gt;用户管理 或者&#123;&#123;user.name&#125;&#125;&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#/contact&quot;&gt;联系&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#/settings&quot;&gt;设置&lt;/a&gt;</div><div class="line">&lt;div ng-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>实现点击可以跳转相应的页面，它刷新的只是ng-view这一块，其它的不改变 必须有# 防止页面的跳转</p>
+<h2 id="2-angular-ui-route-可以实现多应用它更强大"><a href="#2-angular-ui-route-可以实现多应用它更强大" class="headerlink" title="2.angular-ui-route  可以实现多应用它更强大"></a>2.angular-ui-route  可以实现多应用它更强大</h2><h3 id="2-1-安装路由"><a href="#2-1-安装路由" class="headerlink" title="2.1 安装路由"></a>2.1 安装路由</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install angular-ui-router</div></pre></td></tr></table></figure>
+<h3 id="2-2-依赖模块"><a href="#2-2-依赖模块" class="headerlink" title="2.2 依赖模块"></a>2.2 依赖模块</h3><ul>
+<li>让当前模块依赖于uiRouter<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var myMod = angular.module(&apos;myMod&apos;, [&apos;ui.router&apos;]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-3-使用-uiView-指令"><a href="#2-3-使用-uiView-指令" class="headerlink" title="2.3 使用 uiView 指令"></a>2.3 使用 uiView 指令</h3><ul>
+<li>ui-view必须有，所有的页面都是渲染到该标签中的,只有它里面的内容是变化的</li>
+<li>该 div 内的 HTML 内容会根据路由的变化而变化。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div ui-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-4-配置路由"><a href="#2-4-配置路由" class="headerlink" title="2.4 配置路由"></a>2.4 配置路由</h3><ul>
+<li>state 和 when 差不多<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">myMod.config(function($stateProvider,$urlRouterProvider)&#123;</div><div class="line">    $urlRouterProvider.otherwise(&apos;/&apos;);</div><div class="line">    //可以在这个服务下调用otherwise,不然没有这个属性，可以实现刚打开页面就显示内容</div><div class="line">    $stateProvider.state(&apos;index&apos;,&#123;</div><div class="line">        //参数1：是状态的名字  参数2： 配置的对象</div><div class="line">        url:&apos;/&apos;,//代表路由 必须写,每个里面都得写不然在搜索栏里不显示</div><div class="line">        templateUrl:&apos;index.html&apos;</div><div class="line">    &#125;).state(&apos;about&apos;,&#123;</div><div class="line">        url:&apos;/about&apos;,//一个状态配置一个路径，路径不要重复</div><div class="line">        templateUrl:&apos;about.html&apos;,</div><div class="line">        controller:function($scope)&#123;</div><div class="line">            $scope.books = [&#123;id: 1, name: &apos;js高程3&apos;&#125;,&#123;id: 2, name: &apos;node&apos;&#125;,&#123;id: 3, name: &apos;html5&apos;&#125;];</div><div class="line">        &#125;</div><div class="line">    &#125;).state(&apos;contact&apos;,&#123;</div><div class="line">        url:&apos;/contact&apos;,</div><div class="line">        views:&#123;//配置多视图，一个页面里面有多个路由</div><div class="line">            &apos;&apos;:&#123;</div><div class="line">              //默认状态下渲染该模板</div><div class="line">               templateUrl:&apos;templs/contact.html&apos;</div><div class="line">            &#125; ,</div><div class="line">            &apos;tel@contact&apos;:&#123;</div><div class="line">               //tel@contact</div><div class="line">               //contact状态对应的templs/contact.html页面中的 ui-view = ‘tel’视图 ，渲染的是templateUrl:&apos;templs/tel.html&apos;</div><div class="line">                templateUrl:&apos;templs/tel.html&apos;,</div><div class="line">                controller: function ($scope) &#123;</div><div class="line">                    $scope.tel=&apos;12345&apos;</div><div class="line">                &#125;</div><div class="line">            &#125;,</div><div class="line">            &apos;address@contact&apos;:&#123;</div><div class="line">                templateUrl:&apos;templs/address.html&apos;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;).state(&apos;book&apos;,&#123;</div><div class="line">          url:&apos;/book/:name&apos;,</div><div class="line">          template:&apos;&#123;&#123;a&#125;&#125;&apos;,</div><div class="line">          controller: function ($scope,$stateParams) &#123;</div><div class="line">              //$stateParams对象 获取冒号后面的值</div><div class="line">              $scope.a=$stateParams.name</div><div class="line">          &#125;</div><div class="line">      &#125;)</div><div class="line">&#125;).controller(&apos;myCtrl&apos;,function($scope)&#123;</div><div class="line">    $scope.flag=&apos;index&apos;;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-5-创建路由链接"><a href="#2-5-创建路由链接" class="headerlink" title="2.5 创建路由链接"></a>2.5 创建路由链接</h3><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;a ui-sref=&quot;home&quot;&gt;首页&lt;/a&gt;</div><div class="line">&lt;a ui-sref=&quot;book(&#123;name:book.name&#125;)&quot;&gt;用户 或者&#123;&#123;book.name&#125;&#125; &lt;/a&gt;</div><div class="line">&lt;a ui-sref=&quot;contact&quot;&gt;联系&lt;/a&gt;</div><div class="line">&lt;div ui-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/22/node里的模块/" data-id="cisrarhmi00039suau42iohhx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/25/路由-route/" data-id="ciwoc4bbo0000qwua57m7muw5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +147,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -203,7 +172,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
     </div>
   </div>
 
@@ -216,23 +185,23 @@
       <ul>
         
           <li>
+            <a href="/2016/12/11/node基础/">node基础</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/10/git的使用/">git</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/08/angular中的指令/">angular中的指令</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/25/路由-route/">angular中的路由</a>
           </li>
         
           <li>
             <a href="/2016/08/24/自定义服务/">自定义服务</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/22/node里的buffer/">node中的buffer</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/22/node里的模块/">node中的模块</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/22/npm/">npm</a>
           </li>
         
       </ul>

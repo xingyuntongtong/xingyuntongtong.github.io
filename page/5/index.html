@@ -61,14 +61,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-npm" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-自定义服务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/22/npm/" class="article-date">
-  <time datetime="2016-08-22T02:07:25.000Z" itemprop="datePublished">2016-08-22</time>
+    <a href="/2016/08/24/自定义服务/" class="article-date">
+  <time datetime="2016-08-24T09:30:25.000Z" itemprop="datePublished">2016-08-24</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Node-JS/">Node JS</a>
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
   </div>
 
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/22/npm/">npm</a>
+      <a class="article-title" href="/2016/08/24/自定义服务/">自定义服务</a>
     </h1>
   
 
@@ -87,68 +87,80 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-包和npm"><a href="#1-包和npm" class="headerlink" title="1.包和npm"></a>1.包和npm</h2><ul>
-<li>多个模块可以封装成一个包</li>
-<li>放置多个模块的文件夹称为包,可以通过包来对一组具有相互依赖的有关系模块进行管理。</li>
-<li>npm是node.js默认的模块管理器,用来安装和管理node模块 网址为 <a href="http://npmjs.org" target="_blank" rel="external">http://npmjs.org</a></li>
-<li>可以用包的方式通过npm安装、卸载、发布包<h2 id="2-npm-node-package-manager"><a href="#2-npm-node-package-manager" class="headerlink" title="2.npm: node package manager"></a>2.npm: node package manager</h2></li>
-<li>我们想把所有依赖都用一个文件来描述出来,初始化一个描述文件,是一个json格式的</li>
-<li>创建package.json,在一个文件夹里初始化一个项目<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ npm init -y</div><div class="line">&#123;</div><div class="line">&quot;name&quot;:&quot;包的名称&quot;,</div><div class="line">&quot;description&quot;：&quot;包的简要说明。&quot;,</div><div class="line">&quot;version&quot;:&quot;版本号&quot;,</div><div class="line">&quot;keywords&quot;：&quot;关键字&quot;,</div><div class="line">&quot;licenses&quot;:&quot;许可证&quot;,</div><div class="line">&quot;repositories&quot;：&quot;仓库地址 &quot;,</div><div class="line">&quot;dependencies&quot;:&quot;包的依赖，一个关联数组，由包名称和版本组成。&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h2 id="什么是服务？"><a href="#什么是服务？" class="headerlink" title="什么是服务？"></a>什么是服务？</h2><ul>
+<li>服务是公用的方法，把控制器中相同的部分抽取出来封装成一个服务，什么时候用它的时候就把它注入到控制器中 相当于原生js里的DOM库</li>
+<li>在 AngularJS 中，服务是一个函数或对象，可在你的 AngularJS 应用中使用。</li>
+<li>在 AngularJS 中，有五种服务一种装饰(decorator)</li>
+<li>指令，控制器，服务都是通过模块来声明的，服务通常情况下都是单例的</li>
+</ul>
+<h2 id="AngularJS中的五种服务和一种装饰"><a href="#AngularJS中的五种服务和一种装饰" class="headerlink" title="AngularJS中的五种服务和一种装饰"></a>AngularJS中的五种服务和一种装饰</h2><h2 id="1-provider"><a href="#1-provider" class="headerlink" title="1.provider"></a>1.provider</h2><ul>
+<li>可配置,是唯一一种你可以传进 .config() 函数的 service</li>
+<li><p>提供计算的服务 可实现简单的加减乘除的计算器</p>
+</li>
+<li><p>定义服务，注入到控制器的时候取到的是它的实例上$get方法的反回值,它是最大的服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var myMod = angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.provider(&apos;myPro&apos;,function()&#123;</div><div class="line">    this.$get=function()&#123;</div><div class="line">        return&#123;</div><div class="line">            &apos;+&apos;:function(a,b)&#123;//+当做属性名</div><div class="line">                return a+b;</div><div class="line">            &#125;</div><div class="line">            //&apos;+&apos;:(a,b)=&gt;a+b //ES6的语法 箭头符号  第二种写法</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用服务 ,注入进来的就是上面return里的对象 此时会默认调用provider的$get方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myPro&apos;,function ($scope,myPro) &#123;</div><div class="line">    $scope.result=myPro[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+</li>
+<li><p>封装的服务是以前缀$ currency=’$’，在输出的时候会有一个前缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var currency=&apos;$&apos;;</div><div class="line">retrun&#123;</div><div class="line">    &apos;+&apos;:function(a,b)&#123;</div><div class="line">    return currency+(parseFloat(a)+parseFloat(b));//parseFloat防止字符串拼接</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置服务，可以对服务暴露出来的接口进行配置，对修改关闭，对扩展开放，angular的执行顺序是先执行config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.config(function (myProProvider) &#123;</div><div class="line">    myProProvider.currency=&apos;￥&apos;;//可以对前缀进行修改</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="依赖列表-依赖的好处可以详细描述你的项目"><a href="#依赖列表-依赖的好处可以详细描述你的项目" class="headerlink" title="依赖列表,依赖的好处可以详细描述你的项目"></a>依赖列表,依赖的好处可以详细描述你的项目</h2><ul>
-<li><p>所有的依赖要放入到依赖列表中安装时加入到列表里<br>hexo init blog 初始化的项目是没有node_modules<br>cd blog&amp;&amp;npm install 是安装所需要的依赖</p>
+<p>参数：是由服务的名字+Provider,myProProvider是myPro服务的实例，可以调用myPro上的方法</p>
+<h2 id="2-factory"><a href="#2-factory" class="headerlink" title="2.factory"></a>2.factory</h2><ul>
+<li><p>工厂函数定义服务，调用该工厂函数将返回服务实例,它是定义服务的一种方法，内部封装的也是provider的实现原理，它的函数定义部分只要 return的返回值是个对象，没有$get()方法，不能调用config配置函数，这是最常用的,相当于原生js里的一个工厂函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">myMod.factory(&apos;myfactory&apos;, function () &#123;</div><div class="line">       var currency = &apos;$&apos;;</div><div class="line">       return &#123;</div><div class="line">           &apos;+&apos;:(a,b)=&gt;currency+(parseFloat(a)+parseFloat(b)),//ES6的语法</div><div class="line">           &apos;-&apos;:(a,b)=&gt;currency+(a-b),</div><div class="line">           &apos;*&apos;:(a,b)=&gt;currency+(a*b),</div><div class="line">           &apos;/&apos;:(a,b)=&gt;currency+(a/b),</div><div class="line">       &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
-<li><p>一个叫开发依赖 例如 webpack  –save-dev 只是在写代码时用</p>
-</li>
-<li>一个叫依赖 例如 jquery –save 写代码和上线都要用<h2 id="3-安装第三方包"><a href="#3-安装第三方包" class="headerlink" title="3.安装第三方包"></a>3.安装第三方包</h2></li>
-<li>在任何地方安装都可以，因为安装到全局下</li>
-<li><p>全局安装,所有带-g(-global)的都表示全局安装,直接下载到Node的安装目录中，各个项目都可以调用,适合工具模块,可以在<code>命令行</code>下直接使用,比如 hexo deploy </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install 包的名字 -g</div></pre></td></tr></table></figure>
-</li>
-<li><p>本地安装 将一个模块下载到当前目录的node_modules子目录，然后只有在当前目录和它的子目录之中，才能调用这个模块,本地安装就是项目中要真正使用的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install 包的名字 --save-dev/--save</div></pre></td></tr></table></figure>
-</li>
-<li><p>查看全局路径,目录安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm root -g</div></pre></td></tr></table></figure>
+<li><p>使用服务 ,注入进来的就是上面return里的对象，这里和provider的用法是一样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myfactory&apos;,function ($scope,myfactory) &#123;</div><div class="line">    $scope.result=myfactory[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="4-卸载第三方包-怎么安装的就怎么卸载"><a href="#4-卸载第三方包-怎么安装的就怎么卸载" class="headerlink" title="4.卸载第三方包,怎么安装的就怎么卸载"></a>4.卸载第三方包,怎么安装的就怎么卸载</h2><ul>
-<li><p>全局卸载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm uninstall 包的名字 -g</div></pre></td></tr></table></figure>
+<h2 id="3-service"><a href="#3-service" class="headerlink" title="3.service"></a>3.service</h2><ul>
+<li><p>定义服务 相当于原生js中的一个构造函数，都用this来实现 不可配置config，由factory构建出来的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.service(&apos;myservice&apos;, function () &#123;</div><div class="line">       var currency  = &apos;$&apos;;</div><div class="line">       this[&apos;+&apos;]=(a,b)=&gt;currency+(parseFloat(a)+parseFloat(b));</div><div class="line">       this[&apos;-&apos;]=(a,b)=&gt;currency+(a-b);</div><div class="line">       this[&apos;*&apos;]=(a,b)=&gt;currency+(a*b);</div><div class="line">       this[&apos;/&apos;]=(a,b)=&gt;currency+(a/b);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
-<li><p>本地卸载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm uninstall 包的名字 --save</div><div class="line">npm uninstall 包的名字 --save-dev</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="5-发布包-发布全局项目"><a href="#5-发布包-发布全局项目" class="headerlink" title="5.发布包,发布全局项目"></a>5.发布包,发布全局项目</h2><ul>
-<li><p>创建用户,在npm官网注册用户 <a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm adduser</div></pre></td></tr></table></figure>
-</li>
-<li><p>发布项目,我们想发布我们包 和 jquery一样，让别人使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm publish</div></pre></td></tr></table></figure>
-</li>
-<li><p>可以让别人进行下载,当做第三方包</p>
+<li><p>使用服务 ,注入进来的是该方法(service里的方法)的一个实例，可以直接调用它实例上的一个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myservice&apos;,function ($scope,myservice) &#123;</div><div class="line">    $scope.result=myservice[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>注意项目的名称不能是别人已经注册的名称,尽量用自己的名字做前缀 如果注册失败的话可能是因为改了镜像地址了，需要改回来 npm config set registry “<a href="http://registry.npmjs.org/“" target="_blank" rel="external">http://registry.npmjs.org/“</a> 查看所有的配置项 npm config ls</p>
-<h2 id="6-切换源"><a href="#6-切换源" class="headerlink" title="6.切换源"></a>6.切换源</h2><ul>
-<li><p>安装此工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install nrm -g</div></pre></td></tr></table></figure>
+<h2 id="4-value"><a href="#4-value" class="headerlink" title="4.value"></a>4.value</h2><ul>
+<li><p>用来定义变量，就相当于myvalue 赋值为一个111，不可配置config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.value(&apos;myvalue&apos;, &#123;</div><div class="line">      &apos;+&apos;:(a,b)=&gt;(a+b),</div><div class="line">      &apos;-&apos;:(a,b)=&gt;(a-b),</div><div class="line">      &apos;*&apos;:(a,b)=&gt;(a*b),</div><div class="line">      &apos;/&apos;:(a,b)=&gt;(a/b),</div><div class="line">&#125;);</div><div class="line">//myMod.value(&apos;myvalue&apos;,&apos;111&apos;); //两种方法</div></pre></td></tr></table></figure>
 </li>
-<li><p>查看所有源</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nrm ls</div></pre></td></tr></table></figure>
-</li>
-<li><p>切换到中国源,使用源</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nrm use cnpm</div></pre></td></tr></table></figure>
+<li><p>使用服务 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myvalue&apos;,function ($scope,myvalue) &#123;</div><div class="line">    $scope.result=myvalue; //这里调用的是上面的111，可以得到111</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>node npm 都可以在命令行下使用,我把它配置到path中了<br>hexo是否在path中？<br>C:\Users\10354_000\AppData\Roaming\npm 这里是npm的安装路径我们说npm可以进行全局访问，在npm中创建了很多连接，做了个快捷方式<br>C:\Users\10354_000\AppData\Roaming\npm\gulp -&gt; C:\Users\10354_000\AppData\Roaming\npm\node_modules\gulp\bin\gulp.js</p>
+<h2 id="5-constant"><a href="#5-constant" class="headerlink" title="5.constant"></a>5.constant</h2><ul>
+<li>定义长量的，用法和value一样只是value不可配置config</li>
+<li><p>它其实不算一种服务只是一个常量，长量：就是不可改变的量比如一个固定的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.constant(&apos;myconstant&apos;, &#123;</div><div class="line">     &apos;+&apos;:(a,b)=&gt;(a+b),</div><div class="line">     &apos;-&apos;:(a,b)=&gt;(a-b),</div><div class="line">     &apos;*&apos;:(a,b)=&gt;(a*b),</div><div class="line">     &apos;/&apos;:(a,b)=&gt;(a/b),</div><div class="line">&#125;);</div><div class="line">//myMod.constant(&apos;myconstant&apos;,&apos;111&apos;); //两种方法</div></pre></td></tr></table></figure>
+</li>
+<li><p>可配置config，参数：直接写服务的名字，可以取到myconstant的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.config(function (myconstant) &#123;</div><div class="line">    myconstant.aa = &apos;$&apos;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="6-decorator-装饰"><a href="#6-decorator-装饰" class="headerlink" title="6.decorator 装饰"></a>6.decorator 装饰</h2><ul>
+<li>装饰服务，可以包装自带的，也可以包装我们自己写的</li>
+<li><p>声明服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.factory(&apos;my&apos;,function () &#123;</div><div class="line">    return &#123;</div><div class="line">        a: function () &#123;</div><div class="line">            return 1;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>装饰服务，就是一层层的包装一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">myMod.config(function ($provide) &#123;</div><div class="line">    $provide.decorator(&apos;my&apos;,function ($delegate) &#123;</div><div class="line">        var fn =  $delegate[&apos;a&apos;];</div><div class="line">        $delegate[&apos;a&apos;] = function () &#123;</div><div class="line">            return fn()+100;</div><div class="line">        &#125;;</div><div class="line">        return $delegate;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>$log.log();输出日志的,通过$provide来装饰的，在$delegate上有log的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">myMod.config(function ($provide) &#123;</div><div class="line">    $provide.decorator(&apos;$log&apos;,function ($delegate) &#123;//用$delegate代理$log</div><div class="line">        $delegate.log=function()&#123;&#125;;</div><div class="line">        return $delegate;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/22/npm/" data-id="cisrarhml00049sua5v0lfapd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/24/自定义服务/" data-id="ciwoc21r90000f4uab5yevf6f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,7 +173,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -186,7 +198,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
     </div>
   </div>
 
@@ -199,23 +211,23 @@
       <ul>
         
           <li>
+            <a href="/2016/12/11/node基础/">node基础</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/10/git的使用/">git</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/08/angular中的指令/">angular中的指令</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/25/路由-route/">angular中的路由</a>
           </li>
         
           <li>
             <a href="/2016/08/24/自定义服务/">自定义服务</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/22/node里的buffer/">node中的buffer</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/22/node里的模块/">node中的模块</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/22/npm/">npm</a>
           </li>
         
       </ul>
