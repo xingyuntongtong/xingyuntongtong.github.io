@@ -93,17 +93,19 @@
 <li>什么是模块呢？我们可以简单的把它看成一个实现单独功能的文件。比如在前端JS中的jQuery.js，在node.js里，我们把它就看成一个模块的概念就行。在前端的JS中使用它之前，先要引入此文件。在node.js里，则需要require来引入.</li>
 <li>包的概念：包含一个或多模块的(也就是JS文件的)文件夹（我们先简单的理为包就是一个实现完整功能的目录，其实它的意义远不止这些，先这样上手）</li>
 <li>包是模块化JS必须的。<br>我们可以在node.js项目中直使用别人写好的功能，就是使用别人写的包。也可以自己写一个包，发布到互联网上供大家使用。 </li>
-<li>为了让Node.js的文件可以相互调用，Node.js提供了一个简单的模块系统。<br>模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个 Node.js 文件就是一个模块，这个文件可能是JavaScript 代码、JSON 或者编译过的C/C++ 扩展。<h2 id="1-JS的不足"><a href="#1-JS的不足" class="headerlink" title="1.JS的不足"></a>1.JS的不足</h2>js没有模块系统（现在es6中有），不支持封闭作用域或依赖管理<br>没有<code>标准库</code>，没有文件系统API<br>没有包管理系统，不能自动加载和安装依赖<h2 id="2-什么是CommonJS"><a href="#2-什么是CommonJS" class="headerlink" title="2.什么是CommonJS?"></a>2.什么是CommonJS?</h2></li>
+<li>为了让Node.js的文件可以相互调用，Node.js提供了一个简单的模块系统。<br>模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个 Node.js 文件就是一个模块，这个文件可能是JavaScript 代码、JSON 或者编译过的C/C++ 扩展。</li>
+</ul>
+<h2 id="1-JS的不足"><a href="#1-JS的不足" class="headerlink" title="1.JS的不足"></a>1.JS的不足</h2><p>js没有模块系统（现在es6中有），不支持封闭作用域或依赖管理<br>没有<code>标准库</code>，没有文件系统API<br>没有包管理系统，不能自动加载和安装依赖</p>
+<h2 id="2-什么是CommonJS"><a href="#2-什么是CommonJS" class="headerlink" title="2.什么是CommonJS?"></a>2.什么是CommonJS?</h2><ul>
 <li>CommonJS 是javascript模块化编程的一种规范，主要是在服务器端模块化的规范，一个单独的文件就是一个模块。每一个模块都是一个单独的作用域，也就是说，在该模块内部定义的变量，无法被其他模块读取，除非定义为global对象的属性。</li>
-<li>commonjs规范<br>一个 node.js由大量模块组成，每个JS文件都是一个模块<br>实现了require方法，npm基于commonjs实现了自动加载和安装依赖<blockquote>
-<p>require 它不是global上的属性，它是形参</p>
-</blockquote>
-</li>
+<li>commonjs规范<br>一个 node.js由大量模块组成，每个JS文件都是一个模块<br>实现了require方法，npm基于commonjs实现了自动加载和安装依赖<br><code>require</code> 它不是<code>global</code>上的属性，它是形参</li>
 </ul>
 <h2 id="3-模块化优点"><a href="#3-模块化优点" class="headerlink" title="3.模块化优点"></a>3.模块化优点</h2><ul>
 <li>增加内聚性，有助分工协作（高内聚，低耦合），你干你的我干我的不影响</li>
 <li>方便重构(你走了在来个人接着干) 方便管理代码</li>
-<li>提高代码质量<h2 id="4-模块使用"><a href="#4-模块使用" class="headerlink" title="4.模块使用"></a>4.模块使用</h2></li>
+<li>提高代码质量</li>
+</ul>
+<h2 id="4-模块使用"><a href="#4-模块使用" class="headerlink" title="4.模块使用"></a>4.模块使用</h2><ul>
 <li>定义(创建)模块 我们创建一个文件就是声明了一个模块，它会在外层自动的增加一个闭包函数</li>
 <li>使用模块 require(‘./filename’); 可以引用一个模块/包</li>
 <li>导出模块 module.exports和exports 模块的接口</li>
@@ -129,9 +131,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require.resolve(&apos;./test.js&apos;);   //相当于key</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>
 <p>可以帮我们通过一个已经存在的文件解析出一个绝对路径出来</p>
-</blockquote>
 <ul>
 <li><p>查看单个的模块缓存</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require.cache[require.resolve(&apos;./test.js&apos;)]; //&#123;key&#125;： 对象[key]就取出key了</div></pre></td></tr></table></figure>
@@ -163,9 +163,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;mime&apos;);//会自动搜索package.json里的main属性 mime.js</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>
-<p>我们引入第三模块是不要路径的./,直接引用模块的名字<br>自己写的模块 要注意:当我们安装一个模块会就近安装 找最近目录一直往上找，直到找到node_modules文件夹，如果找不到在自己的目录下创建</p>
-</blockquote>
+<p>我们引入第三模块是不要路径的<code>./</code>,直接引用模块的名字；自己写的模块 要注意:当我们安装一个模块会就近安装 找最近目录一直往上找，直到找到<code>node_modules</code>文件夹，如果找不到在自己的目录下创建</p>
 <h2 id="7-模块查找规则"><a href="#7-模块查找规则" class="headerlink" title="7.模块查找规则"></a>7.模块查找规则</h2><p>当没有以<code>/</code>或者<code>./</code>来指向一个文件时，这个模块要么是核心模块要么就是从node_modules文件夹加载的第三方模块</p>
 <ul>
 <li>从module.paths(模块的查找路径)取出第一个目录开始。</li>
@@ -179,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/22/node里的模块/" data-id="ciwocz9j70005b8ua8mxs5e88" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/22/node里的模块/" data-id="ciwod5d0n0007h8uald182hkw" class="article-share-link">Share</a>
       
       
     </footer>

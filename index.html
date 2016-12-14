@@ -87,33 +87,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p><code>我的电脑-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;找到path</code></p>
-<ul>
-<li>配置ws提示，setting-&gt;npm-&gt;引用源码包<h2 id="什么是node"><a href="#什么是node" class="headerlink" title="什么是node"></a>什么是node</h2></li>
+        <p>配置环境变量:我的电脑-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;找到path<br>配置ws提示，setting-&gt;npm-&gt;引用源码包</p>
+<h2 id="什么是node"><a href="#什么是node" class="headerlink" title="什么是node"></a>什么是node</h2><ul>
 <li>node是一个环境，供js代码执行的环境，我们可以把它等价于浏览器，只不过我们一般都会把node这个环境安装到服务器端</li>
 <li>它实现了诸如文件系统、模块、包、操作系统API、网络通信等核心JS没有或不完善的功能</li>
 <li>它摒弃了传统平台依赖多线程来实现高并发的设计思路，而采用单线程、异步式I/O(读写文件)、事件驱动式的程序设计模型</li>
-<li>它使用了来自于Google的V8引擎<blockquote>
-<p>验证时一定要前后台都验证<br>能使用异步的不用同步，防止阻塞主线程<br>安装的时候要默认c盘不然会更改环境变量会有问题<br>向一个文件中写入内容，我们需要把文件读出来，在写入到这个文件中;<br>IO: 输入输出 Input Output</p>
-</blockquote>
-</li>
+<li>它使用了来自于Google的V8引擎<br>验证时一定要前后台都验证；能使用异步的不用同步，防止阻塞主线程；安装的时候要默认c盘不然会更改环境变量会有问题；向一个文件中写入内容，我们需要把文件读出来，在写入到这个文件中；<code>IO: 输入输出 Input Output</code></li>
 </ul>
 <h2 id="node-js的优点"><a href="#node-js的优点" class="headerlink" title="node.js的优点"></a>node.js的优点</h2><ul>
 <li>node.js基于JS语言</li>
 <li>统一公共类库，代码标准化（因为代码都能看懂）</li>
 <li>Node本身运行V8 JavaScript。V8 JavaScript引擎是Google用于其Chrome浏览器的底层JavaScript引擎。</li>
-<li><a href="http://cnodejs.org/" target="_blank" rel="external">http://cnodejs.org/</a> node中文社区，它的社区非常活跃<h2 id="node的线程"><a href="#node的线程" class="headerlink" title="node的线程"></a>node的线程</h2></li>
+<li><a href="http://cnodejs.org/" target="_blank" rel="external">http://cnodejs.org/</a> node中文社区，它的社区非常活跃</li>
+</ul>
+<h2 id="node的线程"><a href="#node的线程" class="headerlink" title="node的线程"></a>node的线程</h2><ul>
 <li>node的主线程永远是单线程的</li>
 <li>单进程里面可以开多个线程</li>
-<li>node里面就是单进程、单线程，可以开多个进程就是多进程、单线程<h2 id="单线程和多线程"><a href="#单线程和多线程" class="headerlink" title="单线程和多线程"></a>单线程和多线程</h2></li>
+<li>node里面就是单进程、单线程，可以开多个进程就是多进程、单线程</li>
+</ul>
+<h2 id="单线程和多线程"><a href="#单线程和多线程" class="headerlink" title="单线程和多线程"></a>单线程和多线程</h2><ul>
 <li>多线程：同一个时间可以干多件事，其实不可能同时干多件事，只是切换上下文(速度非常快)，让你感觉不出来</li>
-<li>单线程：同一个时间干一件事，一件事干完了才能干别处一件事<blockquote>
-<p>不管是单核还是多核，都可以开多个进程</p>
-</blockquote>
-</li>
+<li>单线程：同一个时间干一件事，一件事干完了才能干别处一件事<br><code>不管是单核还是多核，都可以开多个进程</code></li>
 </ul>
 <h2 id="阻塞和非阻塞"><a href="#阻塞和非阻塞" class="headerlink" title="阻塞和非阻塞"></a>阻塞和非阻塞</h2><ul>
-<li>针对内核来说的，非阻塞是异步的前置条件<h2 id="node的全局对象-global"><a href="#node的全局对象-global" class="headerlink" title="node的全局对象 global"></a>node的全局对象 global</h2></li>
+<li>针对内核来说的，非阻塞是异步的前置条件</li>
+</ul>
+<h2 id="node的全局对象-global"><a href="#node的全局对象-global" class="headerlink" title="node的全局对象 global"></a>node的全局对象 global</h2><ul>
 <li>写代码时，可以在任意一个地方访问</li>
 <li>在node中最大的就是global 在webStorm中运行的是文件中的代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">不能通过global访问var声明的变量</div><div class="line">var a=100;</div><div class="line">console.log(global.a);//找不到得把var去掉，也可以写成global.a=100;</div></pre></td></tr></table></figure>
 </li>
@@ -135,13 +134,11 @@
 <li><p>__filename 文件的绝对路径 他是不可更改的</p>
 <pre><code>比如  F:\xuexi\3.node.js\node\node_8\2.node\2.global.js
 </code></pre></li>
-<li><p>__dirname  当前文件夹的名字  F:\xuexi\3.node.js\node\node_8\2.node。无法更改</p>
-<blockquote>
-<p>全局对象，在任何地方都能访问到，但是它们不是global上的属性<br>文件相当于一个模块在执行时默认会添加一个自执行函数<strong>filename和</strong>dirname是形参可以在文件内直接访问</p>
-</blockquote>
-</li>
-<li><p>setTimeout 延迟 I/O是最慢的</p>
-</li>
+<li>__dirname  当前文件夹的名字  F:\xuexi\3.node.js\node\node_8\2.node。无法更改</li>
+</ul>
+<p>全局对象，在任何地方都能访问到，但是它们不是<code>global</code>上的属性；文件相当于一个模块在执行时默认会添加一个自执行函数<code>__filename</code>和<code>__dirname</code>是形参可以在文件内直接访问`</p>
+<ul>
+<li>setTimeout 延迟 I/O是最慢的</li>
 <li>setImmediate 立即  两个方法都是异步的 第二个本上setImmediate是个setTimeout一些机会的 它可以让0的setTimeout先执行 它没有时间</li>
 <li>process.nextTick 下一个队列，它也没有时间，它永远比上面2个快，就是同步方法执行后就执行它，也就是在服务员上的第一个小本，上面2个都在第二个小本上</li>
 <li>process(进程) 是global上的属性 进程在整个代码运行后会退出进程<ul>
@@ -159,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/11/node基础/" data-id="ciwocz9iv0004b8uaf0r5y6ed" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/11/node基础/" data-id="ciwod5d080004h8uag7fgzlkm" class="article-share-link">Share</a>
       
       
     </footer>
