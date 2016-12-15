@@ -61,14 +61,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-node里的模块" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-angular/自定义服务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/22/node里的模块/" class="article-date">
-  <time datetime="2016-08-22T02:30:25.000Z" itemprop="datePublished">2016-08-22</time>
+    <a href="/2016/08/24/angular/自定义服务/" class="article-date">
+  <time datetime="2016-08-24T09:30:25.000Z" itemprop="datePublished">2016-08-24</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Node-JS/">Node JS</a>
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
   </div>
 
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/22/node里的模块/">node中的模块</a>
+      <a class="article-title" href="/2016/08/24/angular/自定义服务/">自定义服务</a>
     </h1>
   
 
@@ -87,97 +87,80 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>javaScript 从一个仅仅在浏览器上面的一个玩具语言，一转眼演变成无所不能神一般的存在。但是，由于天生存在着一点戏剧性，模块系统作为一门语言最基本的属性却是javaScript所缺的。</p>
-<h2 id="Node-js里的模块和包的概念"><a href="#Node-js里的模块和包的概念" class="headerlink" title="Node.js里的模块和包的概念"></a>Node.js里的模块和包的概念</h2><ul>
-<li>在前端的编程里，我们经常把单独功能的一些JS脚本写一个文件里，用这个文件的时候就用script标签的src属性来引用。在node.js里，同样也是把单独功能的脚本写一个单独的文件里，不过引入的方式变了，是用require来引用。这个单独的JS文件，在node.js里叫模块</li>
-<li>什么是模块呢？我们可以简单的把它看成一个实现单独功能的文件。比如在前端JS中的jQuery.js，在node.js里，我们把它就看成一个模块的概念就行。在前端的JS中使用它之前，先要引入此文件。在node.js里，则需要require来引入.</li>
-<li>包的概念：包含一个或多模块的(也就是JS文件的)文件夹（我们先简单的理为包就是一个实现完整功能的目录，其实它的意义远不止这些，先这样上手）</li>
-<li>包是模块化JS必须的。<br>我们可以在node.js项目中直使用别人写好的功能，就是使用别人写的包。也可以自己写一个包，发布到互联网上供大家使用。 </li>
-<li>为了让Node.js的文件可以相互调用，Node.js提供了一个简单的模块系统。<br>模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个 Node.js 文件就是一个模块，这个文件可能是JavaScript 代码、JSON 或者编译过的C/C++ 扩展。</li>
+        <h2 id="什么是服务？"><a href="#什么是服务？" class="headerlink" title="什么是服务？"></a>什么是服务？</h2><ul>
+<li>服务是公用的方法，把控制器中相同的部分抽取出来封装成一个服务，什么时候用它的时候就把它注入到控制器中 相当于原生js里的DOM库</li>
+<li>在 AngularJS 中，服务是一个函数或对象，可在你的 AngularJS 应用中使用。</li>
+<li>在 AngularJS 中，有五种服务一种装饰(decorator)</li>
+<li>指令，控制器，服务都是通过模块来声明的，服务通常情况下都是单例的</li>
 </ul>
-<h2 id="1-JS的不足"><a href="#1-JS的不足" class="headerlink" title="1.JS的不足"></a>1.JS的不足</h2><p>js没有模块系统（现在es6中有），不支持封闭作用域或依赖管理<br>没有<code>标准库</code>，没有文件系统API<br>没有包管理系统，不能自动加载和安装依赖</p>
-<h2 id="2-什么是CommonJS"><a href="#2-什么是CommonJS" class="headerlink" title="2.什么是CommonJS?"></a>2.什么是CommonJS?</h2><ul>
-<li>CommonJS 是javascript模块化编程的一种规范，主要是在服务器端模块化的规范，一个单独的文件就是一个模块。每一个模块都是一个单独的作用域，也就是说，在该模块内部定义的变量，无法被其他模块读取，除非定义为global对象的属性。</li>
-<li>commonjs规范<br>一个 node.js由大量模块组成，每个JS文件都是一个模块<br>实现了require方法，npm基于commonjs实现了自动加载和安装依赖<br><code>require</code> 它不是<code>global</code>上的属性，它是形参</li>
-</ul>
-<h2 id="3-模块化优点"><a href="#3-模块化优点" class="headerlink" title="3.模块化优点"></a>3.模块化优点</h2><ul>
-<li>增加内聚性，有助分工协作（高内聚，低耦合），你干你的我干我的不影响</li>
-<li>方便重构(你走了在来个人接着干) 方便管理代码</li>
-<li>提高代码质量</li>
-</ul>
-<h2 id="4-模块使用"><a href="#4-模块使用" class="headerlink" title="4.模块使用"></a>4.模块使用</h2><ul>
-<li>定义(创建)模块 我们创建一个文件就是声明了一个模块，它会在外层自动的增加一个闭包函数</li>
-<li>使用模块 require(‘./filename’); 可以引用一个模块/包</li>
-<li>导出模块 module.exports和exports 模块的接口</li>
-<li>实现原理 文件外面默认被套了一个闭包函数,所以可以模块化,我们是看不到的,是文件形参传入进来的,虽然不是global上的属性，但是可以直接使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(function(exports,require,module,__filename,__dirname)&#123;</div><div class="line">    exports  = module.exports = &#123;&#125;;</div><div class="line">    1.exports.Person=Person; //这样&#123;&#125;就不是空对象了相当于给module.exports也加了</div><div class="line">    2.module.exports = Person; //这种方法也行2种方法 但是exports=Person不行</div><div class="line">    return module.exports; //但是导出的是module.exports</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<h2 id="AngularJS中的五种服务和一种装饰"><a href="#AngularJS中的五种服务和一种装饰" class="headerlink" title="AngularJS中的五种服务和一种装饰"></a>AngularJS中的五种服务和一种装饰</h2><h2 id="1-provider"><a href="#1-provider" class="headerlink" title="1.provider"></a>1.provider</h2><ul>
+<li>可配置,是唯一一种你可以传进 .config() 函数的 service</li>
+<li><p>提供计算的服务 可实现简单的加减乘除的计算器</p>
+</li>
+<li><p>定义服务，注入到控制器的时候取到的是它的实例上$get方法的反回值,它是最大的服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var myMod = angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.provider(&apos;myPro&apos;,function()&#123;</div><div class="line">    this.$get=function()&#123;</div><div class="line">        return&#123;</div><div class="line">            &apos;+&apos;:function(a,b)&#123;//+当做属性名</div><div class="line">                return a+b;</div><div class="line">            &#125;</div><div class="line">            //&apos;+&apos;:(a,b)=&gt;a+b //ES6的语法 箭头符号  第二种写法</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用服务 ,注入进来的就是上面return里的对象 此时会默认调用provider的$get方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myPro&apos;,function ($scope,myPro) &#123;</div><div class="line">    $scope.result=myPro[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+</li>
+<li><p>封装的服务是以前缀$ currency=’$’，在输出的时候会有一个前缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var currency=&apos;$&apos;;</div><div class="line">retrun&#123;</div><div class="line">    &apos;+&apos;:function(a,b)&#123;</div><div class="line">    return currency+(parseFloat(a)+parseFloat(b));//parseFloat防止字符串拼接</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置服务，可以对服务暴露出来的接口进行配置，对修改关闭，对扩展开放，angular的执行顺序是先执行config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.config(function (myProProvider) &#123;</div><div class="line">    myProProvider.currency=&apos;￥&apos;;//可以对前缀进行修改</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>module.exports和exports的区别</p>
-<ul>
-<li>导出模块导出的不是exports对象  exports默认是一个空对象，得exports.a=a;</li>
-<li>真正require进来的是module.exports对象,向外暴露一个接口</li>
-<li>一个global全局上的变量 一个是形参,它的实现原理就是这样</li>
-<li>使用module.exports = Person;的时候在另一个模块中<code>var person=require(&#39;./Person&#39;)</code>; 在使用exports.Person=Person;的时候在另一个模块中<code>var person=require(&#39;./Person&#39;).Person</code>;</li>
-<li>当导出一个时用module.exports = Person; 导出多个时用exports.Person=Person;<h2 id="5-require（引入）的应用"><a href="#5-require（引入）的应用" class="headerlink" title="5.require（引入）的应用"></a>5.require（引入）的应用</h2></li>
-<li>需要一个模块就要把这个模块require(引)进来，通过相对路径引用模块</li>
-<li>require()是同步的：有返回值的是同步方法 如果带有回调函数的是异步</li>
-<li><p>多次导入一个模块会对模块进行缓存,多次加载后得到同一对象,防止浪费性能 所以只会出现一次</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;./test.js&apos;);</div></pre></td></tr></table></figure>
+<p>参数：是由服务的名字+Provider,myProProvider是myPro服务的实例，可以调用myPro上的方法</p>
+<h2 id="2-factory"><a href="#2-factory" class="headerlink" title="2.factory"></a>2.factory</h2><ul>
+<li><p>工厂函数定义服务，调用该工厂函数将返回服务实例,它是定义服务的一种方法，内部封装的也是provider的实现原理，它的函数定义部分只要 return的返回值是个对象，没有$get()方法，不能调用config配置函数，这是最常用的,相当于原生js里的一个工厂函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">myMod.factory(&apos;myfactory&apos;, function () &#123;</div><div class="line">       var currency = &apos;$&apos;;</div><div class="line">       return &#123;</div><div class="line">           &apos;+&apos;:(a,b)=&gt;currency+(parseFloat(a)+parseFloat(b)),//ES6的语法</div><div class="line">           &apos;-&apos;:(a,b)=&gt;currency+(a-b),</div><div class="line">           &apos;*&apos;:(a,b)=&gt;currency+(a*b),</div><div class="line">           &apos;/&apos;:(a,b)=&gt;currency+(a/b),</div><div class="line">       &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
-<li><p>查看模块缓存: require.cache 根据模块的绝对路径进行缓存,{‘一个绝对路径’:’模块’}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(require.cache);  //相当于对象</div></pre></td></tr></table></figure>
-</li>
-<li><p>查询(解析)模块绝对路径: 要让模块多次加载，可以加载后删除掉缓存的模块，得解析出一个绝对路径，例如解析一个绝对路径  C:\Users\10354_000\Desktop\node8\3.module\test.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require.resolve(&apos;./test.js&apos;);   //相当于key</div></pre></td></tr></table></figure>
+<li><p>使用服务 ,注入进来的就是上面return里的对象，这里和provider的用法是一样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myfactory&apos;,function ($scope,myfactory) &#123;</div><div class="line">    $scope.result=myfactory[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>可以帮我们通过一个已经存在的文件解析出一个绝对路径出来</p>
-<ul>
-<li><p>查看单个的模块缓存</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require.cache[require.resolve(&apos;./test.js&apos;)]; //&#123;key&#125;： 对象[key]就取出key了</div></pre></td></tr></table></figure>
+<h2 id="3-service"><a href="#3-service" class="headerlink" title="3.service"></a>3.service</h2><ul>
+<li><p>定义服务 相当于原生js中的一个构造函数，都用this来实现 不可配置config，由factory构建出来的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.service(&apos;myservice&apos;, function () &#123;</div><div class="line">       var currency  = &apos;$&apos;;</div><div class="line">       this[&apos;+&apos;]=(a,b)=&gt;currency+(parseFloat(a)+parseFloat(b));</div><div class="line">       this[&apos;-&apos;]=(a,b)=&gt;currency+(a-b);</div><div class="line">       this[&apos;*&apos;]=(a,b)=&gt;currency+(a*b);</div><div class="line">       this[&apos;/&apos;]=(a,b)=&gt;currency+(a/b);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
-<li><p>删除模块缓存,这样多次加载就可以输出多次</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">delete require.cache[require.resolve(&apos;./test.js&apos;)]; //就是delete 对象[key]</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="6-模块分类"><a href="#6-模块分类" class="headerlink" title="6.模块分类"></a>6.模块分类</h2><ul>
-<li><p>1.内置模块(核心模块)http url fs util  是node中自带的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">require(&apos;util&apos;);</div><div class="line">util.inherits继承 原理就是Object.create方法</div><div class="line">inspect解析属性</div><div class="line">isArray isRegExp isDate isError判断数据类型</div></pre></td></tr></table></figure>
-</li>
-<li><p>inherits 默认为原型链继承(不继承私有属性)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ctor.prototype.__proto__ = superCtor.prototype;</div><div class="line">ctor.prototype = Object.create(superCtor.prototype);</div></pre></td></tr></table></figure>
-</li>
-<li><p>inspect 解析对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var obj  = &#123;name:&apos;tong&apos;,age:7&#125;;</div><div class="line">util.inspect(obj,&#123;showHidden:true,depth:1,colors:true&#125;);</div><div class="line">showHidden 显示隐藏属性</div><div class="line">depth 解析的深度</div><div class="line">colors 输出的时候带颜色</div></pre></td></tr></table></figure>
-</li>
-<li><p>给对象增加属性,这里拿util举例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Object.defineProperty(obj,&apos;age&apos;,&#123;</div><div class="line">    value:&apos;8&apos;, //当前定义属性的值</div><div class="line">    enumerable:false,//是否可枚举</div><div class="line">    writable:true,//是否可写</div><div class="line">    configurable:false,//是否可配置</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>判断类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">console.log(util.isArray([]));</div><div class="line">console.log(util.isError(new RegExp()));</div><div class="line">console.log(util.isRegExp(new Error()));</div></pre></td></tr></table></figure>
-</li>
-<li><p>2.文件模块(自定义模块) 以./方式引入的都是文件模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;./文件名字&apos;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.第三方模块,是需要安装的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;mime&apos;);//会自动搜索package.json里的main属性 mime.js</div></pre></td></tr></table></figure>
+<li><p>使用服务 ,注入进来的是该方法(service里的方法)的一个实例，可以直接调用它实例上的一个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myservice&apos;,function ($scope,myservice) &#123;</div><div class="line">    $scope.result=myservice[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>我们引入第三模块是不要路径的<code>./</code>,直接引用模块的名字；自己写的模块 要注意:当我们安装一个模块会就近安装 找最近目录一直往上找，直到找到<code>node_modules</code>文件夹，如果找不到在自己的目录下创建</p>
-<h2 id="7-模块查找规则"><a href="#7-模块查找规则" class="headerlink" title="7.模块查找规则"></a>7.模块查找规则</h2><p>当没有以<code>/</code>或者<code>./</code>来指向一个文件时，这个模块要么是核心模块要么就是从node_modules文件夹加载的第三方模块</p>
-<ul>
-<li>从module.paths(模块的查找路径)取出第一个目录开始。</li>
-<li>直接从目录中查找，存在结束，不存在下一条。先查找模块的名字,找不到往上找，找到跟目录</li>
-<li>查找index.js index.json如果没有index 会找package.json里的main字段</li>
-<li>我们的文件模块不用指定后缀名默认会自动添加.js后缀，如果找不到在添加.json后缀</li>
-<li>尝试将require的参数作为一个包来查找，读取package.json，取得main配置项指定的文件查找，不存在进行3</li>
-<li>继续失败查看下一个目录</li>
+<h2 id="4-value"><a href="#4-value" class="headerlink" title="4.value"></a>4.value</h2><ul>
+<li><p>用来定义变量，就相当于myvalue 赋值为一个111，不可配置config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.value(&apos;myvalue&apos;, &#123;</div><div class="line">      &apos;+&apos;:(a,b)=&gt;(a+b),</div><div class="line">      &apos;-&apos;:(a,b)=&gt;(a-b),</div><div class="line">      &apos;*&apos;:(a,b)=&gt;(a*b),</div><div class="line">      &apos;/&apos;:(a,b)=&gt;(a/b),</div><div class="line">&#125;);</div><div class="line">//myMod.value(&apos;myvalue&apos;,&apos;111&apos;); //两种方法</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用服务 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myvalue&apos;,function ($scope,myvalue) &#123;</div><div class="line">    $scope.result=myvalue; //这里调用的是上面的111，可以得到111</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-constant"><a href="#5-constant" class="headerlink" title="5.constant"></a>5.constant</h2><ul>
+<li>定义长量的，用法和value一样只是value不可配置config</li>
+<li><p>它其实不算一种服务只是一个常量，长量：就是不可改变的量比如一个固定的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.constant(&apos;myconstant&apos;, &#123;</div><div class="line">     &apos;+&apos;:(a,b)=&gt;(a+b),</div><div class="line">     &apos;-&apos;:(a,b)=&gt;(a-b),</div><div class="line">     &apos;*&apos;:(a,b)=&gt;(a*b),</div><div class="line">     &apos;/&apos;:(a,b)=&gt;(a/b),</div><div class="line">&#125;);</div><div class="line">//myMod.constant(&apos;myconstant&apos;,&apos;111&apos;); //两种方法</div></pre></td></tr></table></figure>
+</li>
+<li><p>可配置config，参数：直接写服务的名字，可以取到myconstant的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.config(function (myconstant) &#123;</div><div class="line">    myconstant.aa = &apos;$&apos;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="6-decorator-装饰"><a href="#6-decorator-装饰" class="headerlink" title="6.decorator 装饰"></a>6.decorator 装饰</h2><ul>
+<li>装饰服务，可以包装自带的，也可以包装我们自己写的</li>
+<li><p>声明服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.factory(&apos;my&apos;,function () &#123;</div><div class="line">    return &#123;</div><div class="line">        a: function () &#123;</div><div class="line">            return 1;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>装饰服务，就是一层层的包装一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">myMod.config(function ($provide) &#123;</div><div class="line">    $provide.decorator(&apos;my&apos;,function ($delegate) &#123;</div><div class="line">        var fn =  $delegate[&apos;a&apos;];</div><div class="line">        $delegate[&apos;a&apos;] = function () &#123;</div><div class="line">            return fn()+100;</div><div class="line">        &#125;;</div><div class="line">        return $delegate;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>$log.log();输出日志的,通过$provide来装饰的，在$delegate上有log的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">myMod.config(function ($provide) &#123;</div><div class="line">    $provide.decorator(&apos;$log&apos;,function ($delegate) &#123;//用$delegate代理$log</div><div class="line">        $delegate.log=function()&#123;&#125;;</div><div class="line">        return $delegate;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/22/node里的模块/" data-id="ciwod5d0n0007h8uald182hkw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/24/angular/自定义服务/" data-id="ciwq0o7360002j4ua4jhe87rr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +173,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/8/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -215,7 +198,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
     </div>
   </div>
 
@@ -228,23 +211,23 @@
       <ul>
         
           <li>
-            <a href="/2016/12/11/node基础/">node基础</a>
+            <a href="/2016/12/11/node/express/">express</a>
           </li>
         
           <li>
-            <a href="/2016/12/10/git的使用/">git</a>
+            <a href="/2016/12/11/node/node基础/">node基础</a>
           </li>
         
           <li>
-            <a href="/2016/12/08/angular中的指令/">angular中的指令</a>
+            <a href="/2016/12/10/node/git的使用/">git</a>
           </li>
         
           <li>
-            <a href="/2016/08/25/路由-route/">angular中的路由</a>
+            <a href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
           </li>
         
           <li>
-            <a href="/2016/08/24/自定义服务/">自定义服务</a>
+            <a href="/2016/09/10/node/mongodb/">Mongodb 数据库</a>
           </li>
         
       </ul>

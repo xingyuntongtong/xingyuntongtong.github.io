@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>angular中的路由 | Tongtong blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是路由?
+AngularJS 路由允许我们通过不同的 URL 访问不同的内容。
+通过 AngularJS 可以实现多视图的单页Web应用（single page web application，SPA）。
+通常我们的URL形式为 http://runoob.com/first/page 但在单页Web应用中 AngularJS 通过 # + 标记 实现，例如：123http://runoob.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular中的路由">
+<meta property="og:url" content="http://yoursite.com/2016/08/25/angular/路由-route/index.html">
+<meta property="og:site_name" content="Tongtong blog">
+<meta property="og:description" content="什么是路由?
+AngularJS 路由允许我们通过不同的 URL 访问不同的内容。
+通过 AngularJS 可以实现多视图的单页Web应用（single page web application，SPA）。
+通常我们的URL形式为 http://runoob.com/first/page 但在单页Web应用中 AngularJS 通过 # + 标记 实现，例如：123http://runoob.">
+<meta property="og:updated_time" content="2016-09-06T09:51:55.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular中的路由">
+<meta name="twitter:description" content="什么是路由?
+AngularJS 路由允许我们通过不同的 URL 访问不同的内容。
+通过 AngularJS 可以实现多视图的单页Web应用（single page web application，SPA）。
+通常我们的URL形式为 http://runoob.com/first/page 但在单页Web应用中 AngularJS 通过 # + 标记 实现，例如：123http://runoob.">
+  
+    <link rel="alternate" href="/atom.xml" title="Tongtong blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Tongtong blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章收藏</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-angular/路由-route" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/25/angular/路由-route/" class="article-date">
+  <time datetime="2016-08-25T02:05:25.000Z" itemprop="datePublished">2016-08-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      angular中的路由
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由?"></a>什么是路由?</h2><ul>
+<li>AngularJS 路由允许我们通过不同的 URL 访问不同的内容。</li>
+<li>通过 AngularJS 可以实现多视图的单页Web应用（single page web application，SPA）。</li>
+<li>通常我们的URL形式为 <a href="http://runoob.com/first/page" target="_blank" rel="external">http://runoob.com/first/page</a> 但在单页Web应用中 AngularJS 通过 # + 标记 实现，例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http://runoob.com/#/first</div><div class="line">http://runoob.com/#/second</div><div class="line">http://runoob.com/#/third</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当我们点击以上的任意一个链接时，向服务端请的地址都是一样的 (<a href="http://runoob.com/" target="_blank" rel="external">http://runoob.com/</a>) 因为 # 号之后的内容在向服务端请求时会被浏览器忽略掉。 所以我们就需要在客户端实现 # 号后面内容的功能实现。 AngularJS 路由 就通过 #, + 标记 帮助我们区分不同的逻辑页面并将不同的页面绑定到对应的控制器上。</p>
+<h2 id="1-ng-route路由-属性单页面应用-angular-route它是angular自带的路由模块"><a href="#1-ng-route路由-属性单页面应用-angular-route它是angular自带的路由模块" class="headerlink" title="1.ng-route路由 属性单页面应用 angular-route它是angular自带的路由模块"></a>1.ng-route路由 属性单页面应用 angular-route它是angular自带的路由模块</h2><h3 id="1-1-安装路由"><a href="#1-1-安装路由" class="headerlink" title="1.1 安装路由"></a>1.1 安装路由</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install angular-route</div></pre></td></tr></table></figure>
+<h3 id="1-2-依赖模块"><a href="#1-2-依赖模块" class="headerlink" title="1.2 依赖模块"></a>1.2 依赖模块</h3><ul>
+<li>让当前模块依赖于ngRoute<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var myMod = angular.module(&apos;myMod&apos;,[&apos;ngRoute&apos;]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-3-使用-ngView-指令"><a href="#1-3-使用-ngView-指令" class="headerlink" title="1.3 使用 ngView 指令"></a>1.3 使用 ngView 指令</h3><ul>
+<li>ng-view必须有，所有的页面都是渲染到该标签中的,只有它里面的内容是变化的</li>
+<li>该 div 内的 HTML 内容会根据路由的变化而变化。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div ng-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-4-配置路由"><a href="#1-4-配置路由" class="headerlink" title="1.4 配置路由"></a>1.4 配置路由</h3><ul>
+<li>when: 就是当配置路由的路径是哪个的时候要做的事情；参数1：path 配置路由的路径 参数2：是一个对象；它可以实现链式操作,可以链接多个when</li>
+<li>AngularJS 模块的 config 函数用于配置路由规则。通过使用 configAPI，我们请求把$routeProvider注入到我们的配置函数并且使用$routeProvider.whenAPI来定义我们的路由规则。</li>
+<li>$routeProvider 为我们提供了 when(path,object) 和 otherwise(object) 函数按顺序定义所有路由<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">myMod.config(function($routeProvider)&#123;</div><div class="line">        $routeProvider.when(&apos;/&apos;,&#123;</div><div class="line">            template:&apos;&lt;h1&gt;index&lt;/h1&gt;&apos;,//定义需要的模板</div><div class="line">        &#125;).when(&apos;/users&apos;,&#123;</div><div class="line">            templateUrl:&apos;usesr.html&apos;,</div><div class="line">            controller:[&apos;$scope&apos;,&apos;add&apos;,function($scope,add)&#123;</div><div class="line">                //控制器:它控制的是同一个路由下的模板，这里有控制器了在模板里就不用写了</div><div class="line">                //$scope.users=[&apos;tongtong&apos;,&apos;haha&apos;,&apos;hehe&apos;];</div><div class="line">                //这里可以是一个字符串也可以是一个对象</div><div class="line">                $scope.users=[&#123;id:1,name:&apos;tongtong&apos;&#125;,&#123;id:2,name:&apos;haha&apos;&#125;,&#123;id:3,name:&apos;hehe&apos;&#125;];</div><div class="line">                $scope.result=add(1,2);</div><div class="line">            &#125;],</div><div class="line">            resolve:&#123;//它是一个对象 相当于factory 可以定义服务,这里面的add就相当于一个服务</div><div class="line">                add:function()&#123;//指定当前controller所依赖的其他模块。</div><div class="line">                    return function(a,b)&#123;</div><div class="line">                        return a+b;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;).when(&apos;/user/:id&apos;,&#123;</div><div class="line">              // /user/1   /user/2    /user/3</div><div class="line">              template:&apos;我的ID号是&#123;&#123;id&#125;&#125;&apos;,</div><div class="line">              controller: function ($scope, $routeParams) &#123;</div><div class="line">            //$routeParams 路由参数（是一个对象） 能够获取到冒号后面的值</div><div class="line">                  $scope.id = $routeParams.id</div><div class="line">              &#125;</div><div class="line">          &#125;).otherwise(&#123;</div><div class="line">              redirectTo:&apos;/&apos;;//意思是重新定义路径，当输入错误时直接回到 / 它的页面上 两种写法</div><div class="line">          &#125;)</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-5-创建路由链接"><a href="#1-5-创建路由链接" class="headerlink" title="1.5 创建路由链接"></a>1.5 创建路由链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;#/home&quot;&gt;首页&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#/user/&#123;&#123;user.id&#125;&#125;&quot;&gt;用户管理 或者&#123;&#123;user.name&#125;&#125;&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#/contact&quot;&gt;联系&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#/settings&quot;&gt;设置&lt;/a&gt;</div><div class="line">&lt;div ng-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>实现点击可以跳转相应的页面，它刷新的只是ng-view这一块，其它的不改变 必须有# 防止页面的跳转</p>
+<h2 id="2-angular-ui-route-可以实现多应用它更强大"><a href="#2-angular-ui-route-可以实现多应用它更强大" class="headerlink" title="2.angular-ui-route  可以实现多应用它更强大"></a>2.angular-ui-route  可以实现多应用它更强大</h2><h3 id="2-1-安装路由"><a href="#2-1-安装路由" class="headerlink" title="2.1 安装路由"></a>2.1 安装路由</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install angular-ui-router</div></pre></td></tr></table></figure>
+<h3 id="2-2-依赖模块"><a href="#2-2-依赖模块" class="headerlink" title="2.2 依赖模块"></a>2.2 依赖模块</h3><ul>
+<li>让当前模块依赖于uiRouter<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var myMod = angular.module(&apos;myMod&apos;, [&apos;ui.router&apos;]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-3-使用-uiView-指令"><a href="#2-3-使用-uiView-指令" class="headerlink" title="2.3 使用 uiView 指令"></a>2.3 使用 uiView 指令</h3><ul>
+<li>ui-view必须有，所有的页面都是渲染到该标签中的,只有它里面的内容是变化的</li>
+<li>该 div 内的 HTML 内容会根据路由的变化而变化。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div ui-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-4-配置路由"><a href="#2-4-配置路由" class="headerlink" title="2.4 配置路由"></a>2.4 配置路由</h3><ul>
+<li>state 和 when 差不多<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">myMod.config(function($stateProvider,$urlRouterProvider)&#123;</div><div class="line">    $urlRouterProvider.otherwise(&apos;/&apos;);</div><div class="line">    //可以在这个服务下调用otherwise,不然没有这个属性，可以实现刚打开页面就显示内容</div><div class="line">    $stateProvider.state(&apos;index&apos;,&#123;</div><div class="line">        //参数1：是状态的名字  参数2： 配置的对象</div><div class="line">        url:&apos;/&apos;,//代表路由 必须写,每个里面都得写不然在搜索栏里不显示</div><div class="line">        templateUrl:&apos;index.html&apos;</div><div class="line">    &#125;).state(&apos;about&apos;,&#123;</div><div class="line">        url:&apos;/about&apos;,//一个状态配置一个路径，路径不要重复</div><div class="line">        templateUrl:&apos;about.html&apos;,</div><div class="line">        controller:function($scope)&#123;</div><div class="line">            $scope.books = [&#123;id: 1, name: &apos;js高程3&apos;&#125;,&#123;id: 2, name: &apos;node&apos;&#125;,&#123;id: 3, name: &apos;html5&apos;&#125;];</div><div class="line">        &#125;</div><div class="line">    &#125;).state(&apos;contact&apos;,&#123;</div><div class="line">        url:&apos;/contact&apos;,</div><div class="line">        views:&#123;//配置多视图，一个页面里面有多个路由</div><div class="line">            &apos;&apos;:&#123;</div><div class="line">              //默认状态下渲染该模板</div><div class="line">               templateUrl:&apos;templs/contact.html&apos;</div><div class="line">            &#125; ,</div><div class="line">            &apos;tel@contact&apos;:&#123;</div><div class="line">               //tel@contact</div><div class="line">               //contact状态对应的templs/contact.html页面中的 ui-view = ‘tel’视图 ，渲染的是templateUrl:&apos;templs/tel.html&apos;</div><div class="line">                templateUrl:&apos;templs/tel.html&apos;,</div><div class="line">                controller: function ($scope) &#123;</div><div class="line">                    $scope.tel=&apos;12345&apos;</div><div class="line">                &#125;</div><div class="line">            &#125;,</div><div class="line">            &apos;address@contact&apos;:&#123;</div><div class="line">                templateUrl:&apos;templs/address.html&apos;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;).state(&apos;book&apos;,&#123;</div><div class="line">          url:&apos;/book/:name&apos;,</div><div class="line">          template:&apos;&#123;&#123;a&#125;&#125;&apos;,</div><div class="line">          controller: function ($scope,$stateParams) &#123;</div><div class="line">              //$stateParams对象 获取冒号后面的值</div><div class="line">              $scope.a=$stateParams.name</div><div class="line">          &#125;</div><div class="line">      &#125;)</div><div class="line">&#125;).controller(&apos;myCtrl&apos;,function($scope)&#123;</div><div class="line">    $scope.flag=&apos;index&apos;;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-5-创建路由链接"><a href="#2-5-创建路由链接" class="headerlink" title="2.5 创建路由链接"></a>2.5 创建路由链接</h3><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;a ui-sref=&quot;home&quot;&gt;首页&lt;/a&gt;</div><div class="line">&lt;a ui-sref=&quot;book(&#123;name:book.name&#125;)&quot;&gt;用户 或者&#123;&#123;book.name&#125;&#125; &lt;/a&gt;</div><div class="line">&lt;a ui-sref=&quot;contact&quot;&gt;联系&lt;/a&gt;</div><div class="line">&lt;div ui-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/25/angular/路由-route/" data-id="ciwq0oadq0004j4uahzqy7z8i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/10/node/mongodb/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Mongodb 数据库
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/24/angular/自定义服务/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">自定义服务</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-JS/">Node JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/11/node/express/">express</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/11/node/node基础/">node基础</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/10/node/git的使用/">git</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/10/node/mongodb/">Mongodb 数据库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Tong chao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章收藏</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-git的使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-node/node基础" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/10/git的使用/" class="article-date">
-  <time datetime="2016-12-10T02:00:00.000Z" itemprop="datePublished">2016-12-10</time>
+    <a href="/2016/12/11/node/node基础/" class="article-date">
+  <time datetime="2016-12-11T02:00:00.000Z" itemprop="datePublished">2016-12-11</time>
 </a>
     
   <div class="article-category">
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/10/git的使用/">git</a>
+      <a class="article-title" href="/2016/12/11/node/node基础/">node基础</a>
     </h1>
   
 
@@ -87,183 +87,76 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><h3 id="备份文件"><a href="#备份文件" class="headerlink" title="备份文件"></a>备份文件</h3><ul>
-<li>类似于网盘备份</li>
-<li>我们的代码也需要备份。修改完了以后提交给版本库进行保管，哪一天代码没了也可以找回来。<h3 id="记录历史"><a href="#记录历史" class="headerlink" title="记录历史"></a>记录历史</h3></li>
-<li>比如我们打游戏就要存档，万一挂了还可以从上个存档的地方重玩。</li>
-<li>和网盘不同，网盘保留的是最新的状态，历史的记录都没有了，修改的记录也都找不回来了</li>
-<li>网盘无法知道文件里的某行代码是何人在哪个时间添加进去的<h3 id="回到过去"><a href="#回到过去" class="headerlink" title="回到过去"></a>回到过去</h3></li>
-<li>如果我有一天不小心删除了某个文件，我们可以通过历史备份找回来<h3 id="多端共享"><a href="#多端共享" class="headerlink" title="多端共享"></a>多端共享</h3></li>
-<li>Git仓库可以通过PC端、Android、IOS移动端等各个终端访问</li>
-<li>可以随时随地修改代码,公司没干完的工作回家接着干，可以在家提交，但是svn不可以<h3 id="团队协作"><a href="#团队协作" class="headerlink" title="团队协作"></a>团队协作</h3></li>
-<li>多个人或团队合作编写一个项目</li>
-<li>合并代码处理冲突</li>
+        <p>配置环境变量:我的电脑-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;找到path<br>配置ws提示，setting-&gt;npm-&gt;引用源码包</p>
+<h2 id="什么是node"><a href="#什么是node" class="headerlink" title="什么是node"></a>什么是node</h2><ul>
+<li>node是一个环境，供js代码执行的环境，我们可以把它等价于浏览器，只不过我们一般都会把node这个环境安装到服务器端</li>
+<li>它实现了诸如文件系统、模块、包、操作系统API、网络通信等核心JS没有或不完善的功能</li>
+<li>它摒弃了传统平台依赖多线程来实现高并发的设计思路，而采用单线程、异步式I/O(读写文件)、事件驱动式的程序设计模型</li>
+<li>它使用了来自于Google的V8引擎<br>验证时一定要前后台都验证；能使用异步的不用同步，防止阻塞主线程；安装的时候要默认c盘不然会更改环境变量会有问题；向一个文件中写入内容，我们需要把文件读出来，在写入到这个文件中；<code>IO: 输入输出 Input Output</code></li>
 </ul>
-<h2 id="git-和-svn-的区别，下面说的主要是git的优势"><a href="#git-和-svn-的区别，下面说的主要是git的优势" class="headerlink" title="git 和 svn 的区别，下面说的主要是git的优势"></a>git 和 svn 的区别，下面说的主要是git的优势</h2><ul>
-<li>速度快</li>
-<li>git是分布式的</li>
-<li>无需联网</li>
-<li>git把内容按元数据方式存储</li>
-<li>强大的分支管</li>
+<h2 id="node-js的优点"><a href="#node-js的优点" class="headerlink" title="node.js的优点"></a>node.js的优点</h2><ul>
+<li>node.js基于JS语言</li>
+<li>统一公共类库，代码标准化（因为代码都能看懂）</li>
+<li>Node本身运行V8 JavaScript。V8 JavaScript引擎是Google用于其Chrome浏览器的底层JavaScript引擎。</li>
+<li><a href="http://cnodejs.org/" target="_blank" rel="external">http://cnodejs.org/</a> node中文社区，它的社区非常活跃</li>
 </ul>
-<h2 id="markdown的配置"><a href="#markdown的配置" class="headerlink" title="markdown的配置"></a>markdown的配置</h2><p>file - settings - plugin - browser - 搜索markdown</p>
-<h2 id="git的安装"><a href="#git的安装" class="headerlink" title="git的安装"></a>git的安装</h2><h3 id="windows下安装"><a href="#windows下安装" class="headerlink" title="windows下安装"></a>windows下安装</h3><ul>
-<li>下载地址 <a href="http://git-scm.com" target="_blank" rel="external">http://git-scm.com</a><h3 id="mac的安装"><a href="#mac的安装" class="headerlink" title="mac的安装"></a>mac的安装</h3></li>
-<li>先安装homebrew 下载Homebrew <a href="http://brew.sh" target="_blank" rel="external">http://brew.sh</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install git</div></pre></td></tr></table></figure>
-</li>
+<h2 id="node的线程"><a href="#node的线程" class="headerlink" title="node的线程"></a>node的线程</h2><ul>
+<li>node的主线程永远是单线程的</li>
+<li>单进程里面可以开多个线程</li>
+<li>node里面就是单进程、单线程，可以开多个进程就是多进程、单线程</li>
 </ul>
-<p>安装<code>xcode</code>,会默认下载<code>git</code></p>
-<h2 id="配置git邮箱和密码"><a href="#配置git邮箱和密码" class="headerlink" title="配置git邮箱和密码"></a>配置git邮箱和密码</h2><h3 id="先查看配置，如果查看没有配置进行配置"><a href="#先查看配置，如果查看没有配置进行配置" class="headerlink" title="先查看配置，如果查看没有配置进行配置"></a>先查看配置，如果查看没有配置进行配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name</div><div class="line">git config --list  //查看所有配置</div></pre></td></tr></table></figure>
-<h3 id="进行配置，如果不配置不能提交代码-只需要配置一次"><a href="#进行配置，如果不配置不能提交代码-只需要配置一次" class="headerlink" title="进行配置，如果不配置不能提交代码,只需要配置一次"></a>进行配置，如果不配置不能提交代码,只需要配置一次</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;用户名&quot; //最好使用github的用户名</div><div class="line">git config --global user.email &quot;自己的邮箱&quot;</div></pre></td></tr></table></figure>
-<h2 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h2><ul>
-<li>自定义快捷键 file–&gt;settings–&gt;搜索living template  把不想写的设置成快捷键<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir test //创建文件夹</div><div class="line">cd test  //进入文件夹，改变目录</div></pre></td></tr></table></figure>
+<h2 id="单线程和多线程"><a href="#单线程和多线程" class="headerlink" title="单线程和多线程"></a>单线程和多线程</h2><ul>
+<li>多线程：同一个时间可以干多件事，其实不可能同时干多件事，只是切换上下文(速度非常快)，让你感觉不出来</li>
+<li>单线程：同一个时间干一件事，一件事干完了才能干别处一件事<br><code>不管是单核还是多核，都可以开多个进程</code></li>
+</ul>
+<h2 id="阻塞和非阻塞"><a href="#阻塞和非阻塞" class="headerlink" title="阻塞和非阻塞"></a>阻塞和非阻塞</h2><ul>
+<li>针对内核来说的，非阻塞是异步的前置条件</li>
+</ul>
+<h2 id="node的全局对象-global"><a href="#node的全局对象-global" class="headerlink" title="node的全局对象 global"></a>node的全局对象 global</h2><ul>
+<li>写代码时，可以在任意一个地方访问</li>
+<li>在node中最大的就是global 在webStorm中运行的是文件中的代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">不能通过global访问var声明的变量</div><div class="line">var a=100;</div><div class="line">console.log(global.a);//找不到得把var去掉，也可以写成global.a=100;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="初始化git仓库"><a href="#初始化git仓库" class="headerlink" title="初始化git仓库"></a>初始化git仓库</h2><ul>
-<li>先创建一个空目录 ，然后进入此目录</li>
-<li>点击右键选择Git-Bash打开命令行</li>
-<li>输入git init命令把这个目录变成Git可以管理的仓库<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
+<h2 id="global上的属性"><a href="#global上的属性" class="headerlink" title="global上的属性"></a>global上的属性</h2><ul>
+<li><p>1.console.log(this); //在文件中直访问this不是global，但是在命令行中就是global<br>2.如果文件外面被套了一个函数，我们看不到 可以模块化 闭包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(function () &#123;</div><div class="line">   console.log(this); //这里的this就是global</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<p><code>ls -al</code>显示全部文件会产生一个<code>.git</code>的隐藏文件，用来管理我们的文件；<code>.git</code>文件存储着所有的内容(提交，版本库，标签)，初始化后会给一个分支默认叫<code>master</code></p>
-<h2 id="对文件夹里面文件的操作"><a href="#对文件夹里面文件的操作" class="headerlink" title="对文件夹里面文件的操作"></a>对文件夹里面文件的操作</h2><h3 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch index.txt</div></pre></td></tr></table></figure>
-<h3 id="像文件内写入内容"><a href="#像文件内写入内容" class="headerlink" title="像文件内写入内容"></a>像文件内写入内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo hello &gt; index.txt //如果文件不存在则会创建文件</div><div class="line">echo word &gt;&gt; index.txt //向文件中追加内容</div></pre></td></tr></table></figure>
-<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat index.txt</div></pre></td></tr></table></figure>
-<p>红色表示未加入暂存区内,就是没有增加之前的</p>
-<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm index.txt</div></pre></td></tr></table></figure>
-<p><code>ls</code> 查看文件；<code>clear</code> 是清屏</p>
-<h3 id="编辑文件，可以往里面写入内容"><a href="#编辑文件，可以往里面写入内容" class="headerlink" title="编辑文件，可以往里面写入内容"></a>编辑文件，可以往里面写入内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi index.txt</div></pre></td></tr></table></figure>
-<p>进入插入模式进行编辑 <code>i</code>，<code>esc</code>退出编辑，<code>wq</code> 保存并退出</p>
-<h3 id="打印之前的命令行中输入的命令"><a href="#打印之前的命令行中输入的命令" class="headerlink" title="打印之前的命令行中输入的命令"></a>打印之前的命令行中输入的命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">history &gt; index.txt</div></pre></td></tr></table></figure>
-<h2 id="git中的三个区"><a href="#git中的三个区" class="headerlink" title="git中的三个区"></a>git中的三个区</h2><ul>
-<li>工作流程<br><a href="http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html" target="_blank" rel="external">http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html</a><h3 id="工作区"><a href="#工作区" class="headerlink" title="工作区"></a>工作区</h3></li>
-<li>添加文件到暂存区中<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add file</div><div class="line">git add . / -A</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="暂存区-缓存区"><a href="#暂存区-缓存区" class="headerlink" title="暂存区/缓存区"></a>暂存区/缓存区</h3><ul>
-<li>提交到版本库/历史区<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m&quot;此次提交的注释内容&quot;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>暂存区特点：过渡的作用，避免误操作，保护工作区和历史区，分支处理;<code>-m ：message</code>就是消息的意思；<code>svn</code>里面没有暂存区</p>
-<h3 id="版本库-历史区"><a href="#版本库-历史区" class="headerlink" title="版本库/历史区"></a>版本库/历史区</h3><ul>
-<li>提交到版本库中通过git log 进行查看日志，里面的内容是注释的内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log --oneline  //查看一行</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="修改时查看git当前状态"><a href="#修改时查看git当前状态" class="headerlink" title="修改时查看git当前状态"></a>修改时查看git当前状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure>
-<h3 id="搜索日志-版本里面的"><a href="#搜索日志-版本里面的" class="headerlink" title="搜索日志(版本里面的)"></a>搜索日志(版本里面的)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log --author/--grep=co //grep搜索的意思</div></pre></td></tr></table></figure>
-<p><code>co</code> 是搜索注释的内容 是<code>git commit -m&quot;注释内容&quot;</code>里面的注释内容</p>
-<h2 id="代码的比较，看代码的不同"><a href="#代码的比较，看代码的不同" class="headerlink" title="代码的比较，看代码的不同"></a>代码的比较，看代码的不同</h2><ul>
-<li><p>比较工作区和缓存区</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff //默认是工作区和缓存区进行比较</div></pre></td></tr></table></figure>
-</li>
-<li><p>比较缓存区和历史区</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git dif --cached //cached：缓存的意思</div></pre></td></tr></table></figure>
-</li>
-<li><p>比较工作区和历史区，一般很少比较</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff master //master 分支是什么名字这里就写什么名字</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h2><p>从缓存区中撤销add内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset HEAD index.txt</div></pre></td></tr></table></figure></p>
-<h2 id="撤回文件里的内容，就是工作区的内容有更改完了又不想改了"><a href="#撤回文件里的内容，就是工作区的内容有更改完了又不想改了" class="headerlink" title="撤回文件里的内容，就是工作区的内容有更改完了又不想改了"></a>撤回文件里的内容，就是工作区的内容有更改完了又不想改了</h2><p>如果工作区有更改 ，我想用暂存区域或者历史区的内容去覆盖掉我们的工作区域；先查找暂存区 ，查找不到 查找历史区；用暂存区替换掉工作区里的内容，就是从暂存区回到工作区<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout index.txt</div></pre></td></tr></table></figure></p>
-<h2 id="合并提交"><a href="#合并提交" class="headerlink" title="合并提交"></a>合并提交</h2><p>如果我们使用git commit 会产生一个新的版本，但是我们此次的提交，还想算作上次的提交<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit --amend //可以选择是否用以前的提交注释</div></pre></td></tr></table></figure></p>
-<p>如果进入编辑模式按<code>esc</code>键 输入:<code>wq</code></p>
-<h2 id="从版本库-历史区-拉回代码-回滚-回到过去，就是从历史区回到工作区"><a href="#从版本库-历史区-拉回代码-回滚-回到过去，就是从历史区回到工作区" class="headerlink" title="从版本库(历史区)拉回代码 回滚 回到过去，就是从历史区回到工作区"></a>从版本库(历史区)拉回代码 回滚 回到过去，就是从历史区回到工作区</h2><ul>
-<li>git log 查看版本号（7位以上）如果太长了不想看，按q退出<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard 版本号</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="在回到未来-就是在回到历史区"><a href="#在回到未来-就是在回到历史区" class="headerlink" title="在回到未来 就是在回到历史区"></a>在回到未来 就是在回到历史区</h2><ul>
-<li>通过git reflog 查看未来的版本，使用reset回到未来<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reflog //获取所有操作的版本号</div><div class="line">git reset --hard 版本号</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="删除缓存区，但是要保证工作区里内容必须不存在"><a href="#删除缓存区，但是要保证工作区里内容必须不存在" class="headerlink" title="删除缓存区，但是要保证工作区里内容必须不存在"></a>删除缓存区，但是要保证工作区里内容必须不存在</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm</div></pre></td></tr></table></figure>
-<h2 id="只删除缓存区"><a href="#只删除缓存区" class="headerlink" title="只删除缓存区"></a>只删除缓存区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm --cached filename</div></pre></td></tr></table></figure>
-<h2 id="同时删除暂存区和工作区"><a href="#同时删除暂存区和工作区" class="headerlink" title="同时删除暂存区和工作区"></a>同时删除暂存区和工作区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm -force 文件的名字</div></pre></td></tr></table></figure>
-<p><code>rm -rf .git</code> 递归删除，删除了就在也找不回来了</p>
-<h2 id="要把写好的文件推送到远程仓库（github仓库）上"><a href="#要把写好的文件推送到远程仓库（github仓库）上" class="headerlink" title="要把写好的文件推送到远程仓库（github仓库）上"></a>要把写好的文件推送到远程仓库（github仓库）上</h2><ul>
-<li>创建新仓库（空的里面什么文件都不能有）</li>
-<li>推送的时候空的文件夹是不会被提交的</li>
-<li>在提交之前想要忽略掉一些文件(.gitignore)</li>
-<li>添加到历史区中 git commit -m”haha”</li>
-<li>添加远程仓库地址</li>
-</ul>
-<h3 id="创建新仓库后需要关联远程仓库"><a href="#创建新仓库后需要关联远程仓库" class="headerlink" title="创建新仓库后需要关联远程仓库"></a>创建新仓库后需要关联远程仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin &apos;仓库的地址&apos;</div></pre></td></tr></table></figure>
-<h3 id="推送到远程仓库，就是把写好的文件推上去gitHub"><a href="#推送到远程仓库，就是把写好的文件推上去gitHub" class="headerlink" title="推送到远程仓库，就是把写好的文件推上去gitHub"></a>推送到远程仓库，就是把写好的文件推上去gitHub</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
-<p><code>-u</code>的意思是<code>upstream</code> 如果下次再提交可以直接使用<code>git push</code></p>
-<h2 id="从工作区-直接提交到历史区（必须走一下过渡区）"><a href="#从工作区-直接提交到历史区（必须走一下过渡区）" class="headerlink" title="从工作区 直接提交到历史区（必须走一下过渡区）"></a>从工作区 直接提交到历史区（必须走一下过渡区）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -a -m&quot;add&quot;</div></pre></td></tr></table></figure>
-<p>不支持首次提交，如果文件没有加到过缓存区中是不能使用这种方式的</p>
-<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
-<li><p>查看所有分支</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建分支</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch 分支名</div></pre></td></tr></table></figure>
-</li>
-<li><p>切换分支</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout 分支名(dev)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>相当于把<code>master</code>复制了一份到<code>dev</code>里，如果在<code>dev</code>分支里创建文件在<code>master</code>里也可以看到，如果在dev里提交master上才看不到dev上的内容，就是在哪里提交就是哪里的，在另一个里面就看不到了</p>
+<li><p>console输出的是不一定谁先谁后的</p>
 <ul>
-<li>删除分支<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -D dev</div></pre></td></tr></table></figure>
+<li>console.log(‘log’); //日志</li>
+<li>console.warn(‘warn’); //警告</li>
+<li>console.error(‘error’); //错误</li>
+<li>console.info(‘info’); //信息</li>
+<li>console.dir(‘dir’);<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">console.time(&apos;start&apos;);  //时间  time和timeEnd里面参数名字要一样</div><div class="line">setTimeout(function () &#123;</div><div class="line">    console.timeEnd(&apos;start&apos;); //这是异步的要写在函数中</div><div class="line">    console.log(this);  //这里的this不是global,指向的是自己</div><div class="line">&#125;,2000);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>得先把分支切换到<code>master</code>，不能自己删除自己</p>
-<h2 id="创建分支并且切换分支"><a href="#创建分支并且切换分支" class="headerlink" title="创建分支并且切换分支"></a>创建分支并且切换分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git branch dev</div><div class="line">git checkout dev</div><div class="line">git checkout -b dev  //这是把上面2条合并成1条简写的</div></pre></td></tr></table></figure>
-<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><ul>
-<li>要切换到master身上来合并dev，就是合并两个人的代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git merge dev</div></pre></td></tr></table></figure>
 </li>
+<li><p>__filename 文件的绝对路径 他是不可更改的</p>
+<pre><code>比如  F:\xuexi\3.node.js\node\node_8\2.node\2.global.js
+</code></pre></li>
+<li>__dirname  当前文件夹的名字  F:\xuexi\3.node.js\node\node_8\2.node。无法更改</li>
 </ul>
-<h2 id="在合并分支时有冲突我们需要先把最新的拉下来"><a href="#在合并分支时有冲突我们需要先把最新的拉下来" class="headerlink" title="在合并分支时有冲突我们需要先把最新的拉下来"></a>在合并分支时有冲突我们需要先把最新的拉下来</h2><ul>
-<li>先使用git fetch拉下来 我们可以先比较一下不同在合并<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git fetch</div><div class="line">git merge</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>git pull  = get fetch + git merge</p>
+<p>全局对象，在任何地方都能访问到，但是它们不是<code>global</code>上的属性；文件相当于一个模块在执行时默认会添加一个自执行函数<code>__filename</code>和<code>__dirname</code>是形参可以在文件内直接访问`</p>
 <ul>
-<li>产生冲突(就是两个人同时改了一个文件)比如：<br>1.在dev分支中改变hello.js文件，把里面的内容改成了helloword，进行提交<br>2.在master分支中改变hello.js文件，把里面的内容改成了helloword123，进行提交<br>3.合并时会产生冲突，解决冲突 删除&gt;&gt;&gt;&gt;  ==== &lt;&lt;&lt;&lt; 保存剩余的再次提交即可</li>
-</ul>
-<h2 id="发布静态页面"><a href="#发布静态页面" class="headerlink" title="发布静态页面"></a>发布静态页面</h2><ul>
-<li>发布页面要求分支的名字必须叫做gh-pages(并且把内容推送到这个分支上)</li>
-<li>1.创建页面(html)，写上内容</li>
-<li>2.切换到gh-pages分支上</li>
-<li>3.提交到分支上</li>
-<li>4.推到远程仓库</li>
-</ul>
-<h2 id="每天完成的代码-提交流程"><a href="#每天完成的代码-提交流程" class="headerlink" title="每天完成的代码 提交流程"></a>每天完成的代码 提交流程</h2><ul>
-<li>领导建立一个仓库</li>
-<li>所有的’组长’都需要fork领导的仓库(只能fork一次)<br><code>fork：将现在你看好的仓库代码复制一份，放到自己的仓库下(领导的代码发生变化不会影响自己的)</code></li>
-</ul>
-<h2 id="组长提交作业"><a href="#组长提交作业" class="headerlink" title="组长提交作业"></a>组长提交作业</h2><ul>
-<li><p>将fork领导的仓库下载下来,将自己的作业丢进去</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone 自己的仓库地址 别名(可有可无，就是改变文件夹的名字)</div></pre></td></tr></table></figure>
-</li>
-<li><p>当我们建立好一个仓库后不是所有文件都要提交的，要忽略掉一些文件</p>
-<ul>
-<li>在文件根目录下创建一个.gitignore文件去忽略掉不想要的<br>.idea<br>node_modules<br>.DS_Store<br>bower_component</li>
+<li>setTimeout 延迟 I/O是最慢的</li>
+<li>setImmediate 立即  两个方法都是异步的 第二个本上setImmediate是个setTimeout一些机会的 它可以让0的setTimeout先执行 它没有时间</li>
+<li>process.nextTick 下一个队列，它也没有时间，它永远比上面2个快，就是同步方法执行后就执行它，也就是在服务员上的第一个小本，上面2个都在第二个小本上</li>
+<li>process(进程) 是global上的属性 进程在整个代码运行后会退出进程<ul>
+<li>process.exit(); 退出进程</li>
+<li>console.log(__dirname); //不可更改的 它和cwd是一样的</li>
+<li>console.log(‘cwd’,process.cwd()); //可更改的 也可以进行手动修改<br>cwd： current  working directory  当前工作目录，得看它在哪工作的<br>pwd:  print working directory 打印当前的工作目录 它是一个Linux命令</li>
+<li>process.chdir(); 改变目录</li>
+<li>process.memoryUsage(); //内存的使用 可以监控内存的变化<br>rss 常住内存 heapTotal堆内存的总和  heapUsed内存的使用</li>
+<li>process.pid 当前进程id 运行的性能可在任务管理器上查看</li>
+<li>process.kill(11104);  //删除进程，可以让进程挂掉比如把开着的浏览器关掉</li>
 </ul>
 </li>
-<li>提交到自己的仓库下<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m &apos;&apos;</div><div class="line">git push origin master</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>克隆后会默认提供<code>origin</code>地址</p>
-<h2 id="发送合并请求"><a href="#发送合并请求" class="headerlink" title="发送合并请求"></a>发送合并请求</h2><ul>
-<li>你的项目是从领导这克隆下来的，可以直接发送请求</li>
-<li>new pull request<h2 id="组长需要给组员发配权限"><a href="#组长需要给组员发配权限" class="headerlink" title="组长需要给组员发配权限"></a>组长需要给组员发配权限</h2></li>
-<li>让组员操作自己的仓库 自己项目下-&gt; settings -&gt; collabrators -&gt; 添加 -&gt; 给组员发送邀请函 -&gt;组员同意即可 （组员拥有组长所有权限）</li>
-<li><p>组员需要将组长的仓库拉到本地<br><code>git clone</code> 组长的地址</p>
-</li>
-<li><p>在提交到组长仓库之前要拉取组长的最新代码<br>防止你写代码时 别人有提交的代码，你需要先拉取别人，更新成最新代码提交到仓库上将自己的作业提交到组长的仓库上，在根目录下提交，相当于作业提交给了组长</p>
-</li>
-</ul>
-<h2 id="组长将作业提交给老师"><a href="#组长将作业提交给老师" class="headerlink" title="组长将作业提交给老师"></a>组长将作业提交给老师</h2><ul>
-<li>先拉取自己仓库最新代码</li>
-<li>拉取领导的最新代码<br>git remote add teacher 领导的仓库地址</li>
-<li>提交到自己的仓库下，在发送pull request请求</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/10/git的使用/" data-id="ciwoe61by00006guar0pdwwst" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/11/node/node基础/" data-id="ciwq0orml000cj4uaclxth2fb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -276,7 +169,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -301,7 +194,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
     </div>
   </div>
 
@@ -314,23 +207,23 @@
       <ul>
         
           <li>
-            <a href="/2016/12/11/node基础/">node基础</a>
+            <a href="/2016/12/11/node/express/">express</a>
           </li>
         
           <li>
-            <a href="/2016/12/10/git的使用/">git</a>
+            <a href="/2016/12/11/node/node基础/">node基础</a>
           </li>
         
           <li>
-            <a href="/2016/12/08/angular中的指令/">angular中的指令</a>
+            <a href="/2016/12/10/node/git的使用/">git</a>
           </li>
         
           <li>
-            <a href="/2016/08/25/路由-route/">angular中的路由</a>
+            <a href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
           </li>
         
           <li>
-            <a href="/2016/08/24/自定义服务/">自定义服务</a>
+            <a href="/2016/09/10/node/mongodb/">Mongodb 数据库</a>
           </li>
         
       </ul>
