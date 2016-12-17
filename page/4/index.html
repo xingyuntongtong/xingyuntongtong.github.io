@@ -61,14 +61,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-angular/angular中的指令" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-node/git的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/08/angular/angular中的指令/" class="article-date">
-  <time datetime="2016-12-08T04:00:25.000Z" itemprop="datePublished">2016-12-08</time>
+    <a href="/2016/12/10/node/git的使用/" class="article-date">
+  <time datetime="2016-12-10T02:00:00.000Z" itemprop="datePublished">2016-12-10</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
+    <a class="article-category-link" href="/categories/Node-JS/">Node JS</a>
   </div>
 
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
+      <a class="article-title" href="/2016/12/10/node/git的使用/">git</a>
     </h1>
   
 
@@ -87,36 +87,183 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>angular中程序运行时最先执行的是什么方法：run()</p>
-<h2 id="什么是指令：AngularJS-指令是扩展的-HTML-属性-就是操作DOM元素的"><a href="#什么是指令：AngularJS-指令是扩展的-HTML-属性-就是操作DOM元素的" class="headerlink" title="什么是指令：AngularJS 指令是扩展的 HTML 属性 就是操作DOM元素的"></a>什么是指令：AngularJS 指令是扩展的 HTML 属性 就是操作DOM元素的</h2><h2 id="什么是自定义指令：就是封装一些方法，供外面使用"><a href="#什么是自定义指令：就是封装一些方法，供外面使用" class="headerlink" title="什么是自定义指令：就是封装一些方法，供外面使用"></a>什么是自定义指令：就是封装一些方法，供外面使用</h2><h2 id="指令-directive"><a href="#指令-directive" class="headerlink" title="指令 directive"></a>指令 directive</h2><ul>
-<li>目的：封装功能</li>
-<li>组件式指令：有模板的 <code>&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;</code>，restrict一般采用E</li>
-<li>装饰型指令：一般增加属性的 <code>&lt;div red-color&gt;&lt;/div&gt;</code>，restrict一般采用A<br>指令默认是不依赖控制器的；一般我们用指令封装功能而不是封装方法的</li>
+        <h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><h3 id="备份文件"><a href="#备份文件" class="headerlink" title="备份文件"></a>备份文件</h3><ul>
+<li>类似于网盘备份</li>
+<li>我们的代码也需要备份。修改完了以后提交给版本库进行保管，哪一天代码没了也可以找回来。<h3 id="记录历史"><a href="#记录历史" class="headerlink" title="记录历史"></a>记录历史</h3></li>
+<li>比如我们打游戏就要存档，万一挂了还可以从上个存档的地方重玩。</li>
+<li>和网盘不同，网盘保留的是最新的状态，历史的记录都没有了，修改的记录也都找不回来了</li>
+<li>网盘无法知道文件里的某行代码是何人在哪个时间添加进去的<h3 id="回到过去"><a href="#回到过去" class="headerlink" title="回到过去"></a>回到过去</h3></li>
+<li>如果我有一天不小心删除了某个文件，我们可以通过历史备份找回来<h3 id="多端共享"><a href="#多端共享" class="headerlink" title="多端共享"></a>多端共享</h3></li>
+<li>Git仓库可以通过PC端、Android、IOS移动端等各个终端访问</li>
+<li>可以随时随地修改代码,公司没干完的工作回家接着干，可以在家提交，但是svn不可以<h3 id="团队协作"><a href="#团队协作" class="headerlink" title="团队协作"></a>团队协作</h3></li>
+<li>多个人或团队合作编写一个项目</li>
+<li>合并代码处理冲突</li>
 </ul>
-<h2 id="定义一个指令"><a href="#定义一个指令" class="headerlink" title="定义一个指令"></a>定义一个指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;div my-dire&gt;wold&lt;/div&gt;</div><div class="line">var myMod=angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.directive(&apos;myDire&apos;,function()&#123;</div><div class="line">//myDire需要转成驼峰命名法,声明指令后默认返回一个对象</div><div class="line">    return&#123;返回值: 是一个对象</div><div class="line">    //定义一个模板 它指的是html结构 把它嵌套到html里面 &lt;div my-dire&gt;&lt;div&gt;hello&lt;/div&gt;&lt;/div&gt;</div><div class="line">        //template:&apos;&lt;div&gt;hello&lt;/div&gt;&apos;, 会把原有的标签里的内容也替换掉</div><div class="line">        templateUrl:&apos;url.html&apos;,//引入外界的模板只能是模板片段 上面的就不用了，它是ajax将文件读取过来插入到模板中</div><div class="line">        replace:true,  //替换原有的标签 就是把上面的div替换掉 只剩下这一个div，只能有一个根结点</div><div class="line">        restrict:&apos;ECMA&apos;, //定义指令可以使用的位置 用它的时候必须得有 replace:true</div><div class="line">        transclude:true, //保存原有标签里的内容 和ng-transclude(会形成自己的作用域)结合使用，想把内容放在哪个标签上就在哪个标签上加ng-transclude 标签和外面的一样</div><div class="line">        scope:true, //指令所有的元素 会形成自己的作用域,它也可以是个对象,&#123;&#125;和true是有区别的，指定它以后就不会出现</div><div class="line">        controller:function($scope,$element,$attrs)&#123;//可被外界定义指令调用的公用部分</div><div class="line">        &#125;//在最前面</div><div class="line">        compile:function(tElement,tAttrs)&#123;//编译阶段 写在link前面</div><div class="line">        &#125;,</div><div class="line">        link:function(scope,element,attrs)&#123; //链接阶段,是装饰指令</div><div class="line">        &#125;,</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="restrict"><a href="#restrict" class="headerlink" title="restrict"></a>restrict</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">restrict:&apos;ECMA&apos;; 不写默认值是 EA 可以不写 可以单个写 restrict:&apos;E&apos;;</div><div class="line">    &lt;my-dire&gt;&lt;/my-dire&gt;&lt;!--用于标签--&gt; E: element 用于标签</div><div class="line">    &lt;div class=&quot;my-dire&quot;&gt;&lt;/div&gt;&lt;!--用于样式类名--&gt; C: class 用于样式类名</div><div class="line">    &lt;!-- directive:my-dire --&gt; 里面内容前后各一个空格  &lt;!--用于注释--&gt; M: comment 用于注释</div><div class="line">    &lt;div my-dire&gt;&lt;/div&gt;&lt;!--用于属性名--&gt; A: attribute 用于属性名</div></pre></td></tr></table></figure>
-<h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><p>link: 它是个函数可以实现 作用域(scope)和DOM元素 的链接 在它上面写的都是私有的 链接阶段<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">link:function(scope,element,attrs)&#123;</div><div class="line">   scope: 指是当前模板的作用域，如果当前模板没有形成作用域，会直接找父级，和控制器里的$scope是一样的，它里面的属性也是定义在scope上的</div><div class="line">   element: 自定义指令所在的DOM元素，是一个jQuery对象，可以调用jQuery里的方法 内置的有轻量级的jQuery也就是 jqLite 是简化板的，不是所有的方法都有</div><div class="line">  把jQuery 变成原生的 element[0]; 在变回jQuery的  angular.element(element[0])</div><div class="line">   attrs: 自定义指令所在的DOM元素上的属性存储在attrs对象里标签里的属性可以通过它得到;也就是当前指令的所有属性变成一个对象格式</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="git-和-svn-的区别，下面说的主要是git的优势"><a href="#git-和-svn-的区别，下面说的主要是git的优势" class="headerlink" title="git 和 svn 的区别，下面说的主要是git的优势"></a>git 和 svn 的区别，下面说的主要是git的优势</h2><ul>
+<li>速度快</li>
+<li>git是分布式的</li>
+<li>无需联网</li>
+<li>git把内容按元数据方式存储</li>
+<li>强大的分支管</li>
+</ul>
+<h2 id="markdown的配置"><a href="#markdown的配置" class="headerlink" title="markdown的配置"></a>markdown的配置</h2><p>file - settings - plugin - browser - 搜索markdown</p>
+<h2 id="git的安装"><a href="#git的安装" class="headerlink" title="git的安装"></a>git的安装</h2><h3 id="windows下安装"><a href="#windows下安装" class="headerlink" title="windows下安装"></a>windows下安装</h3><ul>
+<li>下载地址 <a href="http://git-scm.com" target="_blank" rel="external">http://git-scm.com</a><h3 id="mac的安装"><a href="#mac的安装" class="headerlink" title="mac的安装"></a>mac的安装</h3></li>
+<li>先安装homebrew 下载Homebrew <a href="http://brew.sh" target="_blank" rel="external">http://brew.sh</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install git</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>安装<code>xcode</code>,会默认下载<code>git</code></p>
+<h2 id="配置git邮箱和密码"><a href="#配置git邮箱和密码" class="headerlink" title="配置git邮箱和密码"></a>配置git邮箱和密码</h2><h3 id="先查看配置，如果查看没有配置进行配置"><a href="#先查看配置，如果查看没有配置进行配置" class="headerlink" title="先查看配置，如果查看没有配置进行配置"></a>先查看配置，如果查看没有配置进行配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name</div><div class="line">git config --list  //查看所有配置</div></pre></td></tr></table></figure>
+<h3 id="进行配置，如果不配置不能提交代码-只需要配置一次"><a href="#进行配置，如果不配置不能提交代码-只需要配置一次" class="headerlink" title="进行配置，如果不配置不能提交代码,只需要配置一次"></a>进行配置，如果不配置不能提交代码,只需要配置一次</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;用户名&quot; //最好使用github的用户名</div><div class="line">git config --global user.email &quot;自己的邮箱&quot;</div></pre></td></tr></table></figure>
+<h2 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h2><ul>
+<li>自定义快捷键 file–&gt;settings–&gt;搜索living template  把不想写的设置成快捷键<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir test //创建文件夹</div><div class="line">cd test  //进入文件夹，改变目录</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="初始化git仓库"><a href="#初始化git仓库" class="headerlink" title="初始化git仓库"></a>初始化git仓库</h2><ul>
+<li>先创建一个空目录 ，然后进入此目录</li>
+<li>点击右键选择Git-Bash打开命令行</li>
+<li>输入git init命令把这个目录变成Git可以管理的仓库<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>ls -al</code>显示全部文件会产生一个<code>.git</code>的隐藏文件，用来管理我们的文件；<code>.git</code>文件存储着所有的内容(提交，版本库，标签)，初始化后会给一个分支默认叫<code>master</code></p>
+<h2 id="对文件夹里面文件的操作"><a href="#对文件夹里面文件的操作" class="headerlink" title="对文件夹里面文件的操作"></a>对文件夹里面文件的操作</h2><h3 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch index.txt</div></pre></td></tr></table></figure>
+<h3 id="像文件内写入内容"><a href="#像文件内写入内容" class="headerlink" title="像文件内写入内容"></a>像文件内写入内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo hello &gt; index.txt //如果文件不存在则会创建文件</div><div class="line">echo word &gt;&gt; index.txt //向文件中追加内容</div></pre></td></tr></table></figure>
+<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat index.txt</div></pre></td></tr></table></figure>
+<p>红色表示未加入暂存区内,就是没有增加之前的</p>
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm index.txt</div></pre></td></tr></table></figure>
+<p><code>ls</code> 查看文件；<code>clear</code> 是清屏</p>
+<h3 id="编辑文件，可以往里面写入内容"><a href="#编辑文件，可以往里面写入内容" class="headerlink" title="编辑文件，可以往里面写入内容"></a>编辑文件，可以往里面写入内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi index.txt</div></pre></td></tr></table></figure>
+<p>进入插入模式进行编辑 <code>i</code>，<code>esc</code>退出编辑，<code>wq</code> 保存并退出</p>
+<h3 id="打印之前的命令行中输入的命令"><a href="#打印之前的命令行中输入的命令" class="headerlink" title="打印之前的命令行中输入的命令"></a>打印之前的命令行中输入的命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">history &gt; index.txt</div></pre></td></tr></table></figure>
+<h2 id="git中的三个区"><a href="#git中的三个区" class="headerlink" title="git中的三个区"></a>git中的三个区</h2><ul>
+<li>工作流程<br><a href="http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html" target="_blank" rel="external">http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html</a><h3 id="工作区"><a href="#工作区" class="headerlink" title="工作区"></a>工作区</h3></li>
+<li>添加文件到暂存区中<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add file</div><div class="line">git add . / -A</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="暂存区-缓存区"><a href="#暂存区-缓存区" class="headerlink" title="暂存区/缓存区"></a>暂存区/缓存区</h3><ul>
+<li>提交到版本库/历史区<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m&quot;此次提交的注释内容&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>暂存区特点：过渡的作用，避免误操作，保护工作区和历史区，分支处理;<code>-m ：message</code>就是消息的意思；<code>svn</code>里面没有暂存区</p>
+<h3 id="版本库-历史区"><a href="#版本库-历史区" class="headerlink" title="版本库/历史区"></a>版本库/历史区</h3><ul>
+<li>提交到版本库中通过git log 进行查看日志，里面的内容是注释的内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log --oneline  //查看一行</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="修改时查看git当前状态"><a href="#修改时查看git当前状态" class="headerlink" title="修改时查看git当前状态"></a>修改时查看git当前状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure>
+<h3 id="搜索日志-版本里面的"><a href="#搜索日志-版本里面的" class="headerlink" title="搜索日志(版本里面的)"></a>搜索日志(版本里面的)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log --author/--grep=co //grep搜索的意思</div></pre></td></tr></table></figure>
+<p><code>co</code> 是搜索注释的内容 是<code>git commit -m&quot;注释内容&quot;</code>里面的注释内容</p>
+<h2 id="代码的比较，看代码的不同"><a href="#代码的比较，看代码的不同" class="headerlink" title="代码的比较，看代码的不同"></a>代码的比较，看代码的不同</h2><ul>
+<li><p>比较工作区和缓存区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff //默认是工作区和缓存区进行比较</div></pre></td></tr></table></figure>
+</li>
+<li><p>比较缓存区和历史区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git dif --cached //cached：缓存的意思</div></pre></td></tr></table></figure>
+</li>
+<li><p>比较工作区和历史区，一般很少比较</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff master //master 分支是什么名字这里就写什么名字</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h2><p>从缓存区中撤销add内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset HEAD index.txt</div></pre></td></tr></table></figure></p>
+<h2 id="撤回文件里的内容，就是工作区的内容有更改完了又不想改了"><a href="#撤回文件里的内容，就是工作区的内容有更改完了又不想改了" class="headerlink" title="撤回文件里的内容，就是工作区的内容有更改完了又不想改了"></a>撤回文件里的内容，就是工作区的内容有更改完了又不想改了</h2><p>如果工作区有更改 ，我想用暂存区域或者历史区的内容去覆盖掉我们的工作区域；先查找暂存区 ，查找不到 查找历史区；用暂存区替换掉工作区里的内容，就是从暂存区回到工作区<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout index.txt</div></pre></td></tr></table></figure></p>
+<h2 id="合并提交"><a href="#合并提交" class="headerlink" title="合并提交"></a>合并提交</h2><p>如果我们使用git commit 会产生一个新的版本，但是我们此次的提交，还想算作上次的提交<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit --amend //可以选择是否用以前的提交注释</div></pre></td></tr></table></figure></p>
+<p>如果进入编辑模式按<code>esc</code>键 输入:<code>wq</code></p>
+<h2 id="从版本库-历史区-拉回代码-回滚-回到过去，就是从历史区回到工作区"><a href="#从版本库-历史区-拉回代码-回滚-回到过去，就是从历史区回到工作区" class="headerlink" title="从版本库(历史区)拉回代码 回滚 回到过去，就是从历史区回到工作区"></a>从版本库(历史区)拉回代码 回滚 回到过去，就是从历史区回到工作区</h2><ul>
+<li>git log 查看版本号（7位以上）如果太长了不想看，按q退出<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard 版本号</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="在回到未来-就是在回到历史区"><a href="#在回到未来-就是在回到历史区" class="headerlink" title="在回到未来 就是在回到历史区"></a>在回到未来 就是在回到历史区</h2><ul>
+<li>通过git reflog 查看未来的版本，使用reset回到未来<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reflog //获取所有操作的版本号</div><div class="line">git reset --hard 版本号</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="删除缓存区，但是要保证工作区里内容必须不存在"><a href="#删除缓存区，但是要保证工作区里内容必须不存在" class="headerlink" title="删除缓存区，但是要保证工作区里内容必须不存在"></a>删除缓存区，但是要保证工作区里内容必须不存在</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm</div></pre></td></tr></table></figure>
+<h2 id="只删除缓存区"><a href="#只删除缓存区" class="headerlink" title="只删除缓存区"></a>只删除缓存区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm --cached filename</div></pre></td></tr></table></figure>
+<h2 id="同时删除暂存区和工作区"><a href="#同时删除暂存区和工作区" class="headerlink" title="同时删除暂存区和工作区"></a>同时删除暂存区和工作区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm -force 文件的名字</div></pre></td></tr></table></figure>
+<p><code>rm -rf .git</code> 递归删除，删除了就在也找不回来了</p>
+<h2 id="要把写好的文件推送到远程仓库（github仓库）上"><a href="#要把写好的文件推送到远程仓库（github仓库）上" class="headerlink" title="要把写好的文件推送到远程仓库（github仓库）上"></a>要把写好的文件推送到远程仓库（github仓库）上</h2><ul>
+<li>创建新仓库（空的里面什么文件都不能有）</li>
+<li>推送的时候空的文件夹是不会被提交的</li>
+<li>在提交之前想要忽略掉一些文件(.gitignore)</li>
+<li>添加到历史区中 git commit -m”haha”</li>
+<li>添加远程仓库地址</li>
+</ul>
+<h3 id="创建新仓库后需要关联远程仓库"><a href="#创建新仓库后需要关联远程仓库" class="headerlink" title="创建新仓库后需要关联远程仓库"></a>创建新仓库后需要关联远程仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin &apos;仓库的地址&apos;</div></pre></td></tr></table></figure>
+<h3 id="推送到远程仓库，就是把写好的文件推上去gitHub"><a href="#推送到远程仓库，就是把写好的文件推上去gitHub" class="headerlink" title="推送到远程仓库，就是把写好的文件推上去gitHub"></a>推送到远程仓库，就是把写好的文件推上去gitHub</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
+<p><code>-u</code>的意思是<code>upstream</code> 如果下次再提交可以直接使用<code>git push</code></p>
+<h2 id="从工作区-直接提交到历史区（必须走一下过渡区）"><a href="#从工作区-直接提交到历史区（必须走一下过渡区）" class="headerlink" title="从工作区 直接提交到历史区（必须走一下过渡区）"></a>从工作区 直接提交到历史区（必须走一下过渡区）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -a -m&quot;add&quot;</div></pre></td></tr></table></figure>
+<p>不支持首次提交，如果文件没有加到过缓存区中是不能使用这种方式的</p>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
+<li><p>查看所有分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch 分支名</div></pre></td></tr></table></figure>
+</li>
+<li><p>切换分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout 分支名(dev)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>相当于把<code>master</code>复制了一份到<code>dev</code>里，如果在<code>dev</code>分支里创建文件在<code>master</code>里也可以看到，如果在dev里提交master上才看不到dev上的内容，就是在哪里提交就是哪里的，在另一个里面就看不到了</p>
 <ul>
-<li>在angularJS只有link可以操作DOM元素 在控制器里用的都是$scope</li>
+<li>删除分支<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -D dev</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<h2 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h2><ul>
-<li>指令默认是没用作用域的，所以它会找到上面的上级作用域，可以取到作用域上的东西</li>
-<li><p>可以为当前指令设置独立作用域，也可以起到赋值的作用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    scope:true, //它仍然可以取到上级作用域上的东西</div><div class="line">    scope:&#123;&#125;,  //这样就是完全不能取到上级作用域上的东西，通过属性可以传递数据(数据类型 字符串 函数 变量)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>得先把分支切换到<code>master</code>，不能自己删除自己</p>
+<h2 id="创建分支并且切换分支"><a href="#创建分支并且切换分支" class="headerlink" title="创建分支并且切换分支"></a>创建分支并且切换分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git branch dev</div><div class="line">git checkout dev</div><div class="line">git checkout -b dev  //这是把上面2条合并成1条简写的</div></pre></td></tr></table></figure>
+<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><ul>
+<li>要切换到master身上来合并dev，就是合并两个人的代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git merge dev</div></pre></td></tr></table></figure>
 </li>
-<li><p>“@”引用字符串 指令和作用域间的交互  会形成自己的作用域<br>想用自定义指令拿到控制器里的属性; 在页面上把自定义指令放入到控制器里面，做它的子级</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;div ng-controller=&quot;myCtrl&quot;&gt;</div><div class="line">    &lt;input type=&quot;text&quot; ng-model=&quot;nameCtrl&quot;/&gt;</div><div class="line">    &lt;my-dire name=&quot;&#123;&#123;nameCtrl&#125;&#125;&quot;&gt;&lt;/my-dire&gt;</div><div class="line">    &lt;my-dire name=&quot;nameCtrl&quot; greet=&quot;greetCtrl(d)&quot;&gt;&lt;/my-dire&gt; //供 = 来使用</div><div class="line">&lt;/div&gt;</div><div class="line">var myMod=angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope)&#123;</div><div class="line">    $scope.nameCtrl=&apos;tongtong&apos;; //这样做是把上面的nameCtrl的字符串变成了变量</div><div class="line">    $scope.greetCtrl=function(a)&#123;//这里面的a就是上面函数里传的 d</div><div class="line">        alert(a);</div><div class="line">    &#125;</div><div class="line">&#125;]);</div><div class="line">myMod.directive(&apos;myDire&apos;,function()&#123;</div><div class="line">    return&#123;</div><div class="line">        template:&apos;&lt;input type=&quot;text&quot; ng-model=&quot;nameDir&quot;/&gt;</div><div class="line">                  &lt;button ng-click=&quot;greetDir(&#123;d:nameDir&#125;)&quot;&gt;打招呼&lt;/button&gt;&apos;,</div><div class="line">        scope:&#123;</div><div class="line">            nameDir:&apos;@name&apos;,</div><div class="line">            //name:&apos;@&apos;, 名字相同时直接用@就可以了 name:&apos;@name&apos;</div><div class="line">            nameDir:&apos;=name&apos;,</div><div class="line">            //name:&apos;=&apos;, 名字相同时直接用=就可以了 name:&apos;=name&apos;</div><div class="line">            greetDir:&apos;&amp;greet&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>  @name中的name是自定义指令中的name属性，获取的是name=”“里面的字面量的值 那么nameDir在当前指令所在的作用域可随处调用nameDir存储的的字面量的值,但是子级改变不了父级的，实现不了双向绑定 会形成自己的作用域</p>
+</ul>
+<h2 id="在合并分支时有冲突我们需要先把最新的拉下来"><a href="#在合并分支时有冲突我们需要先把最新的拉下来" class="headerlink" title="在合并分支时有冲突我们需要先把最新的拉下来"></a>在合并分支时有冲突我们需要先把最新的拉下来</h2><ul>
+<li>先使用git fetch拉下来 我们可以先比较一下不同在合并<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git fetch</div><div class="line">git merge</div></pre></td></tr></table></figure>
 </li>
-<li><p>‘=’ 变量 它实现了子级和父级的双向绑定 就是和控制器的双向数据绑定 是变量的传递<br>‘=name’ 获取的是name=’nameCtrl’ 中 ‘nameCtrl’ 存储的变量，在当前指令所在的作用域<br>修改nameDir也可以同时修改myCtrl中的nameCtrl的值 上面得属性名(变量)不能用字量形式</p>
+</ul>
+<p>git pull  = get fetch + git merge</p>
+<ul>
+<li>产生冲突(就是两个人同时改了一个文件)比如：<br>1.在dev分支中改变hello.js文件，把里面的内容改成了helloword，进行提交<br>2.在master分支中改变hello.js文件，把里面的内容改成了helloword123，进行提交<br>3.合并时会产生冲突，解决冲突 删除&gt;&gt;&gt;&gt;  ==== &lt;&lt;&lt;&lt; 保存剩余的再次提交即可</li>
+</ul>
+<h2 id="发布静态页面"><a href="#发布静态页面" class="headerlink" title="发布静态页面"></a>发布静态页面</h2><ul>
+<li>发布页面要求分支的名字必须叫做gh-pages(并且把内容推送到这个分支上)</li>
+<li>1.创建页面(html)，写上内容</li>
+<li>2.切换到gh-pages分支上  <code>git checkout -b gh-pages</code></li>
+<li>3.连接远程仓库  <code>git remote add 仓库地址</code></li>
+<li>4.推到远程仓库  <code>git push origin gh-pages</code></li>
+</ul>
+<h2 id="每天完成的代码-提交流程"><a href="#每天完成的代码-提交流程" class="headerlink" title="每天完成的代码 提交流程"></a>每天完成的代码 提交流程</h2><ul>
+<li>领导建立一个仓库</li>
+<li>所有的’组长’都需要fork领导的仓库(只能fork一次)<br><code>fork：将现在你看好的仓库代码复制一份，放到自己的仓库下(领导的代码发生变化不会影响自己的)</code></li>
+</ul>
+<h2 id="组长提交作业"><a href="#组长提交作业" class="headerlink" title="组长提交作业"></a>组长提交作业</h2><ul>
+<li><p>将fork领导的仓库下载下来,将自己的作业丢进去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone 自己的仓库地址 别名(可有可无，就是改变文件夹的名字)</div></pre></td></tr></table></figure>
 </li>
-<li>&amp; 函数 用来取控制器中的方法的  方法的传递<br>greetDir({d:nameDir})中{d:nameDir}是一个对象<code>nameDir</code>是要传的参数传给d，就是ng-model=”nameDir”里的nameDir；当在指令里面的函数用字符串传参，不是指令里面的函数用对象传参，因为它是从外面引进来的</li>
+<li><p>当我们建立好一个仓库后不是所有文件都要提交的，要忽略掉一些文件</p>
+<ul>
+<li>在文件根目录下创建一个.gitignore文件去忽略掉不想要的<br>.idea<br>node_modules<br>.DS_Store<br>bower_component</li>
+</ul>
+</li>
+<li>提交到自己的仓库下<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m &apos;&apos;</div><div class="line">git push origin master</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>克隆后会默认提供<code>origin</code>地址</p>
+<h2 id="发送合并请求"><a href="#发送合并请求" class="headerlink" title="发送合并请求"></a>发送合并请求</h2><ul>
+<li>你的项目是从领导这克隆下来的，可以直接发送请求</li>
+<li>new pull request<h2 id="组长需要给组员发配权限"><a href="#组长需要给组员发配权限" class="headerlink" title="组长需要给组员发配权限"></a>组长需要给组员发配权限</h2></li>
+<li>让组员操作自己的仓库 自己项目下-&gt; settings -&gt; collabrators -&gt; 添加 -&gt; 给组员发送邀请函 -&gt;组员同意即可 （组员拥有组长所有权限）</li>
+<li><p>组员需要将组长的仓库拉到本地<br><code>git clone</code> 组长的地址</p>
+</li>
+<li><p>在提交到组长仓库之前要拉取组长的最新代码<br>防止你写代码时 别人有提交的代码，你需要先拉取别人，更新成最新代码提交到仓库上将自己的作业提交到组长的仓库上，在根目录下提交，相当于作业提交给了组长</p>
+</li>
+</ul>
+<h2 id="组长将作业提交给老师"><a href="#组长将作业提交给老师" class="headerlink" title="组长将作业提交给老师"></a>组长将作业提交给老师</h2><ul>
+<li>先拉取自己仓库最新代码</li>
+<li>拉取领导的最新代码<br>git remote add teacher 领导的仓库地址</li>
+<li>提交到自己的仓库下，在发送pull request请求</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/08/angular/angular中的指令/" data-id="ciwq0t0h70004hkuarhwpoowk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/10/node/git的使用/" data-id="ciwsz7l4p000cpcuav54zbd5q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +276,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -167,6 +314,10 @@
       <ul>
         
           <li>
+            <a href="/2016/12/17/node/fs和path/">fs和path</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/11/node/express/">express</a>
           </li>
         
@@ -180,10 +331,6 @@
         
           <li>
             <a href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/10/node/mongodb/">Mongodb 数据库</a>
           </li>
         
       </ul>

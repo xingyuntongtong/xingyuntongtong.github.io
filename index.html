@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-node/express" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-node/fs和path" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/11/node/express/" class="article-date">
-  <time datetime="2016-12-11T05:00:25.000Z" itemprop="datePublished">2016-12-11</time>
+    <a href="/2016/12/17/node/fs和path/" class="article-date">
+  <time datetime="2016-12-17T07:00:00.000Z" itemprop="datePublished">2016-12-17</time>
 </a>
     
   <div class="article-category">
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/11/node/express/">express</a>
+      <a class="article-title" href="/2016/12/17/node/fs和path/">fs和path</a>
     </h1>
   
 
@@ -87,42 +87,128 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>express: 它是一个函数，第三方模块,当它执行的时候会返回一个函数app</p>
-<ul>
-<li><p>安装express</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install express --save</div></pre></td></tr></table></figure>
+        <h2 id="什么是fs"><a href="#什么是fs" class="headerlink" title="什么是fs"></a>什么是fs</h2><ul>
+<li>fs是node的核心模块，专门处理文件读写的；file system文件系统；</li>
+<li>Node.js 文件系统（fs 模块）模块中的方法均有异步和同步版本，例如读取文件内容的函数有异步的 <code>fs.readFile()</code> 和同步的 <code>fs.readFileSync()</code>，同步方法和异步方法同时出现</li>
+<li>异步的方法函数最后一个参数为回调函数，回调函数的第一个参数包含了错误信息(error)。</li>
+<li>建议使用异步方法，比起同步，异步方法性能更高，速度更快，而且没有阻塞。</li>
+</ul>
+<h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><ul>
+<li><p>同步读取 readFileSync(带sync都是同步)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.readFileSync(&apos;./1.txt&apos;,&#123;encoding:&apos;utf-8&apos;&#125;);</div><div class="line">//第一个参数是要读取文件的路径，第二个参数是编码格式</div></pre></td></tr></table></figure>
 </li>
-<li><p>引入express </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var express=require(&apos;express&apos;);</div><div class="line">var app =express();</div></pre></td></tr></table></figure>
-</li>
-<li><p>app.get()方法，当访问/的时候执行回调函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.get(&apos;/&apos;,function(req,res)&#123;</div><div class="line">    res.end(&apos;hello&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>app 就是我们的监听函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">require(&apos;http&apos;).createServer(app).listen(80);</div><div class="line">可以简写 app.listen(80);</div></pre></td></tr></table></figure>
-</li>
-<li><p>发送不同类型的请求 ，在DOM命令窗口里输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curL -X POST http://localhost:80  //get请求也可以</div></pre></td></tr></table></figure>
+<li><p>异步读取 readFile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.readFile(&apos;./1.txt&apos;,&#123;encoding:&apos;utf-8&apos;&#125;,function(err,data)&#123;</div><div class="line">    console.log(err,data);</div><div class="line">    //第一个参数是要读取文件的路径，第二个参数是编码格式，第三个参数是回调函数</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>中间件</p>
-<ul>
-<li>1.中间件就是起过渡作用，可以检查权限，检查是否合法，最后在进入我们的真正的路由</li>
-<li>2.中间件有next方法，如果不满足可以决定是否继续执行，如果调用next方法表示继续执行</li>
-<li>3.中间件也可以匹配路径，只要路径开头匹配即可，默认是/</li>
-<li>4.中间件中的req和res和路由中的是同一个</li>
-<li>5.一个页面中可以有多个中间件</li>
-<li><p>当匹配成功后执行函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">app.usr(function(req,res,next)&#123;</div><div class="line">    console.log(&apos;过滤石头&apos;);</div><div class="line">    next();//这里如果没有next()表示不执行下面的</div><div class="line">&#125;);</div><div class="line">app.usr(function(req,res,next)&#123;</div><div class="line">    console.log(&apos;过滤沙子&apos;);</div><div class="line">    next();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>1.读取时只能读取已经存在的文件<br>2.默认读取格式是buffer，所以有的时候需要转成字符串格式<code>toString()</code>，也可以指定编码格式<br>3.捕获错误要使用try catch<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">    var age = fs.readFileSync(&apos;./age1.txt&apos;,&apos;utf8&apos;);</div><div class="line">&#125;catch (e)&#123;</div><div class="line">    console.log(e);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>4.readFile 不能读取比内存大的文件<br>5.回调函数中拥有error，必须先判断一下err(error data)不能省略<code>error</code>，如果没有错误是<code>null</code></p>
+<h2 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h2><ul>
+<li><p>同步写入 writeFileSync</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.writeFileSync(&apos;./1.txt&apos;,&apos;写入的内容&apos;,&#123;encoding:&apos;utf-8&apos;&#125;);</div><div class="line">fs.appendFileSync(&apos;./1.txt&apos;,&apos;写入的内容&apos;);//追加文件内容</div><div class="line">//第一个参数是要写入文件的路径，第二个参数是要写入的内容，第三个参数是编码格式</div></pre></td></tr></table></figure>
 </li>
-<li><p>用途：扩展req和res上的属性，还可以扩展公用的方法</p>
+<li><p>异步写入 writeFile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.writeFile(&apos;./1.txt&apos;,&apos;写入的内容&apos;,&#123;encoding:&apos;utf-8&apos;&#125;,function(err,data)&#123;</div><div class="line">    console.log(err,data);</div><div class="line">    //第一个参数是要写入文件的路径，第二个参数是要写入的内容，第三个参数是编码格式，第四个参数是回调函数</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>1.写入时默认编码utf8<br>2.写入文件如果不存在该文件则会创建文件<br>3.先清空在写入</p>
+<h2 id="拷贝文件"><a href="#拷贝文件" class="headerlink" title="拷贝文件"></a>拷贝文件</h2><ul>
+<li><p>先将文件读出来，在将文件写入另一个文件中</p>
+<ul>
+<li><p>全部采用异步</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function copy(source, target) &#123;</div><div class="line">    var fs=require(&apos;fs&apos;);</div><div class="line">    fs.readFile(source,function (err, data) &#123;</div><div class="line">        if(err)&#123;</div><div class="line">            console.log(err);</div><div class="line">        &#125;else &#123;</div><div class="line">            fs.writeFile(target,data,function (err, data) &#123;</div><div class="line">                if(err)&#123;</div><div class="line">                    console.log(err);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">copy(&apos;./1.txt&apos;,&apos;./2.txt&apos;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>全部采用同步</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function copySync(source,target) &#123;</div><div class="line">    var result = fs.readFileSync(source);</div><div class="line">    fs.writeFileSync(target,result);</div><div class="line">&#125;</div><div class="line">copySync(&apos;./name1.txt&apos;,&apos;./name3.txt&apos;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>在读取或者写入的时候不用指定编码格式，因为拷贝的内容很有可能是图片、音频、视频等</p>
+</li>
+</ul>
+<h2 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h2><h3 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3><ul>
+<li><p>同步创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.mkdirSync(&apos;a&apos;);  //这里的a是文件夹</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.mkdir(&apos;a&apos;,function(err,data)&#123;</div><div class="line">    console.log(err);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>1.创建目录的时候要求父目录必须存在<br><code>fs.mkdirSync(&#39;a/a&#39;);</code>和<code>fs.mkdir(&#39;a/a&#39;);</code> 这样直接创建不行，因为没有第一个a文件夹</p>
+<h3 id="读取指定目录下所有的文件"><a href="#读取指定目录下所有的文件" class="headerlink" title="读取指定目录下所有的文件"></a>读取指定目录下所有的文件</h3><ul>
+<li><p>同步读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.readdirSync(&apos;./a&apos;);</div><div class="line">console.log(files);</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.readdir(&apos;./a&apos;,function(err,files)&#123; //读取a文件夹下的所有文件</div><div class="line">    console.log(files);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>它读取出来的文件是以数组的形式显示的</p>
+<h3 id="查看文件的目录信息-详情描述"><a href="#查看文件的目录信息-详情描述" class="headerlink" title="查看文件的目录信息(详情描述)"></a>查看文件的目录信息(详情描述)</h3><ul>
+<li><p>同步查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.statSync(&apos;./a&apos;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.stat(&apos;./a&apos;,function(err,stat)&#123;</div><div class="line">    console.log(stat);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>stat下的面属性</p>
+<ul>
+<li>mtime 修改时间，只要改过就会变不论改什么</li>
+<li>ctime 修改时间，只有内容改了才会变</li>
+<li>atime 访问的时间</li>
+<li>birthtime 出生时间</li>
+</ul>
+</li>
+<li><p>读取指定目录下所有的文件里面的内容，因为是以数组的形式显示的所以用<code>forEach</code>来遍历取出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.readdir(&apos;./a&apos;,function(err,files)&#123;</div><div class="line">    console.log(files);</div><div class="line">    files.forEach(function(file)&#123;</div><div class="line">        fs.stat(&apos;./a/&apos;+file,function(err,data)&#123;</div><div class="line">            if(stat.isFile())&#123; //判断一下是否是一个文件</div><div class="line">                fs.readFile(&apos;./a/&apos;+file,function(err,data)&#123;</div><div class="line">                    console.log(data.toString());</div><div class="line">                &#125;);</div><div class="line">            &#125;else&#123;</div><div class="line">                console.log(&apos;这是一个目录&apos;); //isDirectory()是否是一个目录</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>因为是异步的方法所以谁先读取出来不一定；要保证a文件夹下都是文件不在有其它的文件夹</p>
+<h3 id="判断一个文件是否存在"><a href="#判断一个文件是否存在" class="headerlink" title="判断一个文件是否存在"></a>判断一个文件是否存在</h3><ul>
+<li>判断一个文件夹或者文件是否存在</li>
+<li><p>同步判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.existsSync(&apos;./a&apos;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.exists(&apos;./a&apos;,function(exists)&#123;</div><div class="line">    console.log(exists);</div><div class="line">    //返回的是布尔值，存在就是true；它的回调函数第一个参数不是err</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建目录  同步创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function makep(path) &#123;</div><div class="line">    var paths = path.split(&apos;\\&apos;);  //[a,b,c,d]</div><div class="line">    for(var i = 0; i&lt;paths.length;i++)&#123;</div><div class="line">        var dir = paths.slice(0,i+1).join(&apos;/&apos;);</div><div class="line">        //创建目录时 先判断文件是否存在</div><div class="line">        var flag = fs.existsSync(dir);</div><div class="line">        if(!flag)fs.mkdirSync(dir);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">makep(&apos;b\\c\\d&apos;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里<code>path.split(&#39;\\&#39;)</code>的<code>\</code>不能是一个，会不识别</p>
+<ul>
+<li>异步创建 运用递归的方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function mkdirs(p,fn) &#123;</div><div class="line">    //先判断a/b/c/d是否存在</div><div class="line">    fs.exists(p,function (exist) &#123; //判断当前目录是否存在</div><div class="line">        if(exist)&#123;</div><div class="line">            fn();</div><div class="line">        &#125;else&#123;</div><div class="line">            //看当前目录的上一级是否存在</div><div class="line">            mkdirs(path.dirname(p),function () &#123;</div><div class="line">                fs.mkdir(p,fn)</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">mkdirs(&apos;a/b/c&apos;,function () &#123;</div><div class="line">    console.log(&apos;创建成功&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><ul>
+<li>专门处理路径的 是node的核心模块</li>
+</ul>
+<h2 id="path中的方法"><a href="#path中的方法" class="headerlink" title="path中的方法"></a>path中的方法</h2><h3 id="path-join"><a href="#path-join" class="headerlink" title="path.join"></a>path.join</h3><ul>
+<li>将多个参数值字符串<code>结合</code>为一个路径字符串；就是将多个部分路径拼接成一个最终路径<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var path=require(&apos;path&apos;);</div><div class="line">path.join(__dirname,&apos;a&apos;,&apos;b&apos;,&apos;c&apos;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>前面也可以放<code>__dirname</code>，拼出的结果是 当前文件夹的名字+<code>a\b\c</code>；此处的<code>\</code>在<code>window</code>下是<code>\</code> 在linux和mac下是<code>/</code></p>
+<h3 id="path-resolve"><a href="#path-resolve" class="headerlink" title="path.resolve"></a>path.resolve</h3><ul>
+<li>根据一个文件名解析出一个绝对路径；就是得到一个绝对路径<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var path=require(&apos;path&apos;);</div><div class="line">path.resolve(&apos;a&apos;,&apos;b&apos;,..); 结果 f:node\a</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>1.以应用程序根目录为起点<br>2.如果参数是普通字符串，则意思是当前目录的下级目录<br>3.如果参数是.. 回到上一级目录<br>4.如果是/开头表示一个绝对的根路径</p>
+<h3 id="path-basename"><a href="#path-basename" class="headerlink" title="path.basename"></a>path.basename</h3><ul>
+<li>获取当前路径中的文件名<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var path=require(&apos;path&apos;);</div><div class="line">path.basename(__filename,&apos;.js&apos;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>比如说文件名是<code>path.js</code> 当上面指定了<code>.js</code>以后就会输出<code>path</code>；会默认把扩展名去掉</p>
+<h3 id="path-extname"><a href="#path-extname" class="headerlink" title="path.extname"></a>path.extname</h3><ul>
+<li>获取当前路径中的扩展名<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var path=require(&apos;path&apos;);</div><div class="line">path.basename(__filename);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>比如说文件名是<code>path.js</code> 得到的就<code>.js</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/11/node/express/" data-id="ciwq0t0hl0008hkuaujdma92k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/17/node/fs和path/" data-id="ciwt3818t0013pcuaasd7zicf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +221,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -173,6 +259,10 @@
       <ul>
         
           <li>
+            <a href="/2016/12/17/node/fs和path/">fs和path</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/11/node/express/">express</a>
           </li>
         
@@ -186,10 +276,6 @@
         
           <li>
             <a href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/10/node/mongodb/">Mongodb 数据库</a>
           </li>
         
       </ul>
