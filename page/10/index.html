@@ -92,51 +92,59 @@
 <li>它是一个缓冲区Buffer是暂时存放输入输出数据的一段内存。</li>
 <li>JS语言没有二进制数据类型，而在处理TCP和文件流的时候，必须要处理二进制数据。</li>
 <li>NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该类用来创建一个专门存放二进制数据的缓存区</li>
-<li>是一个表示固定内存分配的全局对象，也就是说要放到缓存区中的字节数需要提前确定</li>
+<li>是一个表示固定内存分配的全局对象，也就是说要放到缓存区中的字节数需要提前确定，不像数组可以一直往里加，它是固定的长度</li>
 <li>Buffer好比由一个多位字节元素组成的数组，可以有效的在javascript中表示二进制数据</li>
-<li>在 Node.js 中，Buffer 类是随 Node 内核一起发布的核心库。Buffer 库为 Node.js 带来了一种存储原始数据的方法，可以让 Node.js 处理二进制数据，每当需要在 Node.js 中处理I/O操作中移动的数据时，就有可能使用 Buffer 库。原始数据存储在 Buffer 类的实例中。一个 Buffer 类似于一个整数数组，但它对应于 V8 堆内存之外的一块原始内存。</li>
+<li>在 Node.js 中，Buffer 类是随 Node 内核一起发布的核心库。Buffer 库为 Node.js 带来了一种存储原始数据的方法，可以让 Node.js 处理二进制数据，每当需要在 Node.js 中处理I/O操作中移动的数据时，就有可能使用 Buffer 库。原始数据存储在 Buffer 类的实例中。一个 Buffer 类似于一个整数<code>数组</code>，但它对应于 V8 堆内存之外的一块原始内存。</li>
 <li>我们的buffer的表现形式是16进制的<h2 id="2-什么是字节"><a href="#2-什么是字节" class="headerlink" title="2. 什么是字节"></a>2. 什么是字节</h2></li>
 <li>字节(Byte)是计算机存储时的一种计量单位，一个字节等于8位二进制数</li>
 <li>一个位就代表一个0或1，每8个位（bit）组成一个字节（Byte）</li>
 <li>字节是通过网络传输信息的单位</li>
-<li>一个字节最大值十进制数是255 一个汉字是由3个字节组成的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var sum =0;</div><div class="line">for(var i=0;i&lt;8;i++)&#123;</div><div class="line">  sum += Math.pow(2,i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>一个字节最大值十进制数是255 一个汉字是由3个字节组成的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var sum =0;</div><div class="line">for(var i=0;i&lt;8;i++)&#123;</div><div class="line">  sum += Math.pow(2,i);  //也可是console.log(Math.pow(2,8)-1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="3-定义buffer的三种方式"><a href="#3-定义buffer的三种方式" class="headerlink" title="3. 定义buffer的三种方式"></a>3. 定义buffer的三种方式</h2><ul>
 <li><p>通过长度定义buffer,通过长度创建buffer是随机的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer(3);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer(3); //new一个构造函数里面可以传参</div></pre></td></tr></table></figure>
 </li>
 <li><p>通过数组定义buffer</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer([2,3]);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer([15,16，17]);  //结果：0f 10 11；数组里面放的一定要是数字</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>正常情况下一个字节表示0-255之间;<br>如果不识别则为0,如果给的值大于255,会对256取模(%),如果为负值 加上256</p>
+<p>正常情况下一个字节表示0-255之间；如果不识别则为0,如果给的值大于255,会对256取模(%),如果为负值 加上256</p>
 <ul>
 <li>字符串创建,node中不支持gb(国标)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer(&apos;名字&apos;,&apos;utf8&apos;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="4-buffer常用方法"><a href="#4-buffer常用方法" class="headerlink" title="4.buffer常用方法"></a>4.buffer常用方法</h2><h3 id="4-1-fill方法"><a href="#4-1-fill方法" class="headerlink" title="4.1 fill方法"></a>4.1 fill方法</h3><ul>
-<li>手动初始化,擦干净桌子,将buffer内容清0<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">buffer.fill(0);</div></pre></td></tr></table></figure>
+<li>手动初始化,擦干净桌子,将buffer内容清0，就是把里面的内容全部设成0<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">buffer.fill(0);</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="4-2-write方法"><a href="#4-2-write方法" class="headerlink" title="4.2 write方法"></a>4.2 write方法</h3><ul>
-<li>往buffer中写入内容,4个参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">buffer.write(&apos;中&apos;,0,3,&apos;utf8&apos;);</div><div class="line">buffer.write(&apos;文&apos;,3,3,&apos;utf8&apos;); //中文</div></pre></td></tr></table></figure>
+<li><p>往buffer中写入内容,4个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buffer.write(&apos;中&apos;,0,3,&apos;utf8&apos;);</div><div class="line">buffer.write(&apos;文&apos;,3,3,&apos;utf8&apos;); //文从第3个字节开始写因为中字以经在前面有3个了</div><div class="line">console.log(buffer.toString()); //得把16进制转成汉字的形式才会出现 中文</div></pre></td></tr></table></figure>
+<ul>
+<li><ul>
+<li>string 要写入的字符串，一个汉字3个字节</li>
+<li>offset 写入的偏移量 就是从哪个字节开始写入 默认为 0</li>
+<li>length 写入的长度 字节的长度</li>
+<li>encoding 写入内容的编码格式 默认为 ‘utf8’</li>
+<li>后两个参数可以不写，write方法会默认把内容从头写到尾</li>
+</ul>
 </li>
 </ul>
-<p>string 要写入的字符串，一个汉字3个字节<br>offset 写入的偏移量 就是从哪个字节开始写入 默认为 0<br>length 写入的长度 字节的长度<br>encoding 写入内容的编码格式 默认为 ‘utf8’<br>后两个参数可以不写write方法会默认把内容从头写到尾</p>
-<ul>
+</li>
 <li>返回值：返回实际写入的大小。如果 buffer 空间不足， 则只会写入部分字符串。</li>
 </ul>
 <h3 id="4-3-toString方法"><a href="#4-3-toString方法" class="headerlink" title="4.3 toString方法"></a>4.3 toString方法</h3><ul>
 <li>将buffer转换成字符串类型 转化时可以根据截取的位置进行输出<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(buffer.toString(&apos;utf8&apos;,3,6));</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>第一天参数可以是utf8也可以是base64;后两个参数是截取的buffer的长度</p>
+<p>第一个参数可以是utf8也可以是base64;后两个参数是截取的buffer的字节（从第几个到第几个）</p>
 <ul>
 <li>返回值：解码缓冲区数据并使用指定的编码返回字符串。</li>
 </ul>
 <h3 id="4-4-slice方法"><a href="#4-4-slice方法" class="headerlink" title="4.4 slice方法"></a>4.4 slice方法</h3><ul>
-<li>截取buffer<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer([1,2,3]);</div><div class="line">var newBuffer = buffer.slice(2); //从索引2开始</div><div class="line">newBuffer[0] = 100;</div><div class="line">console.log(newBuffer); //64</div></pre></td></tr></table></figure>
+<li>截取buffer，是按照索引算的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer([1,2,3]);</div><div class="line">var newBuffer = buffer.slice(2); //从索引2开始</div><div class="line">newBuffer[0] = 100;</div><div class="line">console.log(newBuffer); //64</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>区别在于slice后操作的还是原buffer 100转换成16进制为64</p>
@@ -149,19 +157,27 @@
 </ul>
 <p>先new一个实例 把字符串存进去，不能识别的保留，当在输出的时候进行拼接<br>如果不编译string_decoder，就会出现:本来中文是6个字节，第一次(0,4)就是说第一个字是完整的，第二个字显示不全就会出现乱码</p>
 <h3 id="4-5-copy方法"><a href="#4-5-copy方法" class="headerlink" title="4.5 copy方法"></a>4.5 copy方法</h3><ul>
-<li>复制Buffer 把多个小buffer拷贝到一个大buffer上<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sourceBuffer.copy(targetBuffer,targetstart,sourcestart,sourceend);</div><div class="line">var buffer1 = new Buffer(&apos;ABC&apos;); // 拷贝一个缓冲区</div><div class="line">var buffer2 = new Buffer(3);</div><div class="line">buffer1.copy(buffer2); //把buffer1拷贝到buffer2里</div><div class="line">console.log(buffer2.toString());</div></pre></td></tr></table></figure>
+<li><p>复制Buffer 把多个小buffer拷贝到一个大buffer上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sourceBuffer.copy(targetBuffer,targetstart,sourcestart,sourceend);</div><div class="line">var buffer1 = new Buffer(&apos;ABC&apos;); // 拷贝一个缓冲区</div><div class="line">var buffer2 = new Buffer(3);</div><div class="line">buffer1.copy(buffer2); //把buffer1拷贝到buffer2里</div><div class="line">console.log(buffer2.toString());</div></pre></td></tr></table></figure>
+<ul>
+<li><ul>
+<li>targetBuffer 目标buffer 要拷贝的 Buffer 对象</li>
+<li>targetStart 目标的开始 数字, 可选, 默认: 0 就是从哪个字节开始</li>
+<li>sourceStart 拷贝内容的开始 数字, 可选, 默认: 0</li>
+<li>sourceEnd 拷贝内容的结束 数字, 可选, 默认: buffer.length</li>
+</ul>
 </li>
 </ul>
-<p>targetBuffer 目标buffer 要拷贝的 Buffer 对象<br>targetStart 目标的开始 数字, 可选, 默认: 0<br>sourceStart 拷贝内容的开始 数字, 可选, 默认: 0<br>sourceEnd 拷贝内容的结束 数字, 可选, 默认: buffer.length</p>
-<ul>
-<li>返回值：没有返回值</li>
+</li>
+<li><p>返回值：没有返回值</p>
+</li>
 </ul>
 <h3 id="4-6-concat方法"><a href="#4-6-concat方法" class="headerlink" title="4.6 concat方法"></a>4.6 concat方法</h3><ul>
 <li><p>拼接buffer 将两个buffer拼接成1个buffer 也叫缓冲区合并</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var buffer1 = new Buffer(&apos;中&apos;);</div><div class="line">var buffer2 = new Buffer(&apos;文&apos;);</div><div class="line">var newBuffer = Buffer.concat([buffer1,buffer2],3);</div><div class="line">console.log(newBuffer.toString()); //只会显示中因为长度是3</div></pre></td></tr></table></figure>
 </li>
-<li><p>实现concat方法  我们要实现一个buffer方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">Buffer.myconcat = function (list,totalLength) &#123;</div><div class="line">    if(list.length==1)&#123;//如果数组里只有一项直接返回即可</div><div class="line">        return list[0];</div><div class="line">    &#125;</div><div class="line">    if(typeof totalLength==&apos;undefined&apos;)&#123;//手动维护长度，当没有传长度时</div><div class="line">        totalLength = 0;</div><div class="line">        for(var j= 0;j&lt;list.length;j++)&#123;</div><div class="line">            totalLength += list[j].length; //每一个buffer的长度累加算出总长度</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //我们已经拥有长度，需要将每一项粘贴进去</div><div class="line">    var buffer = new Buffer(totalLength);</div><div class="line">    //将每一个buffer拷贝到buffer中</div><div class="line">    var index = 0;//定一个计数器</div><div class="line">    list.forEach(function (item) &#123;</div><div class="line">        item.copy(buffer,index)//每次拷贝时索引是递增的</div><div class="line">        index+=item.length;</div><div class="line">    &#125;);</div><div class="line">    return buffer.slice(0,index); //截取掉想要的内容</div><div class="line">    //返回大buffer</div><div class="line">&#125;;</div><div class="line">console.log(Buffer.myconcat([buffer1,buffer2],100).toString());</div></pre></td></tr></table></figure>
+<li><p>自己实现一个concat方法  我们要实现一个buffer方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">Buffer.myconcat = function (list,totalLength) &#123;</div><div class="line">    if(list.length==1)&#123;//如果数组里只有一项直接返回即可</div><div class="line">        return list[0];</div><div class="line">    &#125;</div><div class="line">    if(typeof totalLength==&apos;undefined&apos;)&#123;//手动维护长度，当没有传长度时</div><div class="line">        totalLength = 0;</div><div class="line">        for(var j= 0;j&lt;list.length;j++)&#123;</div><div class="line">            totalLength += list[j].length; //每一个buffer的长度累加算出总长度</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //我们已经拥有长度，需要将每一项粘贴进去</div><div class="line">    var buffer = new Buffer(totalLength);</div><div class="line">    //将每一个buffer拷贝到buffer中</div><div class="line">    var index = 0;//定一个计数器</div><div class="line">    list.forEach(function (item) &#123;</div><div class="line">        item.copy(buffer,index)//每次拷贝时索引是递增的</div><div class="line">        index+=item.length;</div><div class="line">    &#125;);</div><div class="line">    return buffer.slice(0,index); //截取掉想要的内容</div><div class="line">    //返回大buffer 如果过长保留有效区 截取有效长度slice</div><div class="line">&#125;;</div><div class="line">console.log(Buffer.myconcat([buffer1,buffer2],100).toString());</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>list(参数1) - 用于合并的 Buffer 对象数组列表。<br>totalLength(参数2) - 指定合并后Buffer对象的总长度。</p>
@@ -173,8 +189,8 @@
 </li>
 </ul>
 <h3 id="4-8-length"><a href="#4-8-length" class="headerlink" title="4.8 length"></a>4.8 length</h3><ul>
-<li><p>获取字节长度(显示是字符串所代表buffer的长度)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var buffer = Buffer.byteLength(&quot;中文&quot;);</div><div class="line">buffer.length;</div></pre></td></tr></table></figure>
+<li><p>获取字节长度(显示是字符串所代表buffer的长度也就是字节数)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var buffer = Buffer.byteLength(&quot;中文&quot;); //一个汉字是3个字节</div><div class="line">buffer.length;</div></pre></td></tr></table></figure>
 </li>
 <li><p>返回值: 返回 Buffer 对象所占据的内存长度。</p>
 </li>
@@ -200,10 +216,11 @@
 <li>abcdefghijklmnopqrstuvwxyz</li>
 <li>0123456789</li>
 <li><p>+/</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer(&apos;珠&apos;); //默认buffer为16进制</div><div class="line">console.log(buffer); //e7 8f a0 此时是16进制</div><div class="line">//将珠字转换成base64</div><div class="line">//将16进制转换成2进制  0x代表16进制</div><div class="line">console.log((0xe7).toString(2));</div><div class="line">console.log((0x8f).toString(2));</div><div class="line">console.log((0xa0).toString(2));</div><div class="line">//11100111   10001111   10100000 都大于64 因为前两位里面有1</div><div class="line">//转换成小于64的</div><div class="line">//规则:将所有的2进制进行拼接，每隔6位分割 前面加00 就是先都放到一起在分割，因为每个字节8个位，一个汉字3个字节，所以是24个位，每6个一组是它不会超过64肉眼可以看到</div><div class="line">//00111001 00111000 00111110 00100000</div><div class="line">//3个8位转成4个六位</div><div class="line">//转换成10进制进行取值</div><div class="line">console.log(parseInt(&apos;00111001&apos;,2));</div><div class="line">console.log(parseInt(&apos;00111000&apos;,2));</div><div class="line">console.log(parseInt(&apos;00111110&apos;,2));</div><div class="line">console.log(parseInt(&apos;00100000&apos;,2));</div><div class="line">//57 56 62 32 得到的数字就是索引</div><div class="line">var str = &apos;ABCDEFGHIJKLMNOPQRSTUVWXYZ&apos;;</div><div class="line">str+=&apos;abcdefghijklmnopqrstuvwxyz&apos;;</div><div class="line">str+=&apos;0123456789&apos;;</div><div class="line">str+=&apos;+/&apos;;</div><div class="line">var base64 = str[57]+str[56]+str[62]+str[32];</div><div class="line">console.log(base64);//54+g</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer(&apos;珠&apos;); //默认buffer为16进制</div><div class="line">console.log(buffer); //e7 8f a0 此时是16进制</div><div class="line">//将珠字转换成base64</div><div class="line">//将16进制转换成2进制  0x代表16进制</div><div class="line">console.log((0xe7).toString(2));</div><div class="line">console.log((0x8f).toString(2));</div><div class="line">console.log((0xa0).toString(2));</div><div class="line">//11100111   10001111   10100000 都大于64 因为前两位里面有1</div><div class="line">//转换成小于64的</div><div class="line">//规则:将所有的2进制进行拼接，每隔6位分割 前面加00 就是先都放到一起在分割，因为每个字节8个位，一个汉字3个字节，所以是24个位，每6个一组是它不会超过64肉眼可以看到</div><div class="line">//00111001 00111000 00111110 00100000</div><div class="line">//3个8位转成4个六位</div><div class="line">//转换成10进制进行取值</div><div class="line">console.log(parseInt(&apos;00111001&apos;,2));</div><div class="line">console.log(parseInt(&apos;00111000&apos;,2));</div><div class="line">console.log(parseInt(&apos;00111110&apos;,2));</div><div class="line">console.log(parseInt(&apos;00100000&apos;,2));</div><div class="line">//57 56 62 32 得到的数字就是索引</div><div class="line">var str = &apos;ABCDEFGHIJKLMNOPQRSTUVWXYZ&apos;;</div><div class="line">str+=&apos;abcdefghijklmnopqrstuvwxyz&apos;;  //str+=str.toLowerCase();也可以这样写</div><div class="line">str+=&apos;0123456789&apos;;</div><div class="line">str+=&apos;+/&apos;;</div><div class="line">var base64 = str[57]+str[56]+str[62]+str[32];</div><div class="line">console.log(base64);//54+g</div></pre></td></tr></table></figure>
 </li>
 <li><p>得出结果是54+g;在工具里过一下就会得出珠字 base64不是加密的;</p>
 </li>
+<li><a href="http://m.blog.csdn.net/article/details?id=40984869" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=40984869</a> 可以看看这篇文章</li>
 <li>把base64封装成方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">function toBase64 (str) &#123;</div><div class="line">    //先把字符串转成数组 最终返回的结果是这些字符组成的</div><div class="line">    var chars=&apos;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&apos;.split(&apos;&apos;);</div><div class="line">    var buffer=new Buffer(str);//通过字符串构建buffer</div><div class="line">    var str=&apos;&apos;;</div><div class="line">    for (var i=0;i&lt;buffer.length;i++) &#123;</div><div class="line">        //把Buffer中的值转成二进制字符串，拼在一起</div><div class="line">        var a= buffer[i].toString(2);</div><div class="line">        str+=a;</div><div class="line">    &#125;</div><div class="line">    //中国 6个字节 48位  48/6=8</div><div class="line">    var result=&apos;&apos;;</div><div class="line">    str=str.replace(/\d&#123;6&#125;/g,function  (matched) &#123;</div><div class="line">        //matched是六位一组的字符子串</div><div class="line">        //parseInt负责把它们转成10进制数</div><div class="line">        //chars从字符数组中按索引取出对应的字符，拼在一起</div><div class="line">        result+=chars[parseInt(matched,2)];</div><div class="line">    &#125;);</div><div class="line">    return result;</div><div class="line">&#125;</div><div class="line">console.log(toBase64(&apos;中国&apos;));</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -219,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/22/node/node里的buffer/" data-id="ciwq0ount000ej4uan6q6vmd8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/22/node/node里的buffer/" data-id="ciwq0t0ib000hhkuapi61zf1j" class="article-share-link">Share</a>
       
       
     </footer>

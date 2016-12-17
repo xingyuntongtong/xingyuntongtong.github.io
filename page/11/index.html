@@ -141,20 +141,20 @@
 </li>
 </ul>
 <h2 id="6-模块分类"><a href="#6-模块分类" class="headerlink" title="6.模块分类"></a>6.模块分类</h2><ul>
-<li><p>1.内置模块(核心模块)http url fs util  是node中自带的</p>
+<li><p>1.内置模块(核心模块)<code>http</code> <code>url</code> <code>fs</code> <code>util</code> 是node中自带的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">require(&apos;util&apos;);</div><div class="line">util.inherits继承 原理就是Object.create方法</div><div class="line">inspect解析属性</div><div class="line">isArray isRegExp isDate isError判断数据类型</div></pre></td></tr></table></figure>
 </li>
-<li><p>inherits 默认为原型链继承(不继承私有属性)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ctor.prototype.__proto__ = superCtor.prototype;</div><div class="line">ctor.prototype = Object.create(superCtor.prototype);</div></pre></td></tr></table></figure>
+<li><p>inherits 默认为原型链继承(不继承私有属性) 就是子类继承父类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Child.prototype.__proto__ = Parent.prototype;</div><div class="line">Child.prototype = Object.create(Parent.prototype);</div></pre></td></tr></table></figure>
 </li>
 <li><p>inspect 解析对象</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var obj  = &#123;name:&apos;tong&apos;,age:7&#125;;</div><div class="line">util.inspect(obj,&#123;showHidden:true,depth:1,colors:true&#125;);</div><div class="line">showHidden 显示隐藏属性</div><div class="line">depth 解析的深度</div><div class="line">colors 输出的时候带颜色</div></pre></td></tr></table></figure>
 </li>
 <li><p>给对象增加属性,这里拿util举例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Object.defineProperty(obj,&apos;age&apos;,&#123;</div><div class="line">    value:&apos;8&apos;, //当前定义属性的值</div><div class="line">    enumerable:false,//是否可枚举</div><div class="line">    writable:true,//是否可写</div><div class="line">    configurable:false,//是否可配置</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Object.defineProperty(obj,&apos;age&apos;,&#123;</div><div class="line">    value:&apos;8&apos;, //当前定义属性的值 age:8</div><div class="line">    enumerable:false,//是否可枚举 为true时都能显示</div><div class="line">    writable:true,//是否只读</div><div class="line">    configurable:false,//是否可配置 就是可不可以删除，可配置(true)就是可以删除</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 <li><p>判断类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">console.log(util.isArray([]));</div><div class="line">console.log(util.isError(new RegExp()));</div><div class="line">console.log(util.isRegExp(new Error()));</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">console.log(util.isArray([]));  //判断是否是数组</div><div class="line">console.log(util.isError(new RegExp()));</div><div class="line">console.log(util.isRegExp(new Error()));</div></pre></td></tr></table></figure>
 </li>
 <li><p>2.文件模块(自定义模块) 以./方式引入的都是文件模块</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;./文件名字&apos;);</div></pre></td></tr></table></figure>
@@ -177,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/22/node/node里的模块/" data-id="ciwq0owys000gj4ua8jo8w8ed" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/22/node/node里的模块/" data-id="ciwq0t0if000jhkua9ocg4urd" class="article-share-link">Share</a>
       
       
     </footer>

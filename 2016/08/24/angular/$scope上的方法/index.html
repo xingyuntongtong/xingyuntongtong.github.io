@@ -17,7 +17,7 @@ angularJS 有一个脏值查询的机制 定时器setInterval(不是angular自�
 1.$apply
 刷新视图  强制刷新 如果用一个非angular里面的方法就用这个
 angularJS 有一个脏值查询的机制 定时器setInterval(不是angular自带的方法)无法触发这个机制 就是无法刷新 用$apply来解决用法1. $scope.$apply(); //用于原生修改数据时使用用法2. $scope.$apply(function(){});它">
-<meta property="og:updated_time" content="2016-12-15T05:09:45.324Z">
+<meta property="og:updated_time" content="2016-12-15T09:21:39.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="$scope上的方法">
 <meta name="twitter:description" content="$scope上的方法
@@ -123,11 +123,26 @@ angularJS 有一个脏值查询的机制 定时器setInterval(不是angular自�
 </ul>
 </li>
 </ul>
+<h2 id="控制器间的交互"><a href="#控制器间的交互" class="headerlink" title="控制器间的交互"></a>控制器间的交互</h2><p>控制器间的交互是通过事件进行监听的  比如父亲的作用域要拿到儿子的东西<br>在控制器中不要操作DOM,比较消耗性能;<br>$emit $broadcast 都是基于事件才能触发比如点击事件 ，不能直接用</p>
+<ul>
+<li>$emit 发射事件就是往上传 子级的数据传给父级自己也能得到 修改子控制器代码,当数量变化时通知父控制器<ul>
+<li>$scope.$emit(‘toParent’,$scope.name);</li>
+<li>参数1. 就是事件的标识符就是名字，参数2. 是要发射的数据</li>
+</ul>
+</li>
+<li>$broadcast向下广播就是往下传 把数据往下传给子级自己也能得到 比如当总价改变，向下通知所有子控制器<ul>
+<li>$scope.$broadcast(‘toSon’,$scope.name);</li>
+</ul>
+</li>
+<li>$on 监听子控制器事件的(就是监听事件的) 用来监听发射或者广播事件的，监听子控制器发射的事件；实现控制器之间数据的传递 用来接收数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$scope.$on(&apos;toParent&apos;, function (e,data) &#123;//toParent和$emit里面的名字是一样的</div><div class="line">     $scope.name = data; //data 就是儿子发射的数据  e 是事件源</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>比如当点击儿子元素时让父亲和孙子都能接收到数据 就得儿子元素向上发射和向下广播用$on来接收数据 在赋值给相应的属性<br>$watch 用来监听数据的变化的事件<br>$on 就是监听事件的</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/24/angular/$scope上的方法/" data-id="ciwq0mp640000s4uafmutjxr6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/24/angular/$scope上的方法/" data-id="ciwq0t0hj0007hkua76cx9f6h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,11 +151,11 @@ angularJS 有一个脏值查询的机制 定时器setInterval(不是angular自�
     
 <nav id="article-nav">
   
-    <a href="/2016/08/24/angular/自定义服务/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/08/24/angular/服务/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          自定义服务
+          服务
         
       </div>
     </a>
