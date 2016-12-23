@@ -23,7 +23,7 @@ AngularJS  诞生于2009年，由Misko Hevery 等人创建，后为Google所收�
 
 框架和库的区别
 库：提供了很多方法，让我们来调用(主动调用)，比如：">
-<meta property="og:updated_time" content="2016-12-23T04:45:26.546Z">
+<meta property="og:updated_time" content="2016-12-23T04:51:23.684Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular基础">
 <meta name="twitter:description" content="这里面的markdown格式有问题所以不能运行
@@ -114,9 +114,7 @@ AngularJS  诞生于2009年，由Misko Hevery 等人创建，后为Google所收�
 </ul>
 <h2 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h2><ul>
 <li>库：提供了很多方法，让我们来调用(主动调用)，比如：vue,react</li>
-<li><p>框架：我们按照他的规范去写，人家调用我们(被动)(强约束)</p>
-<pre><code>框架的好处，提供完整的解决方案
-</code></pre></li>
+<li>框架：我们按照他的规范去写，人家调用我们(被动)(强约束)<br>框架的好处，提供完整的解决方案</li>
 </ul>
 <h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><ul>
 <li>Model: 数据模型层 存在数据的</li>
@@ -126,17 +124,14 @@ AngularJS  诞生于2009年，由Misko Hevery 等人创建，后为Google所收�
 <h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><ul>
 <li>M: model: 用来存放数据的(数据模型层)</li>
 <li>V: view: 视图展示 很单薄(视图层)</li>
-<li><p>VM: viewModel: 视图模型层 在angular里面可以认为是$scope，大部分又业务逻辑放在了这里 很厚重</p>
-<pre><code>`view` 和 `viewModel`是双向数据绑定  view通过viewModel把数据存放model里面，MVVM它是经过MVC的历史演变过来的
-</code></pre></li>
+<li>VM: viewModel: 视图模型层 在angular里面可以认为是$scope，大部分又业务逻辑放在了这里 很厚重<br><code>view</code> 和 <code>viewModel</code>是双向数据绑定  view通过viewModel把数据存放model里面，MVVM它是经过MVC的历史演变过来的</li>
 </ul>
 <h2 id="下载angular"><a href="#下载angular" class="headerlink" title="下载angular"></a>下载angular</h2><ul>
 <li>下载node会提供一个叫npm的东西</li>
-<li><p>node package manager</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install angular</div></pre></td></tr></table></figure>
-<p>  通过npm来下载，别人上传上去的’包’，默认安装到当前目录的<code>node_modules</code>文件夹中，如果上级目录有<code>node_modules</code>就会安装到上级中</p>
+<li>node package manager<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install angular</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>通过npm来下载，别人上传上去的’包’，默认安装到当前目录的<code>node_modules</code>文件夹中，如果上级目录有<code>node_modules</code>就会安装到上级中</p>
 <h2 id="本文讲述Angular中的指令、控制器、服务的应用场景。"><a href="#本文讲述Angular中的指令、控制器、服务的应用场景。" class="headerlink" title="本文讲述Angular中的指令、控制器、服务的应用场景。"></a>本文讲述Angular中的指令、控制器、服务的应用场景。</h2><ul>
 <li>指令：涉及到DOM操作的时候使用</li>
 <li>控制器：涉及到业务逻辑的时候使用</li>
@@ -219,8 +214,11 @@ angular.module(&apos;myMod&apos;);//调用这个模块
 </li>
 <li><p>2.定义一个控制器 它是分块管理的(相当于每个部门一样) 可以有很多控制器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;,function($scope)&#123; //创建一个控制器</div><div class="line">    $scope.name = &apos;tongtong&apos;;</div><div class="line">       console.log($scope);//它可以打印出详细的信息，上面有方法原型链 ChildScope</div><div class="line">   &#125;);</div><div class="line">   myMod.run(function ($rootScope) &#123; //将公有的代码放在run中</div><div class="line">       $rootScope.name=&apos;tongtong&apos;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>  使用这个控制器 可管理的范围是ng-controller=”myCtrl”的标签里的范围<br>  在这个控制器里首先形成自己的作用域 定义的变量和方法，都是定义在$scope上的属性 $scope.name=’tongtong’;<br>  <code>&lt;div ng-controller=&quot;myCtrl&quot;&gt;</code><code>&lt;/div&gt;</code>  //使用控制器<br><code>$scope</code>是一个作用域，相当于把属性挂在作用域上，双括号可以通过它取值</p>
+<p>  使用这个控制器 可管理的范围是ng-controller=”myCtrl”的标签里的范围<br>  在这个控制器里首先形成自己的作用域 定义的变量和方法，都是定义在$scope上的属性 $scope.name=’tongtong’;<br>  <code>&lt;div ng-controller=&quot;myCtrl&quot;&gt;</code><code>&lt;/div&gt;</code>  //使用控制器</p>
 </li>
+</ul>
+<p><code>$scope</code>是一个作用域，相当于把属性挂在作用域上，双括号可以通过它取值</p>
+<ul>
 <li><p>控制器的特点</p>
 <ul>
 <li>1.控制器可以嵌套，只能子找父(子控制器可以继承父控制器)，不能父找子</li>
@@ -238,7 +236,7 @@ angular.module(&apos;myMod&apos;);//调用这个模块
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/07/angular/angular基础/" data-id="cix1aismk00038cua14qozu6v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/07/angular/angular基础/" data-id="cix1bkzjp0006qcuajhz4yk2u" class="article-share-link">Share</a>
       
       
     </footer>
