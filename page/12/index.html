@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-node/node里的模块" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-node/node里的buffer" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/22/node/node里的模块/" class="article-date">
-  <time datetime="2016-08-22T02:30:25.000Z" itemprop="datePublished">2016-08-22</time>
+    <a href="/2016/08/22/node/node里的buffer/" class="article-date">
+  <time datetime="2016-08-22T05:00:25.000Z" itemprop="datePublished">2016-08-22</time>
 </a>
     
   <div class="article-category">
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/22/node/node里的模块/">node中的模块</a>
+      <a class="article-title" href="/2016/08/22/node/node里的buffer/">node中的buffer</a>
     </h1>
   
 
@@ -87,97 +87,156 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>javaScript 从一个仅仅在浏览器上面的一个玩具语言，一转眼演变成无所不能神一般的存在。但是，由于天生存在着一点戏剧性，模块系统作为一门语言最基本的属性却是javaScript所缺的。</p>
-<h2 id="Node-js里的模块和包的概念"><a href="#Node-js里的模块和包的概念" class="headerlink" title="Node.js里的模块和包的概念"></a>Node.js里的模块和包的概念</h2><ul>
-<li>在前端的编程里，我们经常把单独功能的一些JS脚本写一个文件里，用这个文件的时候就用script标签的src属性来引用。在node.js里，同样也是把单独功能的脚本写一个单独的文件里，不过引入的方式变了，是用require来引用。这个单独的JS文件，在node.js里叫模块</li>
-<li>什么是模块呢？我们可以简单的把它看成一个实现单独功能的文件。比如在前端JS中的jQuery.js，在node.js里，我们把它就看成一个模块的概念就行。在前端的JS中使用它之前，先要引入此文件。在node.js里，则需要require来引入.</li>
-<li>包的概念：包含一个或多模块的(也就是JS文件的)文件夹（我们先简单的理为包就是一个实现完整功能的目录，其实它的意义远不止这些，先这样上手）</li>
-<li>包是模块化JS必须的。<br>我们可以在node.js项目中直使用别人写好的功能，就是使用别人写的包。也可以自己写一个包，发布到互联网上供大家使用。 </li>
-<li>为了让Node.js的文件可以相互调用，Node.js提供了一个简单的模块系统。<br>模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个 Node.js 文件就是一个模块，这个文件可能是JavaScript 代码、JSON 或者编译过的C/C++ 扩展。</li>
-</ul>
-<h2 id="1-JS的不足"><a href="#1-JS的不足" class="headerlink" title="1.JS的不足"></a>1.JS的不足</h2><p>js没有模块系统（现在es6中有），不支持封闭作用域或依赖管理<br>没有<code>标准库</code>，没有文件系统API<br>没有包管理系统，不能自动加载和安装依赖</p>
-<h2 id="2-什么是CommonJS"><a href="#2-什么是CommonJS" class="headerlink" title="2.什么是CommonJS?"></a>2.什么是CommonJS?</h2><ul>
-<li>CommonJS 是javascript模块化编程的一种规范，主要是在服务器端模块化的规范，一个单独的文件就是一个模块。每一个模块都是一个单独的作用域，也就是说，在该模块内部定义的变量，无法被其他模块读取，除非定义为global对象的属性。</li>
-<li>commonjs规范<br>一个 node.js由大量模块组成，每个JS文件都是一个模块<br>实现了require方法，npm基于commonjs实现了自动加载和安装依赖<br><code>require</code> 它不是<code>global</code>上的属性，它是形参</li>
-</ul>
-<h2 id="3-模块化优点"><a href="#3-模块化优点" class="headerlink" title="3.模块化优点"></a>3.模块化优点</h2><ul>
-<li>增加内聚性，有助分工协作（高内聚，低耦合），你干你的我干我的不影响</li>
-<li>方便重构(你走了在来个人接着干) 方便管理代码</li>
-<li>提高代码质量</li>
-</ul>
-<h2 id="4-模块使用"><a href="#4-模块使用" class="headerlink" title="4.模块使用"></a>4.模块使用</h2><ul>
-<li>定义(创建)模块 我们创建一个文件就是声明了一个模块，它会在外层自动的增加一个闭包函数</li>
-<li>使用模块 require(‘./filename’); 可以引用一个模块/包</li>
-<li>导出模块 module.exports和exports 模块的接口</li>
-<li>实现原理 文件外面默认被套了一个闭包函数,所以可以模块化,我们是看不到的,是文件形参传入进来的,虽然不是global上的属性，但是可以直接使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(function(exports,require,module,__filename,__dirname)&#123;</div><div class="line">    exports  = module.exports = &#123;&#125;;</div><div class="line">    1.exports.Person=Person; //这样&#123;&#125;就不是空对象了相当于给module.exports也加了</div><div class="line">    2.module.exports = Person; //这种方法也行2种方法 但是exports=Person不行</div><div class="line">    return module.exports; //但是导出的是module.exports</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+        <p>JS语言自身只有字符串数据类型，没有二进制数据类型，因此NodeJS提供了一个与String对等的全局构造函数Buffer来提供对二进制数据的操作。</p>
+<h2 id="1-什么是Buffer"><a href="#1-什么是Buffer" class="headerlink" title="1. 什么是Buffer"></a>1. 什么是Buffer</h2><ul>
+<li>它是一个缓冲区Buffer是暂时存放输入输出数据的一段内存。</li>
+<li>JS语言没有二进制数据类型，而在处理TCP和文件流的时候，必须要处理二进制数据。</li>
+<li>NodeJS提供了一个Buffer对象(类)来提供对二进制数据的操作,该类用来创建一个专门存放二进制数据的缓存区</li>
+<li>是一个表示固定内存分配的全局对象，也就是说要放到缓存区中的字节数需要提前确定，不像数组可以一直往里加，它是固定的长度</li>
+<li>Buffer好比由一个多位字节元素组成的数组，可以有效的在javascript中表示二进制数据</li>
+<li>在 Node.js 中，Buffer 类是随 Node 内核一起发布的核心库。Buffer 库为 Node.js 带来了一种存储原始数据的方法，可以让 Node.js 处理二进制数据，每当需要在 Node.js 中处理I/O操作中移动的数据时，就有可能使用 Buffer 库。原始数据存储在 Buffer 类的实例中。一个 Buffer 类似于一个整数<code>数组</code>，但它对应于 V8 堆内存之外的一块原始内存。</li>
+<li>我们的buffer的表现形式是16进制的<h2 id="2-什么是字节"><a href="#2-什么是字节" class="headerlink" title="2. 什么是字节"></a>2. 什么是字节</h2></li>
+<li>字节(Byte)是计算机存储时的一种计量单位，一个字节等于8位二进制数</li>
+<li>一个位就代表一个0或1，每8个位（bit）组成一个字节（Byte）</li>
+<li>字节是通过网络传输信息的单位</li>
+<li>一个字节最大值十进制数是255 一个汉字是由3个字节组成的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var sum =0;</div><div class="line">for(var i=0;i&lt;8;i++)&#123;</div><div class="line">  sum += Math.pow(2,i);  //也可是console.log(Math.pow(2,8)-1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>module.exports和exports的区别</p>
+<h2 id="3-定义buffer的三种方式"><a href="#3-定义buffer的三种方式" class="headerlink" title="3. 定义buffer的三种方式"></a>3. 定义buffer的三种方式</h2><ul>
+<li><p>通过长度定义buffer,通过长度创建buffer是随机的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer(3); //new一个构造函数里面可以传参</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过数组定义buffer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer([15,16，17]);  //结果：0f 10 11；数组里面放的一定要是数字</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>正常情况下一个字节表示0-255之间；如果不识别则为0,如果给的值大于255,会对256取模(%),如果为负值 加上256</p>
 <ul>
-<li>导出模块导出的不是exports对象  exports默认是一个空对象，得exports.a=a;</li>
-<li>真正require进来的是module.exports对象,向外暴露一个接口</li>
-<li>一个global全局上的变量 一个是形参,它的实现原理就是这样</li>
-<li>使用module.exports = Person;的时候在另一个模块中<code>var person=require(&#39;./Person&#39;)</code>; 在使用exports.Person=Person;的时候在另一个模块中<code>var person=require(&#39;./Person&#39;).Person</code>;</li>
-<li>当导出一个时用module.exports = Person; 导出多个时用exports.Person=Person;<h2 id="5-require（引入）的应用"><a href="#5-require（引入）的应用" class="headerlink" title="5.require（引入）的应用"></a>5.require（引入）的应用</h2></li>
-<li>需要一个模块就要把这个模块require(引)进来，通过相对路径引用模块</li>
-<li>require()是同步的：有返回值的是同步方法 如果带有回调函数的是异步</li>
-<li><p>多次导入一个模块会对模块进行缓存,多次加载后得到同一对象,防止浪费性能 所以只会出现一次</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;./test.js&apos;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>查看模块缓存: require.cache 根据模块的绝对路径进行缓存,{‘一个绝对路径’:’模块’}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(require.cache);  //相当于对象</div></pre></td></tr></table></figure>
-</li>
-<li><p>查询(解析)模块绝对路径: 要让模块多次加载，可以加载后删除掉缓存的模块，得解析出一个绝对路径，例如解析一个绝对路径  C:\Users\10354_000\Desktop\node8\3.module\test.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require.resolve(&apos;./test.js&apos;);   //相当于key</div></pre></td></tr></table></figure>
+<li>字符串创建,node中不支持gb(国标)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer(&apos;名字&apos;,&apos;utf8&apos;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>可以帮我们通过一个已经存在的文件解析出一个绝对路径出来</p>
+<h2 id="4-buffer常用方法"><a href="#4-buffer常用方法" class="headerlink" title="4.buffer常用方法"></a>4.buffer常用方法</h2><h3 id="4-1-fill方法"><a href="#4-1-fill方法" class="headerlink" title="4.1 fill方法"></a>4.1 fill方法</h3><ul>
+<li>手动初始化,擦干净桌子,将buffer内容清0，就是把里面的内容全部设成0<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">buffer.fill(0);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-2-write方法"><a href="#4-2-write方法" class="headerlink" title="4.2 write方法"></a>4.2 write方法</h3><ul>
+<li><p>往buffer中写入内容,4个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buffer.write(&apos;中&apos;,0,3,&apos;utf8&apos;);</div><div class="line">buffer.write(&apos;文&apos;,3,3,&apos;utf8&apos;); //文从第3个字节开始写因为中字以经在前面有3个了</div><div class="line">console.log(buffer.toString()); //得把16进制转成汉字的形式才会出现 中文</div></pre></td></tr></table></figure>
 <ul>
-<li><p>查看单个的模块缓存</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require.cache[require.resolve(&apos;./test.js&apos;)]; //&#123;key&#125;： 对象[key]就取出key了</div></pre></td></tr></table></figure>
-</li>
-<li><p>删除模块缓存,这样多次加载就可以输出多次</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">delete require.cache[require.resolve(&apos;./test.js&apos;)]; //就是delete 对象[key]</div></pre></td></tr></table></figure>
+<li><ul>
+<li>string 要写入的字符串，一个汉字3个字节</li>
+<li>offset 写入的偏移量 就是从哪个字节开始写入 默认为 0</li>
+<li>length 写入的长度 字节的长度</li>
+<li>encoding 写入内容的编码格式 默认为 ‘utf8’</li>
+<li>后两个参数可以不写，write方法会默认把内容从头写到尾</li>
+</ul>
 </li>
 </ul>
-<h2 id="6-模块分类"><a href="#6-模块分类" class="headerlink" title="6.模块分类"></a>6.模块分类</h2><ul>
-<li><p>1.内置模块(核心模块)<code>http</code> <code>url</code> <code>fs</code> <code>util</code> 是node中自带的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">require(&apos;util&apos;);</div><div class="line">util.inherits继承 原理就是Object.create方法</div><div class="line">inspect解析属性</div><div class="line">isArray isRegExp isDate isError判断数据类型</div></pre></td></tr></table></figure>
 </li>
-<li><p>inherits 默认为原型链继承(不继承私有属性) 就是子类继承父类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Child.prototype.__proto__ = Parent.prototype;</div><div class="line">Child.prototype = Object.create(Parent.prototype);</div></pre></td></tr></table></figure>
-</li>
-<li><p>inspect 解析对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var obj  = &#123;name:&apos;tong&apos;,age:7&#125;;</div><div class="line">util.inspect(obj,&#123;showHidden:true,depth:1,colors:true&#125;);</div><div class="line">showHidden 显示隐藏属性</div><div class="line">depth 解析的深度</div><div class="line">colors 输出的时候带颜色</div></pre></td></tr></table></figure>
-</li>
-<li><p>给对象增加属性,这里拿util举例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Object.defineProperty(obj,&apos;age&apos;,&#123;</div><div class="line">    value:&apos;8&apos;, //当前定义属性的值 age:8</div><div class="line">    enumerable:false,//是否可枚举 为true时都能显示</div><div class="line">    writable:true,//是否只读</div><div class="line">    configurable:false,//是否可配置 就是可不可以删除，可配置(true)就是可以删除</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>判断类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">console.log(util.isArray([]));  //判断是否是数组</div><div class="line">console.log(util.isError(new RegExp()));</div><div class="line">console.log(util.isRegExp(new Error()));</div></pre></td></tr></table></figure>
-</li>
-<li><p>2.文件模块(自定义模块) 以./方式引入的都是文件模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;./文件名字&apos;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.第三方模块,是需要安装的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require(&apos;mime&apos;);//会自动搜索package.json里的main属性 mime.js</div></pre></td></tr></table></figure>
+<li>返回值：返回实际写入的大小。如果 buffer 空间不足， 则只会写入部分字符串。</li>
+</ul>
+<h3 id="4-3-toString方法"><a href="#4-3-toString方法" class="headerlink" title="4.3 toString方法"></a>4.3 toString方法</h3><ul>
+<li>将buffer转换成字符串类型 转化时可以根据截取的位置进行输出<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(buffer.toString(&apos;utf8&apos;,3,6));</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>我们引入第三模块是不要路径的<code>./</code>,直接引用模块的名字；自己写的模块 要注意:当我们安装一个模块会就近安装 找最近目录一直往上找，直到找到<code>node_modules</code>文件夹，如果找不到在自己的目录下创建</p>
-<h2 id="7-模块查找规则"><a href="#7-模块查找规则" class="headerlink" title="7.模块查找规则"></a>7.模块查找规则</h2><p>当没有以<code>/</code>或者<code>./</code>来指向一个文件时，这个模块要么是核心模块要么就是从node_modules文件夹加载的第三方模块</p>
+<p>第一个参数可以是utf8也可以是base64;后两个参数是截取的buffer的字节（从第几个到第几个）</p>
 <ul>
-<li>从module.paths(模块的查找路径)取出第一个目录开始。</li>
-<li>直接从目录中查找，存在结束，不存在下一条。先查找模块的名字,找不到往上找，找到跟目录</li>
-<li>查找index.js index.json如果没有index 会找package.json里的main字段</li>
-<li>我们的文件模块不用指定后缀名默认会自动添加.js后缀，如果找不到在添加.json后缀</li>
-<li>尝试将require的参数作为一个包来查找，读取package.json，取得main配置项指定的文件查找，不存在进行3</li>
-<li>继续失败查看下一个目录</li>
+<li>返回值：解码缓冲区数据并使用指定的编码返回字符串。</li>
 </ul>
+<h3 id="4-4-slice方法"><a href="#4-4-slice方法" class="headerlink" title="4.4 slice方法"></a>4.4 slice方法</h3><ul>
+<li>截取buffer，是按照索引算的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer([1,2,3]);</div><div class="line">var newBuffer = buffer.slice(2); //从索引2开始</div><div class="line">newBuffer[0] = 100;</div><div class="line">console.log(newBuffer); //64</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>区别在于slice后操作的还是原buffer 100转换成16进制为64</p>
+<ul>
+<li><p>返回值：返回一个新的缓冲区，它和旧缓冲区指向同一块内存，但是从索引 start 到 end 的位置剪切。</p>
+</li>
+<li><p>截取乱码问题, 编译 string_decoder</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var StringDecoder  = require(&apos;string_decoder&apos;).StringDecoder;</div><div class="line">var sd = new StringDecoder;</div><div class="line">var buffer = new Buffer(&apos;中文&apos;);</div><div class="line">console.log(sd.write(buffer.slice(0,4).toString()));</div><div class="line">console.log(sd.write(buffer.slice(4).toString()));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>先new一个实例 把字符串存进去，不能识别的保留，当在输出的时候进行拼接<br>如果不编译string_decoder，就会出现:本来中文是6个字节，第一次(0,4)就是说第一个字是完整的，第二个字显示不全就会出现乱码</p>
+<h3 id="4-5-copy方法"><a href="#4-5-copy方法" class="headerlink" title="4.5 copy方法"></a>4.5 copy方法</h3><ul>
+<li><p>复制Buffer 把多个小buffer拷贝到一个大buffer上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sourceBuffer.copy(targetBuffer,targetstart,sourcestart,sourceend);</div><div class="line">var buffer1 = new Buffer(&apos;ABC&apos;); // 拷贝一个缓冲区</div><div class="line">var buffer2 = new Buffer(3);</div><div class="line">buffer1.copy(buffer2); //把buffer1拷贝到buffer2里</div><div class="line">console.log(buffer2.toString());</div></pre></td></tr></table></figure>
+<ul>
+<li><ul>
+<li>targetBuffer 目标buffer 要拷贝的 Buffer 对象</li>
+<li>targetStart 目标的开始 数字, 可选, 默认: 0 就是从哪个字节开始</li>
+<li>sourceStart 拷贝内容的开始 数字, 可选, 默认: 0</li>
+<li>sourceEnd 拷贝内容的结束 数字, 可选, 默认: buffer.length</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>返回值：没有返回值</p>
+</li>
+</ul>
+<h3 id="4-6-concat方法"><a href="#4-6-concat方法" class="headerlink" title="4.6 concat方法"></a>4.6 concat方法</h3><ul>
+<li><p>拼接buffer 将两个buffer拼接成1个buffer 也叫缓冲区合并</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var buffer1 = new Buffer(&apos;中&apos;);</div><div class="line">var buffer2 = new Buffer(&apos;文&apos;);</div><div class="line">var newBuffer = Buffer.concat([buffer1,buffer2],3);</div><div class="line">console.log(newBuffer.toString()); //只会显示中因为长度是3</div></pre></td></tr></table></figure>
+</li>
+<li><p>自己实现一个concat方法  我们要实现一个buffer方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">Buffer.myconcat = function (list,totalLength) &#123;</div><div class="line">    if(list.length==1)&#123;//如果数组里只有一项直接返回即可</div><div class="line">        return list[0];</div><div class="line">    &#125;</div><div class="line">    if(typeof totalLength==&apos;undefined&apos;)&#123;//手动维护长度，当没有传长度时</div><div class="line">        totalLength = 0;</div><div class="line">        for(var j= 0;j&lt;list.length;j++)&#123;</div><div class="line">            totalLength += list[j].length; //每一个buffer的长度累加算出总长度</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //我们已经拥有长度，需要将每一项粘贴进去</div><div class="line">    var buffer = new Buffer(totalLength);</div><div class="line">    //将每一个buffer拷贝到buffer中</div><div class="line">    var index = 0;//定一个计数器</div><div class="line">    list.forEach(function (item) &#123;</div><div class="line">        item.copy(buffer,index)//每次拷贝时索引是递增的</div><div class="line">        index+=item.length;</div><div class="line">    &#125;);</div><div class="line">    return buffer.slice(0,index); //截取掉想要的内容</div><div class="line">    //返回大buffer 如果过长保留有效区 截取有效长度slice</div><div class="line">&#125;;</div><div class="line">console.log(Buffer.myconcat([buffer1,buffer2],100).toString());</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>list(参数1) - 用于合并的 Buffer 对象数组列表。<br>totalLength(参数2) - 指定合并后Buffer对象的总长度。</p>
+<ul>
+<li>返回值：返回一个多个成员合并的新 Buffer 对象。</li>
+</ul>
+<h3 id="4-7-isBuffer"><a href="#4-7-isBuffer" class="headerlink" title="4.7 isBuffer"></a>4.7 isBuffer</h3><ul>
+<li>判断是否是buffer<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(Buffer.isBuffer(new Buffer(3)));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-8-length"><a href="#4-8-length" class="headerlink" title="4.8 length"></a>4.8 length</h3><ul>
+<li><p>获取字节长度(显示是字符串所代表buffer的长度也就是字节数)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var buffer = Buffer.byteLength(&quot;中文&quot;); //一个汉字是3个字节</div><div class="line">buffer.length;</div></pre></td></tr></table></figure>
+</li>
+<li><p>返回值: 返回 Buffer 对象所占据的内存长度。</p>
+</li>
+</ul>
+<h2 id="5-进制转换"><a href="#5-进制转换" class="headerlink" title="5.进制转换"></a>5.进制转换</h2><ul>
+<li>将任意进制字符串转换为十进制<br>parseInt(“11”, 2); // 3 2进制转10进制<br>parseInt(“77”, 8); // 63 8进制转10进制<br>parseInt(“e7”, 16); //175 16进制转10进制</li>
+<li>将10进制转换为其它进制字符串<br>(3).toString(2)) // “11” 十进制转2进制<br>(17).toString(16) // “11” 十进制转16进制<br>(33).toString(32) // “11” 十提制转32进制</li>
+<li>2进制是缝二进一，8进制以此类推。。。</li>
+<li>parseInt 将任意进制转换成10进制</li>
+<li>toString 将任意进制转换成任意进制</li>
+<li>计算过程：从最后一位开始算，比如 77(8进制转10进制)–&gt; 7^8^1+7^8^0 它是7乘以8的0次方+7乘以8的1次方<br>以此类推都是这样计算，</li>
+<li><p>16进制ff在10进制中最大是多少 255 ，0x代表16进制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log((0xff).toString(2));</div></pre></td></tr></table></figure>
+</li>
+<li><p>一个字节由8个位组成，每个位不是0 就是1  最高位 1^2^7 2进制</p>
+</li>
+</ul>
+<h2 id="6-base64-转换成可见编码-base64实现原理"><a href="#6-base64-转换成可见编码-base64实现原理" class="headerlink" title="6.base64 转换成可见编码(base64实现原理)"></a>6.base64 转换成可见编码(base64实现原理)</h2><p>Base64是一种用64个字符来表示任意二进制数据的方法。 用记事本打开exe、jpg、pdf这些文件时，我们都会看到一大堆乱码，因为二进制文件包含很多无法显示和打印的字符，所以，如果要让记事本这样的文本处理软件能处理二进制数据，就需要一个二进制到字符串的转换方法。Base64是一种最常见的二进制编码方法。</p>
+<ul>
+<li>相当于2进制最大为6个1 前面两位为0转换成10进制后为最大63 0-63，这个10进制的值就代表数组的索引</li>
+<li>base64,在0-63之间随机取可见编码</li>
+<li>ABCDEFGHIJKLMNOPQRSTUVWXYZ</li>
+<li>abcdefghijklmnopqrstuvwxyz</li>
+<li>0123456789</li>
+<li><p>+/</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">var buffer = new Buffer(&apos;珠&apos;); //默认buffer为16进制</div><div class="line">console.log(buffer); //e7 8f a0 此时是16进制</div><div class="line">//将珠字转换成base64</div><div class="line">//将16进制转换成2进制  0x代表16进制</div><div class="line">console.log((0xe7).toString(2));</div><div class="line">console.log((0x8f).toString(2));</div><div class="line">console.log((0xa0).toString(2));</div><div class="line">//11100111   10001111   10100000 都大于64 因为前两位里面有1</div><div class="line">//转换成小于64的</div><div class="line">//规则:将所有的2进制进行拼接，每隔6位分割 前面加00 就是先都放到一起在分割，因为每个字节8个位，一个汉字3个字节，所以是24个位，每6个一组是它不会超过64肉眼可以看到</div><div class="line">//00111001 00111000 00111110 00100000</div><div class="line">//3个8位转成4个六位</div><div class="line">//转换成10进制进行取值</div><div class="line">console.log(parseInt(&apos;00111001&apos;,2));</div><div class="line">console.log(parseInt(&apos;00111000&apos;,2));</div><div class="line">console.log(parseInt(&apos;00111110&apos;,2));</div><div class="line">console.log(parseInt(&apos;00100000&apos;,2));</div><div class="line">//57 56 62 32 得到的数字就是索引</div><div class="line">var str = &apos;ABCDEFGHIJKLMNOPQRSTUVWXYZ&apos;;</div><div class="line">str+=&apos;abcdefghijklmnopqrstuvwxyz&apos;;  //str+=str.toLowerCase();也可以这样写</div><div class="line">str+=&apos;0123456789&apos;;</div><div class="line">str+=&apos;+/&apos;;</div><div class="line">var base64 = str[57]+str[56]+str[62]+str[32];</div><div class="line">console.log(base64);//54+g</div></pre></td></tr></table></figure>
+</li>
+<li><p>得出结果是54+g;在工具里过一下就会得出珠字 base64不是加密的;</p>
+</li>
+<li><a href="http://m.blog.csdn.net/article/details?id=40984869" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=40984869</a> 可以看看这篇文章</li>
+<li>把base64封装成方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">function toBase64 (str) &#123;</div><div class="line">    //先把字符串转成数组 最终返回的结果是这些字符组成的</div><div class="line">    var chars=&apos;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&apos;.split(&apos;&apos;);</div><div class="line">    var buffer=new Buffer(str);//通过字符串构建buffer</div><div class="line">    var str=&apos;&apos;;</div><div class="line">    for (var i=0;i&lt;buffer.length;i++) &#123;</div><div class="line">        //把Buffer中的值转成二进制字符串，拼在一起</div><div class="line">        var a= buffer[i].toString(2);</div><div class="line">        str+=a;</div><div class="line">    &#125;</div><div class="line">    //中国 6个字节 48位  48/6=8</div><div class="line">    var result=&apos;&apos;;</div><div class="line">    str=str.replace(/\d&#123;6&#125;/g,function  (matched) &#123;</div><div class="line">        //matched是六位一组的字符子串</div><div class="line">        //parseInt负责把它们转成10进制数</div><div class="line">        //chars从字符数组中按索引取出对应的字符，拼在一起</div><div class="line">        result+=chars[parseInt(matched,2)];</div><div class="line">    &#125;);</div><div class="line">    return result;</div><div class="line">&#125;</div><div class="line">console.log(toBase64(&apos;中国&apos;));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="7-DataURL"><a href="#7-DataURL" class="headerlink" title="7. DataURL"></a>7. DataURL</h3><p>Data URL给了我们一种很巧妙的将图片“嵌入”到HTML中的方法。跟传统的用img标记将服务器上的图片引用到页面中的方式不一样，在Data URL协议中，图片被转换成base64编码的字符串形式，并存储在URL中，冠以mime-type</p>
+<ul>
+<li>当访问外部资源很麻烦或受限时</li>
+<li>当图片是在服务器端用程序动态生成，每个访问用户显示的都不同时。比如验证码</li>
+<li>当图片的体积太小，占用一个HTTP会话不是很值得时。比如小图标，验证码，把它内嵌到页面中<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;img src=&quot;data:image/gif;base64,R0lGO&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>R0lGO 就是base64码</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/22/node/node里的模块/" data-id="cix1ado1y000ec8uamkgxsp42" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/22/node/node里的buffer/" data-id="cix1aisnz000k8cuatekgnd02" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +249,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/11/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/11/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/">下一页 &raquo;</a>
   </nav>
 </section>
         
