@@ -106,11 +106,18 @@
 <li>$apply()内部调用的$rootScope.$digest();</li>
 <li>$apply()和$digest()的区别:</li>
 <li>$digest()刷新自己及子作用域上的数据模型的数据;</li>
-<li>$apply()是从跟作用域$rootScope开始循环刷新数据 调用的$rootScope;  $apply()会执行整个循环<br>3.ng-href 用在A标签中，实现链接 表达式生效前不要加载该资源,防止空链接<br>只有当链接加载成功的时候才会跳转页面<br><a ng-href="">baidu</a>  这里必须有双括号<br>var app = angular.module(‘appModule’,[]);<br>app.controller(‘appCtrl’,function ($scope,$timeout) {<br>$timeout(function () {<pre><code>$scope.myHref = &apos;http://www.baidu.com&apos;;  只有当地址加载完会才会跳转绑定a
-</code></pre>},20000)<br>});<br>4.ng-src  只有当图片加载成功之后图片才会展示，没有成功加载之前不会出现裂图 表达式生效前不引用该资源,防止出现404<br><img ng-src=""><br>var app = angular.module(‘appModule’,[]);<br>app.controller(‘appCtrl’,function ($scope,$timeout) {<br>  $timeout(function() {<pre><code>$scope.imgSrc = &apos;https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png&apos;;
-</code></pre>  }, 1000);<br>});<br>5.ng-model-options=’{updateOn:’blur’}’; 当失去焦点的时候，再次触发$digest()脏值查询，实现页面数据的更新<br>它的性能比较差，因为它又触发了一次$digest()  和ng-model同时使用<br>ng-model-options=’{debounce:1000}’; 延迟  意思是1s之后在触发$digest() 性能比较好<br>ng-model-options允许我们控制ng-model何时进行同步什么时候开始执行<br>比如:1.当某个确定的事件被触发的时候 2.在指定的防抖动延迟时间之后,这样视图值就会在指定的时间之后被同步到模型.<br>6.ng-change 它是用来监听事件改变的 和ng-model同时使用 监听ng-model数据的改变  它是一个方法</li>
+<li>$apply()是从跟作用域$rootScope开始循环刷新数据 调用的$rootScope;$apply()会执行整个循环</li>
 </ul>
 </li>
+<li><p>4.ng-href 用在A标签中，实现链接 表达式生效前不要加载该资源,防止空链接<br>  只有当链接加载成功的时候才会跳转页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;a ng-href=&quot;&#123;&#123; myHref &#125;&#125;&quot;&gt;baidu&lt;/a&gt;  这里必须有双括号</div><div class="line">   var app = angular.module(&apos;appModule&apos;,[]);</div><div class="line">   app.controller(&apos;appCtrl&apos;,function ($scope,$timeout) &#123;</div><div class="line">     $timeout(function () &#123;</div><div class="line">         $scope.myHref = &apos;http://www.baidu.com&apos;;  只有当地址加载完会才会跳转绑定a</div><div class="line">     &#125;,20000)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>5.ng-src  只有当图片加载成功之后图片才会展示，没有成功加载之前不会出现裂图 表达式生效前不引用该资源,防止出现404</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;img ng-src=&quot;&#123;&#123;imgSrc&#125;&#125;&quot;/&gt;</div><div class="line">    var app = angular.module(&apos;appModule&apos;,[]);</div><div class="line">    app.controller(&apos;appCtrl&apos;,function ($scope,$timeout) &#123;</div><div class="line">        $timeout(function() &#123;</div><div class="line">            $scope.imgSrc = &apos;https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png&apos;;</div><div class="line">        &#125;, 1000);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>6.ng-model-options=’{updateOn:’blur’}’; 当失去焦点的时候，再次触发$digest()脏值查询，实现页面数据的更新<br>  它的性能比较差，因为它又触发了一次$digest()  和ng-model同时使用<br>  ng-model-options=’{debounce:1000}’; 延迟  意思是1s之后在触发$digest() 性能比较好<br>  ng-model-options允许我们控制ng-model何时进行同步什么时候开始执行<br>  比如:1.当某个确定的事件被触发的时候 2.在指定的防抖动延迟时间之后,这样视图值就会在指定的时间之后被同步到模型.</p>
+</li>
+<li>7.ng-change 它是用来监听事件改变的 和ng-model同时使用 监听ng-model数据的改变  它是一个方法</li>
 </ul>
 <h2 id="控制器间的交互"><a href="#控制器间的交互" class="headerlink" title="控制器间的交互"></a>控制器间的交互</h2><p>控制器间的交互是通过事件进行监听的  比如父亲的作用域要拿到儿子的东西<br>在控制器中不要操作DOM,比较消耗性能;<br>$emit $broadcast 都是基于事件才能触发比如点击事件 ，不能直接用</p>
 <ul>
@@ -131,7 +138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/24/angular/$scope上的方法/" data-id="ciwsz7l3b0003pcuashosi505" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/24/angular/$scope上的方法/" data-id="cix1adnz80003c8uaabrqskt6" class="article-share-link">Share</a>
       
       
     </footer>
