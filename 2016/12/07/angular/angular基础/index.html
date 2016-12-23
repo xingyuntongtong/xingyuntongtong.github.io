@@ -23,7 +23,7 @@ AngularJS  诞生于2009年，由Misko Hevery 等人创建，后为Google所收�
 
 框架和库的区别
 库：提供了很多方法，让我们来调用(主动调用)，比如：">
-<meta property="og:updated_time" content="2016-12-23T04:51:23.684Z">
+<meta property="og:updated_time" content="2016-12-23T05:07:08.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular基础">
 <meta name="twitter:description" content="这里面的markdown格式有问题所以不能运行
@@ -205,19 +205,19 @@ AngularJS  诞生于2009年，由Misko Hevery 等人创建，后为Google所收�
 <h2 id="angular有自己的模块化，一切从模块开始"><a href="#angular有自己的模块化，一切从模块开始" class="headerlink" title="angular有自己的模块化，一切从模块开始"></a>angular有自己的模块化，一切从模块开始</h2><p>单例模式：名字不能保证重名，调用过长</p>
 <ul>
 <li><p>1.angular.module(); 定义一个模块 它放在ng-app=’’;里面</p>
-<pre><code>参数1：这个模块的名字(字符串类型)
-参数2：是数组可以注入依赖的模块 如果没有可依赖的模块写空数组，必须写，得用它占位 字符串的数组
-返回值: 是module对象
-var myMod=angular.module(&apos;myMod1&apos;,[]); 在ng-app=&apos;myMod1&apos;; 这样写
-angular.module(&apos;myMod&apos;);//调用这个模块
-</code></pre><p><code>myMod</code>代表的是当前的模块</p>
+<ul>
+<li>参数1：这个模块的名字(字符串类型)</li>
+<li>参数2：是数组可以注入依赖的模块 如果没有可依赖的模块写空数组，必须写，得用它占位 字符串的数组</li>
+<li>返回值: 是module对象<br>var myMod=angular.module(‘myMod1’,[]); 在ng-app=’myMod1’; 这样写angular.module(‘myMod’);//调用这个模块<code>myMod</code>代表的是当前的模块</li>
+</ul>
 </li>
 <li><p>2.定义一个控制器 它是分块管理的(相当于每个部门一样) 可以有很多控制器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;,function($scope)&#123; //创建一个控制器</div><div class="line">    $scope.name = &apos;tongtong&apos;;</div><div class="line">       console.log($scope);//它可以打印出详细的信息，上面有方法原型链 ChildScope</div><div class="line">   &#125;);</div><div class="line">   myMod.run(function ($rootScope) &#123; //将公有的代码放在run中</div><div class="line">       $rootScope.name=&apos;tongtong&apos;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>  使用这个控制器 可管理的范围是ng-controller=”myCtrl”的标签里的范围<br>  在这个控制器里首先形成自己的作用域 定义的变量和方法，都是定义在$scope上的属性 $scope.name=’tongtong’;<br>  <code>&lt;div ng-controller=&quot;myCtrl&quot;&gt;</code><code>&lt;/div&gt;</code>  //使用控制器</p>
 </li>
 </ul>
-<p><code>$scope</code>是一个作用域，相当于把属性挂在作用域上，双括号可以通过它取值</p>
+<p>使用这个控制器 可管理的范围是ng-controller=”myCtrl”的标签里的范围在这个控制器里首先形成自己的作用域 定义的变量和方法，都是定义在$scope上的属性 $scope.name=’tongtong’;</p>
+<pre><code>`&lt;div ng-controller=&quot;myCtrl&quot;&gt;`{{name}}`&lt;/div&gt;`  //使用控制器
+</code></pre><p><code>$scope</code>是一个作用域，相当于把属性挂在作用域上，双括号可以通过它取值</p>
 <ul>
 <li><p>控制器的特点</p>
 <ul>
@@ -236,7 +236,7 @@ angular.module(&apos;myMod&apos;);//调用这个模块
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/07/angular/angular基础/" data-id="cix1bkzjp0006qcuajhz4yk2u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/07/angular/angular基础/" data-id="cix1bol41000tckuahpwq96q4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -305,6 +305,10 @@ angular.module(&apos;myMod&apos;);//调用这个模块
           </li>
         
           <li>
+            <a href="/2016/12/14/angular/angular总结/">angular总结</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/11/node/express/">express</a>
           </li>
         
@@ -314,10 +318,6 @@ angular.module(&apos;myMod&apos;);//调用这个模块
         
           <li>
             <a href="/2016/12/10/node/git的使用/">git</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
           </li>
         
       </ul>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-angular/服务" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-angular/路由-route" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/24/angular/服务/" class="article-date">
-  <time datetime="2016-08-24T09:30:25.000Z" itemprop="datePublished">2016-08-24</time>
+    <a href="/2016/08/25/angular/路由-route/" class="article-date">
+  <time datetime="2016-08-25T02:05:25.000Z" itemprop="datePublished">2016-08-25</time>
 </a>
     
   <div class="article-category">
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/24/angular/服务/">服务</a>
+      <a class="article-title" href="/2016/08/25/angular/路由-route/">angular中的路由</a>
     </h1>
   
 
@@ -87,86 +87,54 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是服务？"><a href="#什么是服务？" class="headerlink" title="什么是服务？"></a>什么是服务？</h2><ul>
-<li>服务是公用的方法，把控制器中相同的部分抽取出来封装成一个服务，什么时候用它的时候就把它注入到控制器中 相当于原生js里的DOM库</li>
-<li>在 AngularJS 中，服务是一个函数或对象，可在你的 AngularJS 应用中使用。</li>
-<li>在 AngularJS 中，有五种服务一种装饰(decorator)</li>
-<li>指令，控制器，服务都是通过模块来声明的，服务通常情况下都是单例的</li>
-</ul>
-<h2 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h2><ul>
-<li>目的：封装代码 写好后可以在任意一个控制器中注入使用</li>
-<li>已经学过的服务 <code>$interval,$timeout</code> 所有的服务都得注入在$scope后面</li>
-<li>$http: 向后台请求数据 和原生js的ajax一样，也是采用了它的原理<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$http(&#123;</div><div class="line">    url:&apos;data.json&apos;,</div><div class="line">    method:&apos;GET&apos;, //这里是大写的</div><div class="line">    params:&#123;data:&apos;zfpx&apos;&#125;, //用来问号传参的，它指针对get请求</div><div class="line">    //data:&#123;data:&apos;zfpx&apos;&#125;, //如果是post的话它是用data 传递请求主体的内容</div><div class="line">&#125;).success(function(data,status,headers,config)&#123;</div><div class="line">        当成功的时候执行这个方法中的回调函数</div><div class="line">            data: 请求回来的数据</div><div class="line">            status: 状态码</div><div class="line">            headers: 是一个方法，执行时可看到头部信息; 它是需要执行的 headers();</div><div class="line">            config: 配置信息，包含以上三项的内容</div><div class="line">&#125;).error(function(err)&#123;</div><div class="line">        当失败的时候执行这个方法中的回调函数</div><div class="line">            err: 错误信息</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+        <h2 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由?"></a>什么是路由?</h2><ul>
+<li>AngularJS 路由允许我们通过不同的 URL 访问不同的内容。</li>
+<li>通过 AngularJS 可以实现多视图的单页Web应用（single page web application，SPA）。</li>
+<li>通常我们的URL形式为 <a href="http://runoob.com/first/page" target="_blank" rel="external">http://runoob.com/first/page</a> 但在单页Web应用中 AngularJS 通过 # + 标记 实现，例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http://runoob.com/#/first</div><div class="line">http://runoob.com/#/second</div><div class="line">http://runoob.com/#/third</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>$http 返回的是一个 promise 用来解决异步的<br>通过$http封装的简便的方法:<br>    $http.get()   $http.delete()<br>        参数1：路径字符串  参数2：config(对象，放配置的内容)<br>    $http.post()  $http.put()<br>        参数1：路径字符串  参数2：请求体data  参数3：config(对象，放配置的内容)<br>    $http.jsonp() 实现跨域请求，它的回调函数的名字是固定的 cb=JSON_CALLBACK 这点和js不一样<br>        它只有一个参数：请求的路径<br>        $http.jsonp(‘<a href="http://suggestion.baidu.com/su?wd=&#39;+$scope.value+&#39;&amp;cb=JSON_CALLBACK" target="_blank" rel="external">http://suggestion.baidu.com/su?wd=&#39;+$scope.value+&#39;&amp;cb=JSON_CALLBACK</a>‘);</p>
-<h2 id="AngularJS中的五种服务和一种装饰"><a href="#AngularJS中的五种服务和一种装饰" class="headerlink" title="AngularJS中的五种服务和一种装饰"></a>AngularJS中的五种服务和一种装饰</h2><h2 id="1-provider"><a href="#1-provider" class="headerlink" title="1.provider"></a>1.provider</h2><ul>
-<li>可配置,是唯一一种你可以传进 .config() 函数的 service</li>
-<li>提供计算的服务 可实现简单的加减乘除的计算器</li>
-<li><p>定义服务，注入到控制器的时候取到的是它的实例(new出来的)上<code>$get</code>方法的反回值,注入进去就会默认调用<code>$get</code>方法，它是最大的服务；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//一运行代码就会将后面的函数new一下就相当于执行一下，就算没有调用这个方法也会执行</div><div class="line">var myMod = angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.provider(&apos;myPro&apos;,function()&#123;</div><div class="line">    this.$get=function()&#123;</div><div class="line">        return&#123;</div><div class="line">            &apos;+&apos;:function(a,b)&#123; //+当做属性名</div><div class="line">                return a+b;</div><div class="line">            &#125;</div><div class="line">            //&apos;+&apos;:(a,b)=&gt;a+b //ES6的语法 箭头符号  第二种写法 return后面只有一句话就不用写大括号也不用写</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用服务 ,注入进来的就是上面return里的对象 此时会默认调用provider的<code>$get</code>方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myPro&apos;,function ($scope,myPro) &#123;</div><div class="line">    $scope.result=myPro[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-</li>
-<li><p>封装的服务是以 前缀$ currency=’$’，在输出的时候会有一个前缀</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">this.currency=&apos;$&apos;; //如果用var 下面就不用转this</div><div class="line">this.$get=function()&#123;</div><div class="line">    var that=this;</div><div class="line">    retrun&#123;</div><div class="line">        &apos;+&apos;:function(a,b)&#123;//这里的this是控制器里调用的myPro</div><div class="line">        return that.currency+(parseFloat(a)+parseFloat(b));</div><div class="line">        //parseFloat防止字符串拼接</div><div class="line">        //&apos;+&apos;:(a,b)=&gt; this.currency+(a,b); 这样就不用转this了</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置服务，可以对服务暴露出来的接口进行配置，对修改关闭，对扩展开放，angular的执行顺序是先执行Provider在执行config</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.config(function (myProProvider) &#123;//myProProvider代表的就是上面函数中的this</div><div class="line">    myProProvider.currency=&apos;￥&apos;;//可以对前缀进行修改</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>当我们点击以上的任意一个链接时，向服务端请的地址都是一样的 (<a href="http://runoob.com/" target="_blank" rel="external">http://runoob.com/</a>) 因为 # 号之后的内容在向服务端请求时会被浏览器忽略掉。 所以我们就需要在客户端实现 # 号后面内容的功能实现。 AngularJS 路由 就通过 #, + 标记 帮助我们区分不同的逻辑页面并将不同的页面绑定到对应的控制器上。</p>
+<h2 id="1-ng-route路由-属性单页面应用-angular-route它是angular自带的路由模块"><a href="#1-ng-route路由-属性单页面应用-angular-route它是angular自带的路由模块" class="headerlink" title="1.ng-route路由 属性单页面应用 angular-route它是angular自带的路由模块"></a>1.ng-route路由 属性单页面应用 angular-route它是angular自带的路由模块</h2><h3 id="1-1-安装路由"><a href="#1-1-安装路由" class="headerlink" title="1.1 安装路由"></a>1.1 安装路由</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install angular-route</div></pre></td></tr></table></figure>
+<h3 id="1-2-依赖模块"><a href="#1-2-依赖模块" class="headerlink" title="1.2 依赖模块"></a>1.2 依赖模块</h3><ul>
+<li>让当前模块依赖于ngRoute<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var myMod = angular.module(&apos;myMod&apos;,[&apos;ngRoute&apos;]);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>参数：是由服务的名字+Provider,myProProvider是myPro服务的实例，可以调用myPro上的方法</p>
-<h2 id="2-factory"><a href="#2-factory" class="headerlink" title="2.factory"></a>2.factory</h2><ul>
-<li><p>工厂函数定义服务，调用该工厂函数将返回服务实例,它是定义服务的一种方法，内部封装的也是provider的实现原理，它的函数定义部分只要 return的返回值是个对象，没有$get()方法，不能调用config配置函数，这是最常用的,相当于原生js里的一个工厂函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">myMod.factory(&apos;myfactory&apos;, function () &#123;</div><div class="line">       var currency = &apos;$&apos;;</div><div class="line">       return &#123;</div><div class="line">           &apos;+&apos;:(a,b)=&gt;currency+(parseFloat(a)+parseFloat(b)),//ES6的语法</div><div class="line">           &apos;-&apos;:(a,b)=&gt;currency+(a-b),</div><div class="line">           &apos;*&apos;:(a,b)=&gt;currency+(a*b),</div><div class="line">           &apos;/&apos;:(a,b)=&gt;currency+(a/b),</div><div class="line">       &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用服务 ,注入进来的就是上面return里的对象，这里和provider的用法是一样的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myfactory&apos;,function ($scope,myfactory) &#123;</div><div class="line">    $scope.result=myfactory[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<h3 id="1-3-使用-ngView-指令"><a href="#1-3-使用-ngView-指令" class="headerlink" title="1.3 使用 ngView 指令"></a>1.3 使用 ngView 指令</h3><ul>
+<li>ng-view必须有，所有的页面都是渲染到该标签中的,只有它里面的内容是变化的</li>
+<li>该 div 内的 HTML 内容会根据路由的变化而变化。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div ng-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="3-service"><a href="#3-service" class="headerlink" title="3.service"></a>3.service</h2><ul>
-<li><p>定义服务 相当于原生js中的一个构造函数，都用this来实现 不可配置config，由factory构建出来的，factory是service的一个实例 service <code>new</code> 一下就出来了 就是factory的返回对象所以用this[]来取到里面的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.service(&apos;myservice&apos;, function () &#123;</div><div class="line">       var currency  = &apos;$&apos;;</div><div class="line">       this[&apos;+&apos;]=(a,b)=&gt;currency+(parseFloat(a)+parseFloat(b));</div><div class="line">       this[&apos;-&apos;]=(a,b)=&gt;currency+(a-b);</div><div class="line">       this[&apos;*&apos;]=(a,b)=&gt;currency+(a*b);</div><div class="line">       this[&apos;/&apos;]=(a,b)=&gt;currency+(a/b);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用服务 ,注入进来的是该方法(service里的方法)的一个实例，可以直接调用它实例上的一个方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myservice&apos;,function ($scope,myservice) &#123;</div><div class="line">    $scope.result=myservice[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<h3 id="1-4-配置路由"><a href="#1-4-配置路由" class="headerlink" title="1.4 配置路由"></a>1.4 配置路由</h3><ul>
+<li>when: 就是当配置路由的路径是哪个的时候要做的事情；参数1：path 配置路由的路径 参数2：是一个对象；它可以实现链式操作,可以链接多个when</li>
+<li>AngularJS 模块的 config 函数用于配置路由规则。通过使用 configAPI，我们请求把$routeProvider注入到我们的配置函数并且使用$routeProvider.whenAPI来定义我们的路由规则。</li>
+<li>$routeProvider 为我们提供了 when(path,object) 和 otherwise(object) 函数按顺序定义所有路由<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">myMod.config(function($routeProvider)&#123;</div><div class="line">        $routeProvider.when(&apos;/&apos;,&#123;</div><div class="line">            template:&apos;&lt;h1&gt;index&lt;/h1&gt;&apos;,//定义需要的模板</div><div class="line">        &#125;).when(&apos;/users&apos;,&#123;</div><div class="line">            templateUrl:&apos;usesr.html&apos;,</div><div class="line">            //控制器也可以写在外面，一个页面对应一个控制器</div><div class="line">            controller:[&apos;$scope&apos;,&apos;add&apos;,function($scope,add)&#123;</div><div class="line">                //控制器:它控制的是同一个路由下的模板，这里有控制器了在模板里就不用写了</div><div class="line">                //$scope.users=[&apos;tongtong&apos;,&apos;haha&apos;,&apos;hehe&apos;];</div><div class="line">                //这里可以是一个字符串也可以是一个对象</div><div class="line">                $scope.users=[&#123;id:1,name:&apos;tongtong&apos;&#125;,&#123;id:2,name:&apos;haha&apos;&#125;,&#123;id:3,name:&apos;hehe&apos;&#125;];</div><div class="line">                $scope.result=add(1,2);</div><div class="line">                //&lt;div ng-bind-html=&quot;title&quot;&gt;&lt;/div&gt;用$sce就得用这种方式来取值</div><div class="line">                //用$sce这个方法可以让标签起作用不然标签会显示到页面上</div><div class="line">                $scope.title=$sce.trustAsHtml(&apos;&lt;h1&gt;快来围观，书城来了！&lt;/h1&gt;&apos;);</div><div class="line">            &#125;],</div><div class="line">            resolve:&#123;</div><div class="line">            //它是一个对象 相当于factory 可以定义服务,这里面的add就相当于一个服务</div><div class="line">                add:function()&#123;//指定当前controller所依赖的其他模块。</div><div class="line">                    return function(a,b)&#123;</div><div class="line">                        return a+b;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;).when(&apos;/user/:id&apos;,&#123;</div><div class="line">              // /user/1   /user/2    /user/3</div><div class="line">              template:&apos;我的ID号是&#123;&#123;id&#125;&#125;&apos;,</div><div class="line">              controller: function ($scope, $routeParams) &#123;</div><div class="line">            //$routeParams 路由参数（是一个对象） 能够获取到冒号后面的值</div><div class="line">                  $scope.id = $routeParams.id</div><div class="line">              &#125;</div><div class="line">          &#125;).otherwise(&#123;</div><div class="line">              redirectTo:&apos;/&apos;;//意思是重新定义路径，当输入错误时直接回到 / 它的页面上 两种写法</div><div class="line">          &#125;)</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="4-value"><a href="#4-value" class="headerlink" title="4.value"></a>4.value</h2><ul>
-<li><p>用来定义变量，就相当于myvalue 赋值为一个111，不可配置config 它也是factory衍生出来的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.value(&apos;myvalue&apos;, &#123; //这个对象是factory返回后的对象，相当于key,value</div><div class="line">      &apos;+&apos;:(a,b)=&gt;(a+b),</div><div class="line">      &apos;-&apos;:(a,b)=&gt;(a-b),</div><div class="line">      &apos;*&apos;:(a,b)=&gt;(a*b),</div><div class="line">      &apos;/&apos;:(a,b)=&gt;(a/b),</div><div class="line">&#125;);</div><div class="line">//myMod.value(&apos;myvalue&apos;,&apos;111&apos;); //两种方法</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用服务 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myvalue&apos;,function ($scope,myvalue) &#123;</div><div class="line">    $scope.result=myvalue; //这里调用的是上面的111，可以得到111</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="5-constant"><a href="#5-constant" class="headerlink" title="5.constant"></a>5.constant</h2><ul>
-<li>定义长量的，用法和value一样只是value不可配置config</li>
-<li><p>它其实不算一种服务只是一个常量，长量：就是不可改变的量比如一个固定的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.constant(&apos;myconstant&apos;, &#123;</div><div class="line">     &apos;+&apos;:(a,b)=&gt;(a+b),</div><div class="line">     &apos;-&apos;:(a,b)=&gt;(a-b),</div><div class="line">     &apos;*&apos;:(a,b)=&gt;(a*b),</div><div class="line">     &apos;/&apos;:(a,b)=&gt;(a/b),</div><div class="line">&#125;);</div><div class="line">//myMod.constant(&apos;myconstant&apos;,&apos;111&apos;); //两种方法</div></pre></td></tr></table></figure>
-</li>
-<li><p>可配置config，参数：直接写服务的名字，可以取到myconstant的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.config(function (myconstant) &#123;</div><div class="line">    myconstant.aa = &apos;$&apos;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="1-5-创建路由链接"><a href="#1-5-创建路由链接" class="headerlink" title="1.5 创建路由链接"></a>1.5 创建路由链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;#/home&quot;&gt;首页&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#/user/&#123;&#123;user.id&#125;&#125;&quot;&gt;用户管理 或者&#123;&#123;user.name&#125;&#125;&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#/contact&quot;&gt;联系&lt;/a&gt;</div><div class="line">&lt;a href=&quot;#/settings&quot;&gt;设置&lt;/a&gt;</div><div class="line">&lt;div ng-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>实现点击可以跳转相应的页面，它刷新的只是ng-view这一块，其它的不改变 必须有# 防止页面的跳转</p>
+<h2 id="2-angular-ui-route-可以实现多应用它更强大"><a href="#2-angular-ui-route-可以实现多应用它更强大" class="headerlink" title="2.angular-ui-route  可以实现多应用它更强大"></a>2.angular-ui-route  可以实现多应用它更强大</h2><h3 id="2-1-安装路由"><a href="#2-1-安装路由" class="headerlink" title="2.1 安装路由"></a>2.1 安装路由</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install angular-ui-router</div></pre></td></tr></table></figure>
+<h3 id="2-2-依赖模块"><a href="#2-2-依赖模块" class="headerlink" title="2.2 依赖模块"></a>2.2 依赖模块</h3><ul>
+<li>让当前模块依赖于uiRouter<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var myMod = angular.module(&apos;myMod&apos;, [&apos;ui.router&apos;]);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="6-decorator-装饰"><a href="#6-decorator-装饰" class="headerlink" title="6.decorator 装饰"></a>6.decorator 装饰</h2><ul>
-<li>装饰服务，可以包装自带的，也可以包装我们自己写的</li>
-<li><p>声明服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.factory(&apos;my&apos;,function () &#123;</div><div class="line">    return &#123;</div><div class="line">        a: function () &#123;</div><div class="line">            return 1;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="2-3-使用-uiView-指令"><a href="#2-3-使用-uiView-指令" class="headerlink" title="2.3 使用 uiView 指令"></a>2.3 使用 uiView 指令</h3><ul>
+<li>ui-view必须有，所有的页面都是渲染到该标签中的,只有它里面的内容是变化的</li>
+<li>该 div 内的 HTML 内容会根据路由的变化而变化。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div ui-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
 </li>
-<li><p>装饰服务，就是一层层的包装一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">myMod.config(function ($provide) &#123;</div><div class="line">    $provide.decorator(&apos;my&apos;,function ($delegate) &#123;</div><div class="line">        var fn =  $delegate[&apos;a&apos;];</div><div class="line">        $delegate[&apos;a&apos;] = function () &#123;</div><div class="line">            return fn()+100;</div><div class="line">        &#125;;</div><div class="line">        return $delegate;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</ul>
+<h3 id="2-4-配置路由"><a href="#2-4-配置路由" class="headerlink" title="2.4 配置路由"></a>2.4 配置路由</h3><ul>
+<li>state 和 when 差不多<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">myMod.config(function($stateProvider,$urlRouterProvider)&#123;</div><div class="line">    $urlRouterProvider.otherwise(&apos;/&apos;);</div><div class="line">    //可以在这个服务下调用otherwise,不然没有这个属性，可以实现刚打开页面就显示内容</div><div class="line">    $stateProvider.state(&apos;index&apos;,&#123;</div><div class="line">        //参数1：是状态的名字  参数2： 配置的对象</div><div class="line">        url:&apos;/&apos;,//代表路由 必须写,每个里面都得写不然在搜索栏里不显示</div><div class="line">        templateUrl:&apos;index.html&apos;</div><div class="line">    &#125;).state(&apos;about&apos;,&#123;</div><div class="line">        url:&apos;/about&apos;,//一个状态配置一个路径，路径不要重复</div><div class="line">        templateUrl:&apos;about.html&apos;,</div><div class="line">        controller:function($scope)&#123;</div><div class="line">            $scope.books = [&#123;id: 1, name: &apos;js高程3&apos;&#125;,&#123;id: 2, name: &apos;node&apos;&#125;,&#123;id: 3, name: &apos;html5&apos;&#125;];</div><div class="line">        &#125;</div><div class="line">    &#125;).state(&apos;contact&apos;,&#123;</div><div class="line">        url:&apos;/contact&apos;,</div><div class="line">        views:&#123;//配置多视图，一个页面里面有多个路由</div><div class="line">            &apos;&apos;:&#123;</div><div class="line">              //默认状态下渲染该模板</div><div class="line">               templateUrl:&apos;templs/contact.html&apos;</div><div class="line">            &#125; ,</div><div class="line">            &apos;tel@contact&apos;:&#123;</div><div class="line">               //tel@contact</div><div class="line">               //contact状态对应的templs/contact.html页面中的 ui-view = ‘tel’视图 ，渲染的是templateUrl:&apos;templs/tel.html&apos;</div><div class="line">                templateUrl:&apos;templs/tel.html&apos;,</div><div class="line">                controller: function ($scope) &#123;</div><div class="line">                    $scope.tel=&apos;12345&apos;</div><div class="line">                &#125;</div><div class="line">            &#125;,</div><div class="line">            &apos;address@contact&apos;:&#123;</div><div class="line">                templateUrl:&apos;templs/address.html&apos;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;).state(&apos;book&apos;,&#123;</div><div class="line">          url:&apos;/book/:name&apos;,</div><div class="line">          template:&apos;&#123;&#123;a&#125;&#125;&apos;,</div><div class="line">          controller: function ($scope,$stateParams) &#123;</div><div class="line">              //$stateParams对象 获取冒号后面的值</div><div class="line">              $scope.a=$stateParams.name</div><div class="line">          &#125;</div><div class="line">      &#125;)</div><div class="line">&#125;).controller(&apos;myCtrl&apos;,function($scope)&#123;</div><div class="line">    $scope.flag=&apos;index&apos;;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
-<li><p>$log.log();输出日志的,通过$provide来装饰的，在$delegate上有log的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">myMod.config(function ($provide) &#123;</div><div class="line">    $provide.decorator(&apos;$log&apos;,function ($delegate) &#123;//用$delegate代理$log</div><div class="line">        $delegate.log=function()&#123;&#125;;</div><div class="line">        return $delegate;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</ul>
+<h3 id="2-5-创建路由链接"><a href="#2-5-创建路由链接" class="headerlink" title="2.5 创建路由链接"></a>2.5 创建路由链接</h3><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;a ui-sref=&quot;home&quot;&gt;首页&lt;/a&gt;</div><div class="line">&lt;a ui-sref=&quot;book(&#123;name:book.name&#125;)&quot;&gt;用户 或者&#123;&#123;book.name&#125;&#125; &lt;/a&gt;</div><div class="line">&lt;a ui-sref=&quot;contact&quot;&gt;联系&lt;/a&gt;</div><div class="line">&lt;div ui-view&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/24/angular/服务/" data-id="cix1bkzjw0007qcua8cw48rao" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/25/angular/路由-route/" data-id="cix1bol2c0008ckualtvw5ntf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -179,7 +147,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/10/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/10/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -221,6 +189,10 @@
           </li>
         
           <li>
+            <a href="/2016/12/14/angular/angular总结/">angular总结</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/11/node/express/">express</a>
           </li>
         
@@ -230,10 +202,6 @@
         
           <li>
             <a href="/2016/12/10/node/git的使用/">git</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
           </li>
         
       </ul>

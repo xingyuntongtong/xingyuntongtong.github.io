@@ -61,14 +61,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-node/express" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-angular/angular总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/11/node/express/" class="article-date">
-  <time datetime="2016-12-11T05:00:25.000Z" itemprop="datePublished">2016-12-11</time>
+    <a href="/2016/12/14/angular/angular总结/" class="article-date">
+  <time datetime="2016-12-14T04:00:25.000Z" itemprop="datePublished">2016-12-14</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Node-JS/">Node JS</a>
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
   </div>
 
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/11/node/express/">express</a>
+      <a class="article-title" href="/2016/12/14/angular/angular总结/">angular总结</a>
     </h1>
   
 
@@ -87,42 +87,89 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>express: 它是一个函数，第三方模块,当它执行的时候会返回一个函数app</p>
+        <h2 id="angular-怎么用"><a href="#angular-怎么用" class="headerlink" title="angular 怎么用"></a>angular 怎么用</h2><ul>
+<li>处理数据，前后端分离框架(MVVM)，双向数据绑定，有扩展标签的功能，模块化，单页开发(头尾不动，中间一块动)</li>
+</ul>
+<h2 id="ng-app"><a href="#ng-app" class="headerlink" title="ng-app"></a>ng-app</h2><ul>
+<li>启动angular程序，根据指定模块来启动，定义模块，调用run()方法，产生根作用域($rootScope)</li>
+</ul>
+<h2 id="ng-model"><a href="#ng-model" class="headerlink" title="ng-model"></a>ng-model</h2><ul>
+<li>用于表单元素</li>
+<li>ng-model=””里面只能放变量，不能放运算/双括号</li>
+<li>如果作用域上没有，则声明，如果有取值放到输入框中</li>
+<li>如果使用user.name则会创建一个对象，将name变成一个变量存入进来</li>
+</ul>
+<h2 id="ng-bind"><a href="#ng-bind" class="headerlink" title="ng-bind"></a>ng-bind</h2><ul>
+<li>和双括号相同，但是ng-bind不会闪烁</li>
+<li>表单元素里面不能用ng-bind，</li>
+<li>可以使用<code>!/?:</code></li>
+<li>原有的内容不保留，会被ng-bind绑定的值替换掉</li>
+</ul>
+<h2 id="ng-cloak"><a href="#ng-cloak" class="headerlink" title="ng-cloak"></a>ng-cloak</h2><p>用途：防止闪烁</p>
 <ul>
-<li><p>安装express</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install express --save</div></pre></td></tr></table></figure>
+<li><p>先声明一个css，找到所有带有ng-cloak让其隐藏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[ng-cloak]&#123;</div><div class="line">    display:none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>引入express </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var express=require(&apos;express&apos;);</div><div class="line">var app =express();</div></pre></td></tr></table></figure>
+<li><p>增加到需要防止闪烁的元素身上</p>
 </li>
-<li><p>app.get()方法，当访问/的时候执行回调函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.get(&apos;/&apos;,function(req,res)&#123;</div><div class="line">    res.end(&apos;hello&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>app 就是我们的监听函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">require(&apos;http&apos;).createServer(app).listen(80);</div><div class="line">可以简写 app.listen(80);</div></pre></td></tr></table></figure>
-</li>
-<li><p>发送不同类型的请求 ，在DOM命令窗口里输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curL -X POST http://localhost:80  //get请求也可以</div></pre></td></tr></table></figure>
+<li>加载后移除掉ng-cloak属性</li>
+</ul>
+<h2 id="ng-controller"><a href="#ng-controller" class="headerlink" title="ng-controller"></a>ng-controller</h2><p>用途：调度数据的，买一送一送一个作用域</p>
+<ul>
+<li>不能操作DOM，DOM在link函数中操作</li>
+<li>管辖范围，和DOM平齐</li>
+<li>可以将带有ng-controller的标签嵌套，子继承父，父继承不了子</li>
+<li>不能复用</li>
+<li>调用ng-controller后可以执行控制器</li>
+</ul>
+<h2 id="ng-repeat"><a href="#ng-repeat" class="headerlink" title="ng-repeat"></a>ng-repeat</h2><p>用途：循环遍历</p>
+<ul>
+<li>要循环谁就写在谁的身上</li>
+<li>遍历数组；ng中增加的属性 $index $odd $even $first $last $middle(根据索引来遍历)</li>
+<li>通过(key,value)可以获得索引，默认写一个变量则是value</li>
+<li>对象和数组一样</li>
+</ul>
+<h3 id="ng-repeat-为什么用-track-by-index"><a href="#ng-repeat-为什么用-track-by-index" class="headerlink" title="ng-repeat 为什么用 track by $index"></a>ng-repeat 为什么用 track by $index</h3><ul>
+<li>如果value重复，不能通过相同的value去遍历，通过唯一项来进行遍历，只要是数组就加track by $index</li>
+</ul>
+<h2 id="ng-click"><a href="#ng-click" class="headerlink" title="ng-click"></a>ng-click</h2><ul>
+<li>angular中的事件 ng-click=’a()’</li>
+</ul>
+<h2 id="ng-show-ng-hide"><a href="#ng-show-ng-hide" class="headerlink" title="ng-show/ng-hide"></a>ng-show/ng-hide</h2><p>用途：控制元素的显示和隐藏</p>
+<ul>
+<li>通过css样式进行隐藏，会在样式里产生display:none；内部命令依然执行，不会影响DOM，比如循环时，还是会循环只是隐藏了</li>
+</ul>
+<p>频繁切换时用ng-show/ng-hide</p>
+<h2 id="ng-if"><a href="#ng-if" class="headerlink" title="ng-if"></a>ng-if</h2><p>用途：控制元素的显示和隐藏</p>
+<ul>
+<li>通过删除DOM达到隐藏效果，如果为false内部指令不在执行</li>
+<li>会产生一个作用域，保留删掉的内容</li>
+</ul>
+<p>一般和ng-repeat连用，如果数据不存在就移除掉DOM</p>
+<h2 id="ng-disabled"><a href="#ng-disabled" class="headerlink" title="ng-disabled"></a>ng-disabled</h2><p>用途：ng-disabled=”true” 进入禁用状态</p>
+<h2 id="ng-readonly"><a href="#ng-readonly" class="headerlink" title="ng-readonly"></a>ng-readonly</h2><p>用途：ng-readonly=”true” 进入仅读状态</p>
+<h2 id="指令（内置，自定义）"><a href="#指令（内置，自定义）" class="headerlink" title="指令（内置，自定义）"></a>指令（内置，自定义）</h2><ul>
+<li>自定义：组件式和装饰型<ul>
+<li>组件式：E 看有没有template</li>
+<li>装饰型：A 一秀没有template，有link函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">return&#123;</div><div class="line">    restrict:&apos;EA&apos;,  //一般用这两个  限制使用范围</div><div class="line">    template/templateUrl:,</div><div class="line">    transclude:true,</div><div class="line">    scope:true/&#123;@=&amp;&#125;/不写,  //有了它以后指令就和外面没有关系了</div><div class="line">    replace:true,  //替换</div><div class="line">    link:function(scope,element,attrs)&#123;&#125;bbb</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>中间件</p>
+</li>
+</ul>
+<h2 id="作用域的产生"><a href="#作用域的产生" class="headerlink" title="作用域的产生"></a>作用域的产生</h2><p>产生作用域的方式</p>
 <ul>
-<li>1.中间件就是起过渡作用，可以检查权限，检查是否合法，最后在进入我们的真正的路由</li>
-<li>2.中间件有next方法，如果不满足可以决定是否继续执行，如果调用next方法表示继续执行</li>
-<li>3.中间件也可以匹配路径，只要路径开头匹配即可，默认是/</li>
-<li>4.中间件中的req和res和路由中的是同一个</li>
-<li>5.一个页面中可以有多个中间件</li>
-<li><p>当匹配成功后执行函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">app.usr(function(req,res,next)&#123;</div><div class="line">    console.log(&apos;过滤石头&apos;);</div><div class="line">    next();//这里如果没有next()表示不执行下面的</div><div class="line">&#125;);</div><div class="line">app.usr(function(req,res,next)&#123;</div><div class="line">    console.log(&apos;过滤沙子&apos;);</div><div class="line">    next();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>用途：扩展req和res上的属性，还可以扩展公用的方法</p>
-</li>
+<li>ng-controller</li>
+<li>ng-app</li>
+<li>ng-transclude</li>
+<li>scope:true scope:{}</li>
+<li>ng-if</li>
+<li>ng-repeat ng-repeat=”a in arr”</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/11/node/express/" data-id="cix1bkzk3000aqcuaq2qhr53p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/14/angular/angular总结/" data-id="cix1bol210006ckuagr6tpzvl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +182,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -177,6 +224,10 @@
           </li>
         
           <li>
+            <a href="/2016/12/14/angular/angular总结/">angular总结</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/11/node/express/">express</a>
           </li>
         
@@ -186,10 +237,6 @@
         
           <li>
             <a href="/2016/12/10/node/git的使用/">git</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
           </li>
         
       </ul>
