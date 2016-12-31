@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-node/express" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-node/fs和path" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/11/node/express/" class="article-date">
-  <time datetime="2016-12-11T05:00:25.000Z" itemprop="datePublished">2016-12-11</time>
+    <a href="/2016/12/17/node/fs和path/" class="article-date">
+  <time datetime="2016-12-17T07:00:00.000Z" itemprop="datePublished">2016-12-17</time>
 </a>
     
   <div class="article-category">
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/11/node/express/">express</a>
+      <a class="article-title" href="/2016/12/17/node/fs和path/">fs和path</a>
     </h1>
   
 
@@ -87,161 +87,128 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是express"><a href="#什么是express" class="headerlink" title="什么是express"></a>什么是express</h2><p>Express是一个简洁、灵活的node.js Web应用开发框架,是目前最流行的基于Node.js的Web开发框架. 它提供一系列强大的功能，比如：<br>1.路由控制  比如get() 路由是http里面的概念<br>2.参数获取<br>3.中间件<br>4.send和sendFile<br>5.静态文件服务<br>6.模板解析<br>7.重定向<br>还可以使用其他模块来帮助你创建各种Web和移动设备应用<br>express: 它是一个函数，第三方模块,当它执行的时候会返回一个函数app</p>
-<h2 id="安装express"><a href="#安装express" class="headerlink" title="安装express"></a>安装express</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install express --save</div></pre></td></tr></table></figure>
-<h2 id="引入express"><a href="#引入express" class="headerlink" title="引入express"></a>引入express</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var express=require(&apos;express&apos;);  //引入express模块得到一个函数</div><div class="line">var app =express();  //调用此函数会返回一个新的函数</div><div class="line">app.listen(8080);  //在本地监听8080端口，启动http服务器</div></pre></td></tr></table></figure>
-<h2 id="app-get-方法"><a href="#app-get-方法" class="headerlink" title="app.get()方法"></a>app.get()方法</h2><ul>
-<li><p>当访问/的时候执行回调函数 根据请求路径来处理客户端发出的GET请求</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;);</div><div class="line">var app = express();</div><div class="line">app.get(&apos;/&apos;,function(req,res)&#123;</div><div class="line">    res.end(&apos;welcome to  首页&apos;);</div><div class="line">&#125;);</div><div class="line">app.get(&apos;/about&apos;,function(req,res)&#123;</div><div class="line">    res.end(&apos;欢迎来到关于我们&apos;);</div><div class="line">&#125;)</div><div class="line">app.listen(8080);</div></pre></td></tr></table></figure>
-</li>
-<li><p>第一个参数path为请求的路径 可以是字符串（/login）也可以是正则</p>
-</li>
-<li>第二个参数为处理请求的回调函数，有两个参数分别是<ul>
-<li>request 代表请求信息</li>
-<li>response 代表响应信息</li>
+        <h2 id="什么是fs"><a href="#什么是fs" class="headerlink" title="什么是fs"></a>什么是fs</h2><ul>
+<li>fs是node的核心模块，专门处理文件读写的；file system文件系统；</li>
+<li>Node.js 文件系统（fs 模块）模块中的方法均有异步和同步版本，例如读取文件内容的函数有异步的 <code>fs.readFile()</code> 和同步的 <code>fs.readFileSync()</code>，同步方法和异步方法同时出现</li>
+<li>异步的方法函数最后一个参数为回调函数，回调函数的第一个参数包含了错误信息(error)。</li>
+<li>建议使用异步方法，比起同步，异步方法性能更高，速度更快，而且没有阻塞。</li>
 </ul>
+<h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><ul>
+<li><p>同步读取 readFileSync(带sync都是同步)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.readFileSync(&apos;./1.txt&apos;,&#123;encoding:&apos;utf-8&apos;&#125;);</div><div class="line">//第一个参数是要读取文件的路径，第二个参数是编码格式</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步读取 readFile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.readFile(&apos;./1.txt&apos;,&#123;encoding:&apos;utf-8&apos;&#125;,function(err,data)&#123;</div><div class="line">    console.log(err,data);</div><div class="line">    //第一个参数是要读取文件的路径，第二个参数是编码格式，第三个参数是回调函数</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="app-就是我们的监听函数"><a href="#app-就是我们的监听函数" class="headerlink" title="app 就是我们的监听函数"></a>app 就是我们的监听函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">require(&apos;http&apos;).createServer(app).listen(80);</div><div class="line">可以简写 app.listen(80);</div></pre></td></tr></table></figure>
+<p>1.读取时只能读取已经存在的文件<br>2.默认读取格式是buffer，所以有的时候需要转成字符串格式<code>toString()</code>，也可以指定编码格式<br>3.捕获错误要使用try catch<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">    var age = fs.readFileSync(&apos;./age1.txt&apos;,&apos;utf8&apos;);</div><div class="line">&#125;catch (e)&#123;</div><div class="line">    console.log(e);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>4.readFile 不能读取比内存大的文件<br>5.回调函数中拥有error，必须先判断一下err(error data)不能省略<code>error</code>，如果没有错误是<code>null</code></p>
+<h2 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h2><ul>
+<li><p>同步写入 writeFileSync</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.writeFileSync(&apos;./1.txt&apos;,&apos;写入的内容&apos;,&#123;encoding:&apos;utf-8&apos;&#125;);</div><div class="line">fs.appendFileSync(&apos;./1.txt&apos;,&apos;写入的内容&apos;);//追加文件内容</div><div class="line">//第一个参数是要写入文件的路径，第二个参数是要写入的内容，第三个参数是编码格式</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步写入 writeFile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.writeFile(&apos;./1.txt&apos;,&apos;写入的内容&apos;,&#123;encoding:&apos;utf-8&apos;&#125;,function(err,data)&#123;</div><div class="line">    console.log(err,data);</div><div class="line">    //第一个参数是要写入文件的路径，第二个参数是要写入的内容，第三个参数是编码格式，第四个参数是回调函数</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>1.写入时默认编码utf8<br>2.写入文件如果不存在该文件则会创建文件<br>3.先清空在写入</p>
+<h2 id="拷贝文件"><a href="#拷贝文件" class="headerlink" title="拷贝文件"></a>拷贝文件</h2><ul>
+<li><p>先将文件读出来，在将文件写入另一个文件中</p>
 <ul>
-<li><p>发送不同类型的请求 ，在DOM命令窗口里输入 通过linux命令发送post请求</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -X POST http://localhost:8080/login  //get请求也可以</div></pre></td></tr></table></figure>
+<li><p>全部采用异步</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function copy(source, target) &#123;</div><div class="line">    var fs=require(&apos;fs&apos;);</div><div class="line">    fs.readFile(source,function (err, data) &#123;</div><div class="line">        if(err)&#123;</div><div class="line">            console.log(err);</div><div class="line">        &#125;else &#123;</div><div class="line">            fs.writeFile(target,data,function (err, data) &#123;</div><div class="line">                if(err)&#123;</div><div class="line">                    console.log(err);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">copy(&apos;./1.txt&apos;,&apos;./2.txt&apos;);</div></pre></td></tr></table></figure>
 </li>
-<li><p>请求和响应的格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">curl -v http://localhost:8080/login  //可以查看是什么请求</div><div class="line">&gt; 请求</div><div class="line">&gt; GET /login HTTP/1.1</div><div class="line">&gt; Host: localhost:8080</div><div class="line">&gt; User-Agent: curl/7.47.1</div><div class="line">&gt; Accept: */*</div><div class="line">&gt; 响应</div><div class="line">&lt; HTTP/1.1 200 OK</div><div class="line">&lt; X-Powered-By: Express</div><div class="line">&lt; Content-Type: text/html;charset=utf8</div><div class="line">&lt; Date: Sat, 24 Dec 2016 03:39:09 GMT</div><div class="line">&lt; Connection: keep-alive</div><div class="line">&lt; Content-Length: 6</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="app-all"><a href="#app-all" class="headerlink" title="app.all();"></a>app.all();</h2><ul>
-<li>app.all()函数可以匹配所有的http；路由中的星号能匹配所有的路径 语法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;);//引入express</div><div class="line">var app = express();</div><div class="line">app.all(&quot;*&quot;,function(req,res)&#123; //参数和get的一样</div><div class="line">    res.end(&quot;404&quot;);</div><div class="line">&#125;)</div><div class="line">app.listen(8080);</div></pre></td></tr></table></figure>
+<li><p>全部采用同步</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function copySync(source,target) &#123;</div><div class="line">    var result = fs.readFileSync(source);</div><div class="line">    fs.writeFileSync(target,result);</div><div class="line">&#125;</div><div class="line">copySync(&apos;./name1.txt&apos;,&apos;./name3.txt&apos;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="获取请求参数-这里是express提供的"><a href="#获取请求参数-这里是express提供的" class="headerlink" title="获取请求参数 这里是express提供的"></a>获取请求参数 这里是express提供的</h2><p>以这个地址为例：<a href="http://localhost:8080/login?name=tong&amp;age=18" target="_blank" rel="external">http://localhost:8080/login?name=tong&amp;age=18</a></p>
+</li>
+<li><p>在读取或者写入的时候不用指定编码格式，因为拷贝的内容很有可能是图片、音频、视频等</p>
+</li>
+</ul>
+<h2 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h2><h3 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3><ul>
+<li><p>同步创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.mkdirSync(&apos;a&apos;);  //这里的a是文件夹</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.mkdir(&apos;a&apos;,function(err,data)&#123;</div><div class="line">    console.log(err);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>1.创建目录的时候要求父目录必须存在<br><code>fs.mkdirSync(&#39;a/a&#39;);</code>和<code>fs.mkdir(&#39;a/a&#39;);</code> 这样直接创建不行，因为没有第一个a文件夹</p>
+<h3 id="读取指定目录下所有的文件"><a href="#读取指定目录下所有的文件" class="headerlink" title="读取指定目录下所有的文件"></a>读取指定目录下所有的文件</h3><ul>
+<li><p>同步读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.readdirSync(&apos;./a&apos;);</div><div class="line">console.log(files);</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.readdir(&apos;./a&apos;,function(err,files)&#123; //读取a文件夹下的所有文件</div><div class="line">    console.log(files);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>它读取出来的文件是以数组的形式显示的</p>
+<h3 id="查看文件的目录信息-详情描述"><a href="#查看文件的目录信息-详情描述" class="headerlink" title="查看文件的目录信息(详情描述)"></a>查看文件的目录信息(详情描述)</h3><ul>
+<li><p>同步查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.statSync(&apos;./a&apos;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.stat(&apos;./a&apos;,function(err,stat)&#123;</div><div class="line">    console.log(stat);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>stat下的面属性</p>
 <ul>
-<li>获取完整的url地址<code>req.url</code>  /login?name=tong&amp;age=18</li>
-<li>获取路径名<code>req.path</code> 其实就是?前面的部分 /login 就相当于<code>pathname</code></li>
-<li>获取主机名<code>req.host</code> (不包含端口号)’localhost:8080’</li>
-<li>获取查询字符串对象<code>req.query</code>; {name: ‘tong’, age: ‘18’}</li>
-<li>获取请求头对象<code>req.headers</code></li>
+<li>mtime 修改时间，只要改过就会变不论改什么</li>
+<li>ctime 修改时间，只有内容改了才会变</li>
+<li>atime 访问的时间</li>
+<li>birthtime 出生时间</li>
 </ul>
-<h2 id="params路径参数"><a href="#params路径参数" class="headerlink" title="params路径参数"></a>params路径参数</h2><ul>
-<li><p>req.params可以用来获取请求URL中的参数值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.get(&apos;/user/:id/&apos;,function(req,res)&#123;</div><div class="line">   res.end(req.params.id); //上面写的是id这里就通过id来取</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
-<li><p>params的实现原理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//是路由里的路径</div><div class="line">var path = &apos;/users/:name/:age&apos;;</div><div class="line">//真实请求的URL</div><div class="line">var url = &apos;/users/tong/18&apos;;</div><div class="line">//存放所有的参数名</div><div class="line">var paramNames = [];</div><div class="line">var regStr = path.replace(/:(\w+)/g,function(matchedStr,group1)&#123;</div><div class="line">    paramNames.push(group1);// name age 添加进来的</div><div class="line">    return &apos;(\\w+)&apos;;</div><div class="line">&#125;);</div><div class="line">console.log(regStr);//   \/users\/(\w+)\/(\w+)</div><div class="line">var reg = new RegExp(regStr);</div><div class="line">var result = url.match(reg);</div><div class="line">//[ &apos;/users/tong/18&apos;, &apos;tong&apos;, &apos;18&apos;, index: 0, input: &apos;/users/tong/18&apos; ]</div><div class="line">console.log(result);</div><div class="line">var params = &#123;&#125;;</div><div class="line">//循环数组名 值就是 result中的分组</div><div class="line">for(var i=0;i&lt;paramNames.length;i++)&#123;</div><div class="line">    params[paramNames[i]] = result[i+1];</div><div class="line">&#125;</div><div class="line">console.log(params);</div></pre></td></tr></table></figure>
+<li><p>读取指定目录下所有的文件里面的内容，因为是以数组的形式显示的所以用<code>forEach</code>来遍历取出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.readdir(&apos;./a&apos;,function(err,files)&#123;</div><div class="line">    console.log(files);</div><div class="line">    files.forEach(function(file)&#123;</div><div class="line">        fs.stat(&apos;./a/&apos;+file,function(err,data)&#123;</div><div class="line">            if(stat.isFile())&#123; //判断一下是否是一个文件</div><div class="line">                fs.readFile(&apos;./a/&apos;+file,function(err,data)&#123;</div><div class="line">                    console.log(data.toString());</div><div class="line">                &#125;);</div><div class="line">            &#125;else&#123;</div><div class="line">                console.log(&apos;这是一个目录&apos;); //isDirectory()是否是一个目录</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>中间件就是处理http请求的函数，用来完成各种特定的任务 比如检查用户是否登录、检测用户是否有权限访问等；中间件就是一个函数 next也是一个函数<br>比如：当访问京东的时候，有些页面不用登录也可以查看，有些页面只有登录的时候才可以看（我的订单），我们不能把每个页面都判断登录没登录，这样就用到中间件、</p>
+<p>因为是异步的方法所以谁先读取出来不一定；要保证a文件夹下都是文件不在有其它的文件夹</p>
+<h3 id="判断一个文件是否存在"><a href="#判断一个文件是否存在" class="headerlink" title="判断一个文件是否存在"></a>判断一个文件是否存在</h3><ul>
+<li>判断一个文件夹或者文件是否存在</li>
+<li><p>同步判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">var file=fs.existsSync(&apos;./a&apos;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>异步判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var fs=require(&apos;fs&apos;);</div><div class="line">fs.exists(&apos;./a&apos;,function(exists)&#123;</div><div class="line">    console.log(exists);</div><div class="line">    //返回的是布尔值，存在就是true；它的回调函数第一个参数不是err</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建目录  同步创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function makep(path) &#123;</div><div class="line">    var paths = path.split(&apos;\\&apos;);  //[a,b,c,d]</div><div class="line">    for(var i = 0; i&lt;paths.length;i++)&#123;</div><div class="line">        var dir = paths.slice(0,i+1).join(&apos;/&apos;);</div><div class="line">        //创建目录时 先判断文件是否存在</div><div class="line">        var flag = fs.existsSync(dir);</div><div class="line">        if(!flag)fs.mkdirSync(dir);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">makep(&apos;b\\c\\d&apos;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里<code>path.split(&#39;\\&#39;)</code>的<code>\</code>不能是一个，会不识别</p>
 <ul>
-<li>1.中间件就是起过渡作用，可以检查权限，检查是否合法，最后在进入我们的真正的路由</li>
-<li>2.中间件有next方法，如果不满足可以决定是否继续执行，如果调用next方法表示继续执行，不然会卡死在这，它一般放在路由的上面，比如404错误也可以放在路由的下面，取决于用途</li>
-<li>3.中间件中的req和res和路由中的是同一个</li>
-<li>4.一个页面中可以有多个中间件</li>
-<li>5.当匹配成功后执行函数，中间件就是在执行路由函数之前的函数</li>
-<li><p>app.use() 增加中间件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;);</div><div class="line">var app = express();</div><div class="line">app.use(function (req,res,next) &#123;</div><div class="line">    console.log(&apos;过滤石头&apos;);</div><div class="line">    next();</div><div class="line">&#125;);</div><div class="line">app.use(&apos;/water&apos;, function (req,res,next) &#123;</div><div class="line">    console.log(&apos;过滤沙子&apos;);</div><div class="line">    next();</div><div class="line">&#125;);</div><div class="line">app.get(&apos;/water&apos;, function (req,res) &#123;</div><div class="line">    res.end(&apos;water&apos;);</div><div class="line">&#125;);</div><div class="line">app.listen(8080);</div></pre></td></tr></table></figure>
-</li>
-<li><p>中间件用途：扩展req和res上的属性，还可以扩展公用的方法</p>
-<ul>
-<li>执行一些公共的逻辑，比如设置内容类型</li>
-<li>添加一些公共的方法和属性</li>
-<li>还可以覆盖一些原有的方法，插入我们自己的逻辑</li>
-</ul>
-</li>
-<li><p>为什么要用next();</p>
-<ul>
-<li>1.因为中间件有可能有异步代码</li>
-<li>2.因为中间件需要一个权力，能中止或继续执行任务</li>
-</ul>
-</li>
-<li><p>如果中间件里面有参数就是表示任务出错了，它会跳过后面的正常的中间件 会执行错误中间件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">app.use(function (req,res,next) &#123;</div><div class="line">    req.money = 100;</div><div class="line">    console.log(&apos;中央&apos;,req.url);//这时可能会出现2次的 中央 因为有一次是favicon.ico</div><div class="line">    next(&apos;&apos;);</div><div class="line">&#125;);</div><div class="line">app.use(function (req,res,next) &#123;</div><div class="line">    req.money -= 30;</div><div class="line">    next(&apos;出错了&apos;);</div><div class="line">&#125;);</div><div class="line">app.use(function (req,res,next) &#123;</div><div class="line">    req.money -= 20;</div><div class="line">    res.end(&apos;恭喜你获得了&apos;+req.money);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>错误中间件 如果上面的中间件出错了，会直接走这里</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.use(function (err,req,res,next) &#123;</div><div class="line">    console.log(err);</div><div class="line">    res.end(&apos;错误：&apos;+err);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>中间件里也可以放路径，只要路径开头匹配即可，默认是/</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.use(&apos;/user&apos;,function (req,res,next) &#123;</div><div class="line">    req.money = 100;</div><div class="line">    next(&apos;&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<li>异步创建 运用递归的方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function mkdirs(p,fn) &#123;</div><div class="line">    //先判断a/b/c/d是否存在</div><div class="line">    fs.exists(p,function (exist) &#123; //判断当前目录是否存在</div><div class="line">        if(exist)&#123;</div><div class="line">            fn();</div><div class="line">        &#125;else&#123;</div><div class="line">            //看当前目录的上一级是否存在</div><div class="line">            mkdirs(path.dirname(p),function () &#123;</div><div class="line">                fs.mkdir(p,fn)</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">mkdirs(&apos;a/b/c&apos;,function () &#123;</div><div class="line">    console.log(&apos;创建成功&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="router-是一个中间件函数"><a href="#router-是一个中间件函数" class="headerlink" title="router 是一个中间件函数"></a>router 是一个中间件函数</h3><ul>
-<li>如果所有的路由都放到一个页面中会非常乱，所以把它们分类放置；在主页面用中间件控制</li>
-<li>把user路由require进来 这样访问的时候就是主页面的/user和路由里的/add组合<code>/user/add</code></li>
-<li>在user路由中，调用express的router函数返回一个实例，最后把router路由 exports出去<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var express=require(&apos;express&apos;);</div><div class="line">var app=express();</div><div class="line">var user=require(&apos;./routes/user&apos;);</div><div class="line">app.use(&apos;/user&apos;,user);</div><div class="line">app.listen(8080);</div><div class="line"></div><div class="line">//-------------------</div><div class="line">var express=require(&apos;express&apos;);</div><div class="line">var router=express.Router();</div><div class="line">router.get(&apos;/add&apos;,function (req, res) &#123;</div><div class="line">    res.end(&apos;注册&apos;);</div><div class="line">&#125;);</div><div class="line">router.get(&apos;/login&apos;,function (req, res) &#123;</div><div class="line">    res.end(&apos;登录&apos;);</div><div class="line">&#125;);</div><div class="line">module.exports=router;</div></pre></td></tr></table></figure>
+<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><ul>
+<li>专门处理路径的 是node的核心模块</li>
+</ul>
+<h2 id="path中的方法"><a href="#path中的方法" class="headerlink" title="path中的方法"></a>path中的方法</h2><h3 id="path-join"><a href="#path-join" class="headerlink" title="path.join"></a>path.join</h3><ul>
+<li>将多个参数值字符串<code>结合</code>为一个路径字符串；就是将多个部分路径拼接成一个最终路径<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var path=require(&apos;path&apos;);</div><div class="line">path.join(__dirname,&apos;a&apos;,&apos;b&apos;,&apos;c&apos;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="中间件的实现原理"><a href="#中间件的实现原理" class="headerlink" title="中间件的实现原理"></a>中间件的实现原理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">// 当请求到来的时候执行app,这是会对数组里的配置项一次匹配，匹配上的执行，匹配不上执行</div><div class="line">var app = function(req,res)&#123;</div><div class="line">   var i=0;//定义一个变量每次执行next后加一</div><div class="line">    //每执行一次next,会取出一个中间件函数执行，并且把next传进去</div><div class="line">   function next()&#123;</div><div class="line">       var fn = app.routes[i++];</div><div class="line">       if(fn)</div><div class="line">        fn(req,res,next);</div><div class="line">   &#125;</div><div class="line">    next();</div><div class="line">&#125;</div><div class="line">//存放中间件函数的数组</div><div class="line">app.routes = [];</div><div class="line">//配置函数</div><div class="line">app.use = function(fn)&#123;</div><div class="line">    //往数组里添加函数</div><div class="line">    app.routes.push(fn);</div><div class="line">&#125;</div><div class="line">//------------------------</div><div class="line">app.use(function(req,res,next)&#123;</div><div class="line">    console.log(req.url);</div><div class="line">    console.log(1);</div><div class="line">    next();</div><div class="line">&#125;);</div><div class="line">app.use(function(req,res,next)&#123;</div><div class="line">    console.log(2);</div><div class="line">    res.end(&apos;ok&apos;);</div><div class="line">    next();</div><div class="line">&#125;);</div><div class="line">//-------------------</div><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(app);</div><div class="line">server.listen(9090);</div></pre></td></tr></table></figure>
-<h2 id="send和end有什么区别"><a href="#send和end有什么区别" class="headerlink" title="send和end有什么区别"></a>send和end有什么区别</h2><ul>
-<li>send 方法是express中的，可以返回对象、数字对应的状态码，什么类型的都能放，并且设置响应头</li>
-<li>end 方法只能放字符串（JSON.stringify()） 和 buffer的</li>
-<li><p>自定义send方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">res.send = function (msg) &#123;</div><div class="line">    if(typeof msg==&apos;string&apos;||Buffer.isBuffer(msg))&#123;</div><div class="line">        res.contentType(&apos;text/html&apos;);</div><div class="line">        res.end(msg);</div><div class="line">    &#125;else if(typeof msg==&apos;object&apos;)&#123;//如果是一个对象让它转成字符串（stringify）</div><div class="line">        res.contentType(&apos;application/json&apos;);</div><div class="line">        res.end(JSON.stringify(msg));</div><div class="line">    &#125;else if(typeof msg == &apos;number&apos;)&#123;//如果是数字 把它当做状态码来处理</div><div class="line">        res.contentType(&apos;text/plain&apos;);</div><div class="line">        var status_code = require(&apos;_http_server&apos;).STATUS_CODES;//比如404</div><div class="line">        res.end(status_code[msg]);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-</li>
-<li><p>res.send(404); 可能会出现歧义因为想输入状态码，但是看成数字了，可以向下面那样改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//哪个都行</div><div class="line">res.sendStatus(404);它的响应体是 Not Found 这是系统自带的</div><div class="line">res.status(404).send(&apos;你访问的页面不存在&apos;); 指定状态码，并自己提供响应体</div></pre></td></tr></table></figure>
-</li>
-<li><p>res.sendFile(‘./index.html’); 发送静态文件，它会报错 写成绝对路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//哪个都行</div><div class="line">res.sendFile(path.resolve(&apos;index.html&apos;)); //这样写就不会报错了</div><div class="line">res.sendFile(&apos;index.html&apos;,&#123;root:__dirname&#125;); //也可以这样写</div></pre></td></tr></table></figure>
-</li>
-<li><p>res.sendFile的实现原理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">fs.createReadStream(&apos;./index.html&apos;).pipe(res);</div><div class="line">//也可以用fs.readFile()来写</div><div class="line">fs.readFile(&apos;./index.html&apos;,function(err,data)&#123;</div><div class="line">res.setHeader(&apos;Content-Type&apos;,&apos;text/html;charset=utf-8&apos;);</div><div class="line">res.end(data);</div></pre></td></tr></table></figure>
+<p>前面也可以放<code>__dirname</code>，拼出的结果是 当前文件夹的名字+<code>a\b\c</code>；此处的<code>\</code>在<code>window</code>下是<code>\</code> 在linux和mac下是<code>/</code></p>
+<h3 id="path-resolve"><a href="#path-resolve" class="headerlink" title="path.resolve"></a>path.resolve</h3><ul>
+<li>根据一个文件名解析出一个绝对路径；就是得到一个绝对路径<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var path=require(&apos;path&apos;);</div><div class="line">path.resolve(&apos;a&apos;,&apos;b&apos;,..); 结果 f:node\a</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="模板的应用"><a href="#模板的应用" class="headerlink" title="模板的应用"></a>模板的应用</h2><ul>
-<li>在nodejs中使用express框架，它默认的是ejs和jade渲染模板<h2 id="安装模板"><a href="#安装模板" class="headerlink" title="安装模板"></a>安装模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install ejs</div></pre></td></tr></table></figure>
+<p>1.以应用程序根目录为起点<br>2.如果参数是普通字符串，则意思是当前目录的下级目录<br>3.如果参数是.. 回到上一级目录<br>4.如果是/开头表示一个绝对的根路径</p>
+<h3 id="path-basename"><a href="#path-basename" class="headerlink" title="path.basename"></a>path.basename</h3><ul>
+<li>获取当前路径中的文件名<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var path=require(&apos;path&apos;);</div><div class="line">path.basename(__filename,&apos;.js&apos;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="使用ejs模版"><a href="#使用ejs模版" class="headerlink" title="使用ejs模版"></a>使用ejs模版</h2><ul>
-<li>指定渲染模板文件的后缀名为ejs<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;);</div><div class="line">var path = require(&apos;path&apos;);</div><div class="line">var app = express();</div><div class="line"></div><div class="line">app.set(&apos;view engine&apos;,&apos;ejs&apos;); //设置模板引擎 ejs就是后缀</div><div class="line">app.set(&apos;views&apos;,path.resolve(&apos;views&apos;));//模板的存放目录的绝对路径</div><div class="line">app.get(&apos;view engine&apos;);//可以通过get来获取</div><div class="line"></div><div class="line">app.listen(8080);</div></pre></td></tr></table></figure>
+<p>比如说文件名是<code>path.js</code> 当上面指定了<code>.js</code>以后就会输出<code>path</code>；会默认把扩展名去掉</p>
+<h3 id="path-extname"><a href="#path-extname" class="headerlink" title="path.extname"></a>path.extname</h3><ul>
+<li>获取当前路径中的扩展名<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var path=require(&apos;path&apos;);</div><div class="line">path.basename(__filename);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="模板使用html后缀"><a href="#模板使用html后缀" class="headerlink" title="模板使用html后缀"></a>模板使用html后缀</h2><ul>
-<li>修改模板文件的后缀名为html<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">app.set( &apos;view engine&apos;, &apos;html&apos; );</div><div class="line">app.set(&apos;views&apos;,path.resolve(&apos;views&apos;));</div><div class="line">// 运行ejs模块</div><div class="line">app.engine( &apos;html&apos;, require( &apos;ejs&apos; ).__express );</div><div class="line">//__express是ejs模块的一个公共属性，表示要渲染的文件扩展名</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="渲染视图"><a href="#渲染视图" class="headerlink" title="渲染视图"></a>渲染视图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.get(&apos;/user&apos;, function (req,res) &#123;</div><div class="line">    res.render(&apos;hello&apos;,&#123;title:&apos;hello&apos;&#125;,function(err,data)&#123;&#125;);</div><div class="line">    //res.render(path,data,callback);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<ul>
-<li>模板的渲染：把静态模板里的变量用数据对象的属性替换掉 模板中的变量会从数据对象的属性取值</li>
-<li>第一个参数 要渲染的模板 参数<code>hello</code>就是模板的文件名 其实是hello.ejs后面的省略了,这个路径相当于模板的根目录views下的</li>
-<li>第二个参数 渲染所需要的数据 在渲染模板时<code>{title:&#39;hello&#39;}</code>可为其模板传入变量值</li>
-<li>第三个参数 <code>callback</code>用来处理返回的渲染后的字符串</li>
-</ul>
-<h2 id="模板的实现原理"><a href="#模板的实现原理" class="headerlink" title="模板的实现原理"></a>模板的实现原理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">app.use(function(req,res,next)&#123;</div><div class="line">    res.render = function(tmplPath,data)&#123;</div><div class="line">        //1.先得到模板绝对路径=模板存放根目录+</div><div class="line">        var realPath = path.join(app.get(&apos;views&apos;),tmplPath);</div><div class="line">        //拼接上后缀名 得到完整的模板绝对路径 这样就把user.ejs的路径取到了</div><div class="line">        realPath = realPath+&apos;.&apos;+app.get(&apos;view engine&apos;);</div><div class="line">        console.log(realPath);</div><div class="line">        fs.readFile(realPath,&apos;utf8&apos;,function(err,tmpl)&#123;</div><div class="line">            tmpl = tmpl.replace(/&lt;%=(\w+)%&gt;/g,function()&#123;</div><div class="line">                return data[arguments[1]];</div><div class="line">            &#125;);</div><div class="line">            res.end(tmpl);</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">    next();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h2 id="静态文件服务器"><a href="#静态文件服务器" class="headerlink" title="静态文件服务器"></a>静态文件服务器</h2><ul>
-<li>如果要在网页中加载静态文件（css、js、img），就需要另外指定一个存放静态文件的目录，当浏览器发出非html文件请求时，服务器端就会到这个目录下去寻找相关文件</li>
-<li>static 用中间件来处理所有的静态文件请求<br><code>app.use(express.static(path.resolve(&#39;public&#39;)));</code>下面是它的实现原理<br>它的参数指定的是静态文件根目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//当html中link的时候就可以用相对路径来引入 指定当前路径下的下一个路径</div><div class="line">app.use(function(req,res,next)&#123;</div><div class="line">    var filename=path.join(__dirname,&apos;public&apos;,req.path);</div><div class="line">    fs.exists(filename,function(exists)&#123;</div><div class="line">        if(exists)&#123;</div><div class="line">            res.sendFile(filename);</div><div class="line">        &#125;else&#123;</div><div class="line">            next();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h2><ul>
-<li><p>redirect方法允许网址的重定向，跳转到指定的url并且可以指定status，默认为302方式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.get(&apos;/&apos;, function (req,res) &#123;</div><div class="line">    res.redirect(&apos;http://www.baidu.com&apos;);//就是访问什么都会返回这个页面</div><div class="line">    //参数1 状态码(可选) 参数2 跳转的路径</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>302重定向 实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">app.use(function (req,res,next) &#123;</div><div class="line">    res.redirect = function (url) &#123;</div><div class="line">        console.log(url);</div><div class="line">        res.statusCode = 302; //设置302状态码</div><div class="line">        res.setHeader(&apos;Location&apos;,url);</div><div class="line">        //通过响应头的Location字符告诉客户端重新向新地址发起请求</div><div class="line">        res.end(&apos;&apos;);</div><div class="line">    &#125;;</div><div class="line">    next();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="req-body-请求体"><a href="#req-body-请求体" class="headerlink" title="req.body 请求体"></a>req.body 请求体</h2><ul>
-<li><p>安装body-parser</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install body-parser</div></pre></td></tr></table></figure>
-</li>
-<li><p>bodyParser 把它放在路由的上面 ；此中间件如何知道请求的格式是 json 还是urlencoded 根据请求头中<code>Content-Type</code>，<code>application/x-www-form-urlencoded</code>或者<code>application/json</code></p>
-</li>
-<li>此中间件处理完成之后会得到 req.body 请求体对象</li>
-<li><p>如果为true表示 使用querystring来处理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">app.use(bodyParser.urlencoded(&#123;extended:true&#125;));</div><div class="line">app.use(bodyParser.json());</div></pre></td></tr></table></figure>
-</li>
-<li><p>接收请求体中的数据  用post</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">app.get(&apos;/login&apos;, function (req,res) &#123;</div><div class="line">    res.sendFile(&apos;./login.html&apos;,&#123;root:__dirname&#125;)</div><div class="line">&#125;);</div><div class="line">app.post(&apos;/user&apos;, function (req,res) &#123;</div><div class="line">    console.log(req.body);</div><div class="line">    res.send(req.body);</div><div class="line">&#125;);</div><div class="line">app.listen(8080);</div></pre></td></tr></table></figure>
-</li>
-<li><p>req.body的实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">app.use(function (req,res,next) &#123;</div><div class="line">    var result = &apos;&apos;;</div><div class="line">    req.on(&apos;data&apos;, function (data) &#123;//监听请求体</div><div class="line">        result+=data.toString();</div><div class="line">    &#125;);</div><div class="line">    req.on(&apos;end&apos;, function () &#123;</div><div class="line">        try&#123;</div><div class="line">            req.body = JSON.parse(result);</div><div class="line">        &#125;catch(e)&#123;  //name=tong&amp;age=18 用querystring来取</div><div class="line">            req.body = require(&apos;querystring&apos;).parse(result);</div><div class="line">        &#125;</div><div class="line">        next();</div><div class="line">    &#125;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
+<p>比如说文件名是<code>path.js</code> 得到的就<code>.js</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/11/node/express/" data-id="cix49so1k000f7gua9a00jy90" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/17/node/fs和path/" data-id="cixcuym2n000s0guat4drg6da" class="article-share-link">Share</a>
       
       
     </footer>
@@ -254,7 +221,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -279,7 +246,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
     </div>
   </div>
 
@@ -292,6 +259,14 @@
       <ul>
         
           <li>
+            <a href="/2016/12/31/node/mongoose/">Mongodb 数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/31/node/mongodb/">Mongodb 数据库</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/17/node/fs和path/">fs和path</a>
           </li>
         
@@ -301,14 +276,6 @@
         
           <li>
             <a href="/2016/12/11/node/express/">express</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/11/node/node基础/">node基础</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/10/node/git的使用/">git</a>
           </li>
         
       </ul>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-angular/$scope上的方法" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-angular/服务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/24/angular/$scope上的方法/" class="article-date">
-  <time datetime="2016-08-24T05:30:25.000Z" itemprop="datePublished">2016-08-24</time>
+    <a href="/2016/11/27/angular/服务/" class="article-date">
+  <time datetime="2016-11-27T09:30:25.000Z" itemprop="datePublished">2016-11-27</time>
 </a>
     
   <div class="article-category">
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/24/angular/$scope上的方法/">$scope上的方法</a>
+      <a class="article-title" href="/2016/11/27/angular/服务/">服务</a>
     </h1>
   
 
@@ -87,58 +87,86 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="scope上的方法"><a href="#scope上的方法" class="headerlink" title="$scope上的方法"></a>$scope上的方法</h2><ul>
-<li>1.$apply<ul>
-<li>刷新视图  强制刷新 如果用一个非angular里面的方法就用这个</li>
-<li>angularJS 有一个脏值查询的机制 定时器setInterval(不是angular自带的方法)无法触发这个机制 就是无法刷新 用$apply来解决<br>用法1. $scope.$apply(); //用于原生修改数据时使用<br>用法2. $scope.$apply(function(){});<br>它有一个自带的指令会刷新视图 <code>$interval/$timeout</code>它是一个服务;  服务:可全局的调用 把公共的部分写成一个方法<br>如何注入一个服务：就在$scope后面 myMod.controller(‘myCtrl’,function($scope,$interval,$timeout){});<br>因为它是一个单独的模块所以得调用以传参的形式 也叫做注入一个服务<br><code>$interval.cancel()</code>;//清除定时器  已经是angular自带的指令就不要在调用$apply去通知了<br>angular自带的服务$interval/$timeout(它会默认调用$apply)</li>
+        <h2 id="什么是服务？"><a href="#什么是服务？" class="headerlink" title="什么是服务？"></a>什么是服务？</h2><ul>
+<li>服务是公用的方法，把控制器中相同的部分抽取出来封装成一个服务，什么时候用它的时候就把它注入到控制器中 相当于原生js里的DOM库</li>
+<li>在 AngularJS 中，服务是一个函数或对象，可在你的 AngularJS 应用中使用。</li>
+<li>在 AngularJS 中，有五种服务一种装饰(decorator)</li>
+<li>指令，控制器，服务都是通过模块来声明的，服务通常情况下都是单例的</li>
 </ul>
-</li>
-<li><p>2.$watch</p>
-<ul>
-<li>用来监听数据的变化的事件</li>
-<li>ng-change和watch的区别：ng-change只能加在输入框中，不能监听页面的数据变化<br>如果数据模型中的数据发生了改变,视图中所有的值对应的都会发生改变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var myMod=angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.controller(&apos;myCtrl&apos;,function($scope)&#123;</div><div class="line">    参数1：可以是属性名字符串；也可以是方法，我们取的是return的值  参数2：是一个回调函数</div><div class="line">    1.$scope.$watch(&apos;name&apos;,function(newVal,oldVal));</div><div class="line">    //新的value值  上一次的value值 比如在input里只要当前作用域上的值有变化的时候就会触发第一个函数，如果第一个函数返回的值发生变化，就会触发第二个函数</div><div class="line">    2.$scope.$watch(function()&#123;//第一个参数是方法</div><div class="line">        return $scope.value  //在这里面所有调用的前面都得加$scope</div><div class="line">    &#125;,function(newVal,oldVal));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>3.$digest()</p>
-<ul>
-<li>脏值查询  在angularJS里面它会脏值查询(循环)10次当到达10次的时候它会报错,认为是死循环 停止检查<br>页面的数据检查在脏值查询之后 它至少是进行2次的</li>
-<li>$apply()内部调用的$rootScope.$digest();</li>
-<li>$apply()和$digest()的区别:</li>
-<li>$digest()刷新自己及子作用域上的数据模型的数据;</li>
-<li>$apply()是从跟作用域$rootScope开始循环刷新数据 调用的$rootScope;$apply()会执行整个循环</li>
-</ul>
-</li>
-<li><p>4.ng-href 用在A标签中，实现链接 表达式生效前不要加载该资源,防止空链接<br>  只有当链接加载成功的时候才会跳转页面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;a ng-href=&quot;&#123;&#123; myHref &#125;&#125;&quot;&gt;baidu&lt;/a&gt;  这里必须有双括号</div><div class="line">   var app = angular.module(&apos;appModule&apos;,[]);</div><div class="line">   app.controller(&apos;appCtrl&apos;,function ($scope,$timeout) &#123;</div><div class="line">     $timeout(function () &#123;</div><div class="line">         $scope.myHref = &apos;http://www.baidu.com&apos;;  只有当地址加载完会才会跳转绑定a</div><div class="line">     &#125;,20000)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>5.ng-src  只有当图片加载成功之后图片才会展示，没有成功加载之前不会出现裂图 表达式生效前不引用该资源,防止出现404</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;img ng-src=&quot;&#123;&#123;imgSrc&#125;&#125;&quot;/&gt;</div><div class="line">    var app = angular.module(&apos;appModule&apos;,[]);</div><div class="line">    app.controller(&apos;appCtrl&apos;,function ($scope,$timeout) &#123;</div><div class="line">        $timeout(function() &#123;</div><div class="line">            $scope.imgSrc = &apos;https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png&apos;;</div><div class="line">        &#125;, 1000);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>6.ng-model-options=’{updateOn:’blur’}’; 当失去焦点的时候，再次触发$digest()脏值查询，实现页面数据的更新<br>  它的性能比较差，因为它又触发了一次$digest()  和ng-model同时使用<br>  ng-model-options=’{debounce:1000}’; 延迟  意思是1s之后在触发$digest() 性能比较好<br>  ng-model-options允许我们控制ng-model何时进行同步什么时候开始执行<br>  比如:1.当某个确定的事件被触发的时候 2.在指定的防抖动延迟时间之后,这样视图值就会在指定的时间之后被同步到模型.</p>
-</li>
-<li>7.ng-change 它是用来监听事件改变的 和ng-model同时使用 监听ng-model数据的改变  它是一个方法</li>
-</ul>
-<h2 id="控制器间的交互"><a href="#控制器间的交互" class="headerlink" title="控制器间的交互"></a>控制器间的交互</h2><p>控制器间的交互是通过事件进行监听的  比如父亲的作用域要拿到儿子的东西<br>在控制器中不要操作DOM,比较消耗性能;<br>$emit $broadcast 都是基于事件才能触发比如点击事件 ，不能直接用</p>
-<ul>
-<li>$emit 发射事件就是往上传 子级的数据传给父级自己也能得到 修改子控制器代码,当数量变化时通知父控制器<ul>
-<li>$scope.$emit(‘toParent’,$scope.name);</li>
-<li>参数1. 就是事件的标识符就是名字，参数2. 是要发射的数据</li>
-</ul>
-</li>
-<li>$broadcast向下广播就是往下传 把数据往下传给子级自己也能得到 比如当总价改变，向下通知所有子控制器<ul>
-<li>$scope.$broadcast(‘toSon’,$scope.name);</li>
-</ul>
-</li>
-<li>$on 监听子控制器事件的(就是监听事件的) 用来监听发射或者广播事件的，监听子控制器发射的事件；实现控制器之间数据的传递 用来接收数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$scope.$on(&apos;toParent&apos;, function (e,data) &#123;//toParent和$emit里面的名字是一样的</div><div class="line">     $scope.name = data; //data 就是儿子发射的数据  e 是事件源</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h2><ul>
+<li>目的：封装代码 写好后可以在任意一个控制器中注入使用</li>
+<li>已经学过的服务 <code>$interval,$timeout</code> 所有的服务都得注入在$scope后面</li>
+<li>$http: 向后台请求数据 和原生js的ajax一样，也是采用了它的原理<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$http(&#123;</div><div class="line">    url:&apos;data.json&apos;,</div><div class="line">    method:&apos;GET&apos;, //这里是大写的</div><div class="line">    params:&#123;data:&apos;zfpx&apos;&#125;, //用来问号传参的，它指针对get请求</div><div class="line">    //data:&#123;data:&apos;zfpx&apos;&#125;, //如果是post的话它是用data 传递请求主体的内容</div><div class="line">&#125;).success(function(data,status,headers,config)&#123;</div><div class="line">        当成功的时候执行这个方法中的回调函数</div><div class="line">            data: 请求回来的数据</div><div class="line">            status: 状态码</div><div class="line">            headers: 是一个方法，执行时可看到头部信息; 它是需要执行的 headers();</div><div class="line">            config: 配置信息，包含以上三项的内容</div><div class="line">&#125;).error(function(err)&#123;</div><div class="line">        当失败的时候执行这个方法中的回调函数</div><div class="line">            err: 错误信息</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>比如当点击儿子元素时让父亲和孙子都能接收到数据 就得儿子元素向上发射和向下广播用$on来接收数据 在赋值给相应的属性<br>$watch 用来监听数据的变化的事件<br>$on 就是监听事件的</p>
+<p>$http 返回的是一个 promise 用来解决异步的<br>通过$http封装的简便的方法:<br>    $http.get()   $http.delete()<br>        参数1：路径字符串  参数2：config(对象，放配置的内容)<br>    $http.post()  $http.put()<br>        参数1：路径字符串  参数2：请求体data  参数3：config(对象，放配置的内容)<br>    $http.jsonp() 实现跨域请求，它的回调函数的名字是固定的 cb=JSON_CALLBACK 这点和js不一样<br>        它只有一个参数：请求的路径<br>        $http.jsonp(‘<a href="http://suggestion.baidu.com/su?wd=&#39;+$scope.value+&#39;&amp;cb=JSON_CALLBACK" target="_blank" rel="external">http://suggestion.baidu.com/su?wd=&#39;+$scope.value+&#39;&amp;cb=JSON_CALLBACK</a>‘);</p>
+<h2 id="AngularJS中的五种服务和一种装饰"><a href="#AngularJS中的五种服务和一种装饰" class="headerlink" title="AngularJS中的五种服务和一种装饰"></a>AngularJS中的五种服务和一种装饰</h2><h2 id="1-provider"><a href="#1-provider" class="headerlink" title="1.provider"></a>1.provider</h2><ul>
+<li>可配置,是唯一一种你可以传进 .config() 函数的 service</li>
+<li>提供计算的服务 可实现简单的加减乘除的计算器</li>
+<li><p>定义服务，注入到控制器的时候取到的是它的实例(new出来的)上<code>$get</code>方法的反回值,注入进去就会默认调用<code>$get</code>方法，它是最大的服务；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//一运行代码就会将后面的函数new一下就相当于执行一下，就算没有调用这个方法也会执行</div><div class="line">var myMod = angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.provider(&apos;myPro&apos;,function()&#123;</div><div class="line">    this.$get=function()&#123;</div><div class="line">        return&#123;</div><div class="line">            &apos;+&apos;:function(a,b)&#123; //+当做属性名</div><div class="line">                return a+b;</div><div class="line">            &#125;</div><div class="line">            //&apos;+&apos;:(a,b)=&gt;a+b //ES6的语法 箭头符号  第二种写法 return后面只有一句话就不用写大括号也不用写</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用服务 ,注入进来的就是上面return里的对象 此时会默认调用provider的<code>$get</code>方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myPro&apos;,function ($scope,myPro) &#123;</div><div class="line">    $scope.result=myPro[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+</li>
+<li><p>封装的服务是以 前缀$ currency=’$’，在输出的时候会有一个前缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">this.currency=&apos;$&apos;; //如果用var 下面就不用转this</div><div class="line">this.$get=function()&#123;</div><div class="line">    var that=this;</div><div class="line">    retrun&#123;</div><div class="line">        &apos;+&apos;:function(a,b)&#123;//这里的this是控制器里调用的myPro</div><div class="line">        return that.currency+(parseFloat(a)+parseFloat(b));</div><div class="line">        //parseFloat防止字符串拼接</div><div class="line">        //&apos;+&apos;:(a,b)=&gt; this.currency+(a,b); 这样就不用转this了</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置服务，可以对服务暴露出来的接口进行配置，对修改关闭，对扩展开放，angular的执行顺序是先执行Provider在执行config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.config(function (myProProvider) &#123;//myProProvider代表的就是上面函数中的this</div><div class="line">    myProProvider.currency=&apos;￥&apos;;//可以对前缀进行修改</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>参数：是由服务的名字+Provider,myProProvider是myPro服务的实例，可以调用myPro上的方法</p>
+<h2 id="2-factory"><a href="#2-factory" class="headerlink" title="2.factory"></a>2.factory</h2><ul>
+<li><p>工厂函数定义服务，调用该工厂函数将返回服务实例,它是定义服务的一种方法，内部封装的也是provider的实现原理，它的函数定义部分只要 return的返回值是个对象，没有$get()方法，不能调用config配置函数，这是最常用的,相当于原生js里的一个工厂函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">myMod.factory(&apos;myfactory&apos;, function () &#123;</div><div class="line">       var currency = &apos;$&apos;;</div><div class="line">       return &#123;</div><div class="line">           &apos;+&apos;:(a,b)=&gt;currency+(parseFloat(a)+parseFloat(b)),//ES6的语法</div><div class="line">           &apos;-&apos;:(a,b)=&gt;currency+(a-b),</div><div class="line">           &apos;*&apos;:(a,b)=&gt;currency+(a*b),</div><div class="line">           &apos;/&apos;:(a,b)=&gt;currency+(a/b),</div><div class="line">       &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用服务 ,注入进来的就是上面return里的对象，这里和provider的用法是一样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myfactory&apos;,function ($scope,myfactory) &#123;</div><div class="line">    $scope.result=myfactory[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-service"><a href="#3-service" class="headerlink" title="3.service"></a>3.service</h2><ul>
+<li><p>定义服务 相当于原生js中的一个构造函数，都用this来实现 不可配置config，由factory构建出来的，factory是service的一个实例 service <code>new</code> 一下就出来了 就是factory的返回对象所以用this[]来取到里面的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.service(&apos;myservice&apos;, function () &#123;</div><div class="line">       var currency  = &apos;$&apos;;</div><div class="line">       this[&apos;+&apos;]=(a,b)=&gt;currency+(parseFloat(a)+parseFloat(b));</div><div class="line">       this[&apos;-&apos;]=(a,b)=&gt;currency+(a-b);</div><div class="line">       this[&apos;*&apos;]=(a,b)=&gt;currency+(a*b);</div><div class="line">       this[&apos;/&apos;]=(a,b)=&gt;currency+(a/b);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用服务 ,注入进来的是该方法(service里的方法)的一个实例，可以直接调用它实例上的一个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myservice&apos;,function ($scope,myservice) &#123;</div><div class="line">    $scope.result=myservice[&apos;+&apos;](1,2);//实现一个相加的方法</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-value"><a href="#4-value" class="headerlink" title="4.value"></a>4.value</h2><ul>
+<li><p>用来定义变量，就相当于myvalue 赋值为一个111，不可配置config 它也是factory衍生出来的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.value(&apos;myvalue&apos;, &#123; //这个对象是factory返回后的对象，相当于key,value</div><div class="line">      &apos;+&apos;:(a,b)=&gt;(a+b),</div><div class="line">      &apos;-&apos;:(a,b)=&gt;(a-b),</div><div class="line">      &apos;*&apos;:(a,b)=&gt;(a*b),</div><div class="line">      &apos;/&apos;:(a,b)=&gt;(a/b),</div><div class="line">&#125;);</div><div class="line">//myMod.value(&apos;myvalue&apos;,&apos;111&apos;); //两种方法</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用服务 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.controller(&apos;myCtrl&apos;, [&apos;$scope&apos;,&apos;myvalue&apos;,function ($scope,myvalue) &#123;</div><div class="line">    $scope.result=myvalue; //这里调用的是上面的111，可以得到111</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-constant"><a href="#5-constant" class="headerlink" title="5.constant"></a>5.constant</h2><ul>
+<li>定义长量的，用法和value一样只是value不可配置config</li>
+<li><p>它其实不算一种服务只是一个常量，长量：就是不可改变的量比如一个固定的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.constant(&apos;myconstant&apos;, &#123;</div><div class="line">     &apos;+&apos;:(a,b)=&gt;(a+b),</div><div class="line">     &apos;-&apos;:(a,b)=&gt;(a-b),</div><div class="line">     &apos;*&apos;:(a,b)=&gt;(a*b),</div><div class="line">     &apos;/&apos;:(a,b)=&gt;(a/b),</div><div class="line">&#125;);</div><div class="line">//myMod.constant(&apos;myconstant&apos;,&apos;111&apos;); //两种方法</div></pre></td></tr></table></figure>
+</li>
+<li><p>可配置config，参数：直接写服务的名字，可以取到myconstant的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">myMod.config(function (myconstant) &#123;</div><div class="line">    myconstant.aa = &apos;$&apos;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="6-decorator-装饰"><a href="#6-decorator-装饰" class="headerlink" title="6.decorator 装饰"></a>6.decorator 装饰</h2><ul>
+<li>装饰服务，可以包装自带的，也可以包装我们自己写的</li>
+<li><p>声明服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myMod.factory(&apos;my&apos;,function () &#123;</div><div class="line">    return &#123;</div><div class="line">        a: function () &#123;</div><div class="line">            return 1;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>装饰服务，就是一层层的包装一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">myMod.config(function ($provide) &#123;</div><div class="line">    $provide.decorator(&apos;my&apos;,function ($delegate) &#123;</div><div class="line">        var fn =  $delegate[&apos;a&apos;];</div><div class="line">        $delegate[&apos;a&apos;] = function () &#123;</div><div class="line">            return fn()+100;</div><div class="line">        &#125;;</div><div class="line">        return $delegate;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>$log.log();输出日志的,通过$provide来装饰的，在$delegate上有log的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">myMod.config(function ($provide) &#123;</div><div class="line">    $provide.decorator(&apos;$log&apos;,function ($delegate) &#123;//用$delegate代理$log</div><div class="line">        $delegate.log=function()&#123;&#125;;</div><div class="line">        return $delegate;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/24/angular/$scope上的方法/" data-id="cix49so0d00037guaqyn3gslv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/11/27/angular/服务/" data-id="cixcuym0600040gua599ibn7c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +179,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/10/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/12/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/10/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/12/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -176,7 +204,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
     </div>
   </div>
 
@@ -189,6 +217,14 @@
       <ul>
         
           <li>
+            <a href="/2016/12/31/node/mongoose/">Mongodb 数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/31/node/mongodb/">Mongodb 数据库</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/17/node/fs和path/">fs和path</a>
           </li>
         
@@ -198,14 +234,6 @@
         
           <li>
             <a href="/2016/12/11/node/express/">express</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/11/node/node基础/">node基础</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/10/node/git的使用/">git</a>
           </li>
         
       </ul>

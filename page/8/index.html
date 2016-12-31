@@ -61,14 +61,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-node/mongodb" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-angular/angular中的指令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/09/10/node/mongodb/" class="article-date">
-  <time datetime="2016-09-10T03:05:25.000Z" itemprop="datePublished">2016-09-10</time>
+    <a href="/2016/12/08/angular/angular中的指令/" class="article-date">
+  <time datetime="2016-12-08T04:00:25.000Z" itemprop="datePublished">2016-12-08</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Node-JS/">Node JS</a>
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
   </div>
 
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/10/node/mongodb/">Mongodb 数据库</a>
+      <a class="article-title" href="/2016/12/08/angular/angular中的指令/">angular中的指令</a>
     </h1>
   
 
@@ -87,97 +87,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-什么是MongoDB"><a href="#1-什么是MongoDB" class="headerlink" title="1. 什么是MongoDB"></a>1. 什么是MongoDB</h2><ul>
-<li>MongoDB是一个基于分布式文件存储的开源数据库系统</li>
-<li>MongoDB 将数据存储为一个文档，数据结构由键值(key=&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。</li>
-<li>里面可以写js代码<h2 id="2-MongoDB安装"><a href="#2-MongoDB安装" class="headerlink" title="2. MongoDB安装"></a>2. MongoDB安装</h2><h3 id="2-1-windows安装"><a href="#2-1-windows安装" class="headerlink" title="2.1 windows安装"></a>2.1 windows安装</h3></li>
-<li>百度云 32位 <a href="http://pan.baidu.com/s/1c1Y26Py" target="_blank" rel="external">http://pan.baidu.com/s/1c1Y26Py</a></li>
-<li>百度云 64位 <a href="http://pan.baidu.com/s/1hsDBRRu" target="_blank" rel="external">http://pan.baidu.com/s/1hsDBRRu</a></li>
-<li><p>windows客户端 <a href="http://pan.baidu.com/s/1bpdorRD" target="_blank" rel="external">http://pan.baidu.com/s/1bpdorRD</a></p>
-<h3 id="2-2-mac安装"><a href="#2-2-mac安装" class="headerlink" title="2.2 mac安装"></a>2.2 mac安装</h3><p>1.先安装homebrew</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://brew.sh/</div></pre></td></tr></table></figure>
-<p>2.使用brew安装mongodb</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install mongodb</div></pre></td></tr></table></figure>
-<p>3.再安装可视化工具 Robomongo</p>
-<h2 id="3-mongodb启动与连接"><a href="#3-mongodb启动与连接" class="headerlink" title="3. mongodb启动与连接"></a>3. mongodb启动与连接</h2><h3 id="3-1-windows启动服务器端"><a href="#3-1-windows启动服务器端" class="headerlink" title="3.1 windows启动服务器端"></a>3.1 windows启动服务器端</h3><p>1.找到mongodb安装目录,一般是 C:\Program Files\MongoDB 2.6 Standard\bin<br>2.按下Shift+鼠标右键,选择在此处打开命令窗口(就是DOM命令窗口)<br>3.在除C盘外的盘符新建一个空目录,如 D:\Mongodb\data<br>4.在打开的命令行中输入mongod –dbpath=刚创建的空目录,如<br>  mongod –dbpath=D:\Mongodb\data 再按回车键<br>5.如果出现waiting for connections on port 27017就表示启动成功,已经在27017端口上监听了客户端的请求<br>6.注意：–dbpath后的值表示数据库文件的存储路径,而且后面的路径必须事先创建好，必须已经存在，否则服务开启失败，每个操作数据库的时候都得启动服务器<br>7.注意：这个命令窗体绝对不能关,关闭这个窗口就相当于停止了mongodb服务</p>
-<h3 id="3-2-启动客户端连接服务器"><a href="#3-2-启动客户端连接服务器" class="headerlink" title="3.2 启动客户端连接服务器"></a>3.2 启动客户端连接服务器</h3><p>1.找到mongodb安装目录,一般是 C:\Program Files\MongoDB 2.6 Standard\bin<br>2.按下Shift+鼠标右键,选择在此处打开命令窗口 ，就是和上面的路径一样，在重新打开一个<br>3.命令窗体中输入 mongo –host=127.0.0.1 或者 mongo 按回车键</p>
-<blockquote>
-<p>备注：–host后的值表示服务器的ip地址 备注： –host=127.0.0.1 表示的就是本地服务器,每次数据库都会默认连接test数据库</p>
-<h2 id="4-MongoDB基本概念"><a href="#4-MongoDB基本概念" class="headerlink" title="4. MongoDB基本概念"></a>4. MongoDB基本概念</h2></blockquote>
-</li>
-<li>数据库 MongoDB的单个实例可以容纳多个独立的数据库,比如一个学生管理系统就可以对应一个数据库实例 Database</li>
-<li>集合 数据库是由集合组成的,一个集合用来表示一个实体,如学生集合 Collections:内容都在这里</li>
-<li>文档 集合是由文档组成的，一个文档表示一条记录,比如一位同学张三就是一个文档,也就是里面的内容<h2 id="5-数据库操作"><a href="#5-数据库操作" class="headerlink" title="5. 数据库操作"></a>5. 数据库操作</h2></li>
-<li>切换数据库，切换过来以后此数据库并不会创建<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">use person;</div></pre></td></tr></table></figure>
-</li>
+        <p>angular中程序运行时最先执行的是什么方法：run()</p>
+<h2 id="什么是指令：AngularJS-指令是扩展的-HTML-属性-就是操作DOM元素的"><a href="#什么是指令：AngularJS-指令是扩展的-HTML-属性-就是操作DOM元素的" class="headerlink" title="什么是指令：AngularJS 指令是扩展的 HTML 属性 就是操作DOM元素的"></a>什么是指令：AngularJS 指令是扩展的 HTML 属性 就是操作DOM元素的</h2><h2 id="什么是自定义指令：就是封装一些方法，供外面使用"><a href="#什么是自定义指令：就是封装一些方法，供外面使用" class="headerlink" title="什么是自定义指令：就是封装一些方法，供外面使用"></a>什么是自定义指令：就是封装一些方法，供外面使用</h2><h2 id="指令-directive"><a href="#指令-directive" class="headerlink" title="指令 directive"></a>指令 directive</h2><ul>
+<li>目的：封装功能</li>
+<li>组件式指令：有模板的 <code>&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;</code>，restrict一般采用E</li>
+<li>装饰型指令：一般增加属性的 <code>&lt;div red-color&gt;&lt;/div&gt;</code>，restrict一般采用A<br>指令默认是不依赖控制器的；一般我们用指令封装功能而不是封装方法的</li>
 </ul>
-<blockquote>
-<p>注：如果此数据库存在，则切换到此数据库下,如果此数据库还不存在也可以切过来</p>
+<h2 id="定义一个指令"><a href="#定义一个指令" class="headerlink" title="定义一个指令"></a>定义一个指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;div my-dire&gt;wold&lt;/div&gt;</div><div class="line">var myMod=angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.directive(&apos;myDire&apos;,function()&#123;</div><div class="line">//myDire需要转成驼峰命名法,声明指令后默认返回一个对象</div><div class="line">    return&#123;返回值: 是一个对象</div><div class="line">    //定义一个模板 它指的是html结构 把它嵌套到html里面 &lt;div my-dire&gt;&lt;div&gt;hello&lt;/div&gt;&lt;/div&gt;</div><div class="line">        //template:&apos;&lt;div&gt;hello&lt;/div&gt;&apos;, 会把原有的标签里的内容也替换掉</div><div class="line">        templateUrl:&apos;url.html&apos;,//引入外界的模板只能是模板片段 上面的就不用了，它是ajax将文件读取过来插入到模板中</div><div class="line">        replace:true,  //替换原有的标签 就是把上面的div替换掉 只剩下这一个div，只能有一个根结点</div><div class="line">        restrict:&apos;ECMA&apos;, //定义指令可以使用的位置 用它的时候必须得有 replace:true</div><div class="line">        transclude:true, //保存原有标签里的内容 和ng-transclude(会形成自己的作用域)结合使用，想把内容放在哪个标签上就在哪个标签上加ng-transclude 标签和外面的一样</div><div class="line">        scope:true, //指令所有的元素 会形成自己的作用域,它也可以是个对象,&#123;&#125;和true是有区别的，指定它以后就不会出现</div><div class="line">        controller:function($scope,$element,$attrs)&#123;//可被外界定义指令调用的公用部分</div><div class="line">        &#125;//在最前面</div><div class="line">        compile:function(tElement,tAttrs)&#123;//编译阶段 写在link前面</div><div class="line">        &#125;,</div><div class="line">        link:function(scope,element,attrs)&#123; //链接阶段,是装饰指令</div><div class="line">        &#125;,</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="restrict"><a href="#restrict" class="headerlink" title="restrict"></a>restrict</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">restrict:&apos;ECMA&apos;; 不写默认值是 EA 可以不写 可以单个写 restrict:&apos;E&apos;;</div><div class="line">    &lt;my-dire&gt;&lt;/my-dire&gt;&lt;!--用于标签--&gt; E: element 用于标签</div><div class="line">    &lt;div class=&quot;my-dire&quot;&gt;&lt;/div&gt;&lt;!--用于样式类名--&gt; C: class 用于样式类名</div><div class="line">    &lt;!-- directive:my-dire --&gt; 里面内容前后各一个空格  &lt;!--用于注释--&gt; M: comment 用于注释</div><div class="line">    &lt;div my-dire&gt;&lt;/div&gt;&lt;!--用于属性名--&gt; A: attribute 用于属性名</div></pre></td></tr></table></figure>
+<h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><p>link: 它是个函数可以实现 作用域(scope)和DOM元素 的链接 在它上面写的都是私有的 链接阶段<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">link:function(scope,element,attrs)&#123;</div><div class="line">   scope: 指是当前模板的作用域，如果当前模板没有形成作用域，会直接找父级，和控制器里的$scope是一样的，它里面的属性也是定义在scope上的</div><div class="line">   element: 自定义指令所在的DOM元素，是一个jQuery对象，可以调用jQuery里的方法 内置的有轻量级的jQuery也就是 jqLite 是简化板的，不是所有的方法都有</div><div class="line">  把jQuery 变成原生的 element[0]; 在变回jQuery的  angular.element(element[0])</div><div class="line">   attrs: 自定义指令所在的DOM元素上的属性存储在attrs对象里标签里的属性可以通过它得到;也就是当前指令的所有属性变成一个对象格式</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
-<li>当你向数据库的某个集合下面插入一个文档的时候，数据库和集合才会创建<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.persons.inset(&#123;name:&apos;tong&apos;&#125;);</div></pre></td></tr></table></figure>
-</li>
+<li>在angularJS只有link可以操作DOM元素 在控制器里用的都是$scope</li>
 </ul>
-<p>db 是代表当前数据库，只输入一个db的时候会查看当前的数据库； persons 是自定义的集合名称<br>如果有这个数据库就会向里面插入，没有会自动创建这个数据库</p>
-<ul>
-<li>查看当前服务中有多少数据库<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show dbs</div></pre></td></tr></table></figure>
+<h2 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h2><ul>
+<li>指令默认是没用作用域的，所以它会找到上面的上级作用域，可以取到作用域上的东西</li>
+<li><p>可以为当前指令设置独立作用域，也可以起到赋值的作用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    scope:true, //它仍然可以取到上级作用域上的东西</div><div class="line">    scope:&#123;&#125;,  //这样就是完全不能取到上级作用域上的东西，通过属性可以传递数据(数据类型 字符串 函数 变量)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
+<li><p>“@”引用字符串 指令和作用域间的交互  会形成自己的作用域<br>想用自定义指令拿到控制器里的属性; 在页面上把自定义指令放入到控制器里面，做它的子级</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;div ng-controller=&quot;myCtrl&quot;&gt;</div><div class="line">    &lt;input type=&quot;text&quot; ng-model=&quot;nameCtrl&quot;/&gt;</div><div class="line">    &lt;my-dire name=&quot;&#123;&#123;nameCtrl&#125;&#125;&quot;&gt;&lt;/my-dire&gt;</div><div class="line">    &lt;my-dire name=&quot;nameCtrl&quot; greet=&quot;greetCtrl(d)&quot;&gt;&lt;/my-dire&gt; //供 = 来使用</div><div class="line">&lt;/div&gt;</div><div class="line">var myMod=angular.module(&apos;myMod&apos;,[]);</div><div class="line">myMod.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope)&#123;</div><div class="line">    $scope.nameCtrl=&apos;tongtong&apos;; //这样做是把上面的nameCtrl的字符串变成了变量</div><div class="line">    $scope.greetCtrl=function(a)&#123;//这里面的a就是上面函数里传的 d</div><div class="line">        alert(a);</div><div class="line">    &#125;</div><div class="line">&#125;]);</div><div class="line">myMod.directive(&apos;myDire&apos;,function()&#123;</div><div class="line">    return&#123;</div><div class="line">        template:&apos;&lt;input type=&quot;text&quot; ng-model=&quot;nameDir&quot;/&gt;</div><div class="line">                  &lt;button ng-click=&quot;greetDir(&#123;d:nameDir&#125;)&quot;&gt;打招呼&lt;/button&gt;&apos;,</div><div class="line">        scope:&#123;</div><div class="line">            nameDir:&apos;@name&apos;,</div><div class="line">            //name:&apos;@&apos;, 名字相同时直接用@就可以了 name:&apos;@name&apos;</div><div class="line">            nameDir:&apos;=name&apos;,</div><div class="line">            //name:&apos;=&apos;, 名字相同时直接用=就可以了 name:&apos;=name&apos;</div><div class="line">            greetDir:&apos;&amp;greet&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>  @name中的name是自定义指令中的name属性，获取的是name=”“里面的字面量的值 那么nameDir在当前指令所在的作用域可随处调用nameDir存储的的字面量的值,但是子级改变不了父级的，实现不了双向绑定 会形成自己的作用域</p>
+</li>
+<li><p>‘=’ 变量 它实现了子级和父级的双向绑定 就是和控制器的双向数据绑定 是变量的传递<br>‘=name’ 获取的是name=’nameCtrl’ 中 ‘nameCtrl’ 存储的变量，在当前指令所在的作用域<br>修改nameDir也可以同时修改myCtrl中的nameCtrl的值 上面得属性名(变量)不能用字量形式</p>
+</li>
+<li>&amp; 函数 用来取控制器中的方法的  方法的传递<br>greetDir({d:nameDir})中{d:nameDir}是一个对象<code>nameDir</code>是要传的参数传给d，就是ng-model=”nameDir”里的nameDir；当在指令里面的函数用字符串传参，不是指令里面的函数用对象传参，因为它是从外面引进来的</li>
 </ul>
-</blockquote>
-<h3 id="5-1-主键"><a href="#5-1-主键" class="headerlink" title="5.1 主键"></a>5.1 主键</h3><p> 当我们保存一个文档的时候，如果没有提供_id属性，mongodb会帮我们自动生成一个_id.这就是主键<br> 1.它与业务无关<br> 2.每个文档的主键不能相同，也不能为空，就像身份证号一样<br> 3.无论文档的属性如何改变，主键不能修改，就像年龄一样，怎么变这个身份证号也不会变<br> 4.只要知道了这个主键，就能找到其它的属性<br> 5.主键能唯一标识一个文档</p>
-<h3 id="5-2-删除数据库-代表删除当前数据库"><a href="#5-2-删除数据库-代表删除当前数据库" class="headerlink" title="5.2 删除数据库,代表删除当前数据库"></a>5.2 删除数据库,代表删除当前数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.dropDatabase();</div></pre></td></tr></table></figure>
-<h2 id="6-集合的操作"><a href="#6-集合的操作" class="headerlink" title="6. 集合的操作"></a>6. 集合的操作</h2><ul>
-<li><p>查看当前数据库下有多少个集合</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.getCollectionNames();</div></pre></td></tr></table></figure>
-</li>
-<li><p>删除某个集合</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.person.drop();</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="6-1-创建集合"><a href="#6-1-创建集合" class="headerlink" title="6.1 创建集合"></a>6.1 创建集合</h2><ul>
-<li>创建一个空集合<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.createCollection(&apos;student&apos;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p>student 集合的名称</p>
-<ul>
-<li>创建集合并插入一个文档(内容)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.student.insert(_id:1,&apos;name:haha&apos;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>_id:1 可以自己指定id,不然系统会自动生成一个,这就是要插入的文档;每当插入一条新文档的时候mongodb会自动为此文档生成一个_id属性,_id一定是唯一的，用来唯一标识一个文档 _id也可以直接指定，但如果数据库中此集合下已经有此_id的话插入会失败</p>
-<ul>
-<li>修改集合中插入的内容(也是字段)save()<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.student.save(_id:1,&apos;name:haha1&apos;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>注：如果不指定 _id 字段 save() 方法类似于 insert() 方法。如果指定 _id 字段，则会更新该 _id 的数据。就是里面有字段就是修改没有就是插入</p>
-</blockquote>
-<ul>
-<li>查询项目中的所有文档，也就是看一个数据库有几条内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.student.find();</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="7-更新文档"><a href="#7-更新文档" class="headerlink" title="7. 更新文档"></a>7. 更新文档</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">db.collection.update(//语法</div><div class="line">   &lt;query&gt;,</div><div class="line">   &lt;updateObj&gt;,</div><div class="line">   &#123;</div><div class="line">     upsert: &lt;boolean&gt;,</div><div class="line">     multi: &lt;boolean&gt;</div><div class="line">   &#125;</div><div class="line">)</div></pre></td></tr></table></figure>
-<ul>
-<li>query(_id:1) 查询条件,指定要更新符合哪些条件的文档</li>
-<li>upsert 可选，这个参数的意思是，如果不存在符合条件的记录时是否插入updateObj. 默认是false,不插入。<br>  如果upsert=ture代表找到就修改，没有就插入</li>
-<li>multi 可选，mongodb 默认只更新找到的第一条记录，如果这个参数为true,就更新所有符合条件的记录。<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3></li>
-<li><p>将student数据中_id是1 的数据的name修改为liSi_update，$set直接指定更新后的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.student.update(&#123;_id:1&#125;,&#123;$set:&#123;name:&apos;liSi_update&apos;&#125;&#125;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>递增,如果以前的age是55，那么现在就是60，$inc在原基础上累加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.student.update(&#123;_id:1&#125;,&#123;$inc:&#123;age:5&#125;&#125;)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p>注：如果有多条_id是1的数据只更新一条,如果想全部更新需要指定{multi:true}的参数</p>
-<ul>
-<li>把age小于6的文档，age全部累加1岁<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1.for(var i=1;i&lt;=10;i++)&#123;</div><div class="line"> db.users.insert(&#123;name:&apos;zfpx&apos;+i,age:i&#125;);</div><div class="line">    if(i&lt;6)&#123;</div><div class="line">    db.users.update(&#123;name:&quot;zfpx&quot;+i&#125;,&#123;$inc:&#123;age:1&#125;&#125;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">2.db.user.update(&#123;age:&#123;$lt:6&#125;&#125;,&#123;$inc:&#123;age:1&#125;&#125;,&#123;multi:true&#125;)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<h2 id="8-文档的删除"><a href="#8-文档的删除" class="headerlink" title="8. 文档的删除"></a>8. 文档的删除</h2>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/10/node/mongodb/" data-id="cix49so27000m7guahatxh0q3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/08/angular/angular中的指令/" data-id="cixcuym24000l0guaq701r0on" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +129,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/9/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/9/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -215,7 +154,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
     </div>
   </div>
 
@@ -228,6 +167,14 @@
       <ul>
         
           <li>
+            <a href="/2016/12/31/node/mongoose/">Mongodb 数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/31/node/mongodb/">Mongodb 数据库</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/17/node/fs和path/">fs和path</a>
           </li>
         
@@ -237,14 +184,6 @@
         
           <li>
             <a href="/2016/12/11/node/express/">express</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/11/node/node基础/">node基础</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/10/node/git的使用/">git</a>
           </li>
         
       </ul>
